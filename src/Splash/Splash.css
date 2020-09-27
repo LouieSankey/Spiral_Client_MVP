@@ -1,0 +1,138 @@
+.content {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    /* background-color: blue;
+    color: black; */
+}
+
+button {
+    display: show;
+}
+
+.card-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.fails-for {
+    font-size: 30px;
+    margin-top: 100px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.spiral-diff {
+    font-size: 30px;
+}
+
+.heading {
+    margin-top: 40px;
+    color: white;
+}
+
+.galexy-image {
+    width: 400px;
+    height: 400px;
+    margin-left: 60px;
+    margin-top: 60px;
+}
+
+.benefits {
+    margin-top: 100px;
+}
+
+.p-large {
+    font-size: 18px;
+}
+
+.p-heading {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 60px;
+}
+
+.spiral-productivity {
+    font-size: 56px;
+}
+
+.two-column-split {
+    display: flex;
+    width: 100%;
+}
+
+.align-left {
+    flex: 50%;
+}
+
+.align-right {
+    flex: 50%;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.col {
+    float: left;
+    width: 33.33%;
+}
+
+.inner {
+    /* specify padding, can be changed while remaining fixed width of .outer */
+    padding: 10px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.spiral-icon {
+    width: 350px;
+    height: auto;
+    margin: 60px;
+}
+
+.fib-spiral {
+    width: 400px;
+    height: auto;
+}
+
+button {
+    background-color: #5f4dee;
+    border-radius: 2rem;
+    border: none;
+    padding: 20px;
+    color: white;
+}
+
+.first-block {
+    background-color: black;
+}
+
+.first-block-content {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.second-section {
+    margin-bottom: 100px;
+}
+
+.third-section {
+    padding-top: 100px;
+    background-color: #f3f7fd;
+}
+
+ul {
+    list-style-type: square;
+}
+
+.bullet {
+    margin-bottom: 20px;
+}
+
+.image-container {}

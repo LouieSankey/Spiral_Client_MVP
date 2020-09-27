@@ -1,0 +1,91 @@
+.container {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-rows: 8fr 1fr 1fr 3fr;
+    grid-template-columns: 13fr 2fr 1fr 5fr;
+    height: 400px;
+    width: 700px;
+    max-width: 100%;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 60px;
+    background-color: aliceblue;
+    /* sets a potential background image */
+    /* background-image: url('./grspiral.jpeg');
+    background-size: 700px 400px;
+    background-repeat: no-repeat;
+    background-color: black;
+    margin-left: 96px; */
+}
+
+.item {
+    position: relative;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border: 1px solid rgb(139, 139, 139);
+    /* background-image: url('./copper.jpeg');
+    background-repeat: no-repeat;
+    background-size: contain; */
+}
+
+.item:hover {
+    cursor: hand;
+    cursor: pointer;
+    opacity: .9;
+    background: rgba(26, 48, 73, 0.356);
+}
+
+.clickable {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    z-index: 10;
+    background-size: cover;
+    filter: alpha(opacity=0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.box7 {
+    grid-row: 1 / 5;
+}
+
+.box6 {
+    grid-column: 2 / 5;
+}
+
+.box5 {
+    grid-row: 2 / 5;
+    grid-column: 4 / 5;
+}
+
+.box3 {
+    grid-row: 4 / 5;
+    grid-column: 2 / 4;
+}
+
+.box2 {
+    grid-row: 2 / 4;
+    grid-column: 2 / 3;
+}
+
+.box0 {
+    position: relative;
+    font-size: 22px;
+    cursor: hand;
+    cursor: pointer;
+    opacity: .9;
+}
