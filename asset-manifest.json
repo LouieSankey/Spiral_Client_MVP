@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/Spiral-React/static/css/main.27cca48f.chunk.css",
+    "main.js": "/Spiral-React/static/js/main.924e7ef0.chunk.js",
+    "main.js.map": "/Spiral-React/static/js/main.924e7ef0.chunk.js.map",
+    "runtime-main.js": "/Spiral-React/static/js/runtime-main.f7f6fb4e.js",
+    "runtime-main.js.map": "/Spiral-React/static/js/runtime-main.f7f6fb4e.js.map",
+    "static/css/2.6d424c78.chunk.css": "/Spiral-React/static/css/2.6d424c78.chunk.css",
+    "static/js/2.15e13878.chunk.js": "/Spiral-React/static/js/2.15e13878.chunk.js",
+    "static/js/2.15e13878.chunk.js.map": "/Spiral-React/static/js/2.15e13878.chunk.js.map",
+    "index.html": "/Spiral-React/index.html",
+    "precache-manifest.7cf95582bccad1add75d0b529e92bb49.js": "/Spiral-React/precache-manifest.7cf95582bccad1add75d0b529e92bb49.js",
+    "service-worker.js": "/Spiral-React/service-worker.js",
+    "static/css/2.6d424c78.chunk.css.map": "/Spiral-React/static/css/2.6d424c78.chunk.css.map",
+    "static/css/main.27cca48f.chunk.css.map": "/Spiral-React/static/css/main.27cca48f.chunk.css.map",
+    "static/js/2.15e13878.chunk.js.LICENSE.txt": "/Spiral-React/static/js/2.15e13878.chunk.js.LICENSE.txt",
+    "static/media/55golden.png": "/Spiral-React/static/media/55golden.28ce1a40.png",
+    "static/media/spiral-galexy-transparent.png": "/Spiral-React/static/media/spiral-galexy-transparent.a35a83bb.png",
+    "static/media/spiral-icon.png": "/Spiral-React/static/media/spiral-icon.1c0aa0ec.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f7f6fb4e.js",
+    "static/css/2.6d424c78.chunk.css",
+    "static/js/2.15e13878.chunk.js",
+    "static/css/main.27cca48f.chunk.css",
+    "static/js/main.924e7ef0.chunk.js"
+  ]
+}
