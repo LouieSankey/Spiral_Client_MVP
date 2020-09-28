@@ -86,7 +86,7 @@ export default class Splash extends Component {
                                                         <div>For small tasks (like reading a page in a textbook, for example) you have minute values that are closer together, i.e. 3, 5 and 8. </div>
                                                     </li>
                                                     <li className="bullet">
-                                                        <div>While for larger tasks (like reading an entire chapter) you can choose from minute values that are further apart, i.e. 21, 34, or 55.</div>
+                                                        <div>While for larger tasks (like reading an entire chapter) you can choose from values that are further apart, i.e. 21, 34, or 55.</div>
                                                     </li>
                                                     <li >
                                                     <div className="bullet">How you break apart your work for maximum benefit is up to you!</div>
