@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import './Grid.css'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import Delete from './delete.png';
 
 
 
@@ -15,7 +16,8 @@ class Grid extends Component {
             {headerName: "Task", field: "task"},
             {headerName: "Cycle", field: "cycle"},
             {headerName: "Date", field: "date"},
-            {headerName: "Start/End", field: "start"}
+            {headerName: "Start/End", field: "start"},
+            
 
         ],
         rowData: [
@@ -34,7 +36,7 @@ class Grid extends Component {
 
             <div
                 className="ag-theme-balham"
-                style={{ height: '400px', width: '100%' }}
+                style={{ height: '200px', width: '100%' }}
             >
                 <AgGridReact
                     columnDefs={this.state.columnDefs}

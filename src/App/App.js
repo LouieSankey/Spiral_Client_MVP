@@ -15,9 +15,10 @@ export default class App extends Component {
     state = {
         toggle:false
     }
-    Toggle = () => {
+    ToggleMobileNav = () => {
         this.setState({toggle:!this.state.toggle})
     }
+
 
     renderMainRoutes() {
       return (  
@@ -43,7 +44,7 @@ export default class App extends Component {
         return (
          <Router>
               <div className="navBar">
-                  <button class="nav-button" onClick={this.Toggle}>
+                  <button class="nav-button" onClick={this.ToggleMobileNav}>
                       <FaAlignRight />
                   </button>
                   <li className="splash"> <Link to="/splash">Spiral</Link></li>
@@ -51,6 +52,7 @@ export default class App extends Component {
                     
                       <li> <Link to="/">Timer</Link></li>
                       <li> <Link to="/tracking">Tracking</Link></li>
+                      <li> <Link to="/logout">Log Out</Link></li>
                   </ul>
               </div>
               {this.renderMainRoutes()}

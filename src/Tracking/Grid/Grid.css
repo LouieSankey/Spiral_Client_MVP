@@ -6,3 +6,7 @@
 .ag-theme-balham {
     display: inline-block;
 }
+
+.ag-header-cell {
+    width: 280px;
+}

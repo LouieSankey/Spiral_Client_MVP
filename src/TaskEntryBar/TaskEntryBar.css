@@ -11,6 +11,7 @@
 #folder {
     margin-left: 12px;
     margin-top: 8px;
+    cursor: pointer;
 }
 
 .bottom-toolbar {
@@ -65,4 +66,102 @@
 
 .floatLeft {
     float: left;
+}
+
+.add-project-modal {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.add-project-modal-main {
+    position: relative;
+    background: rgb(253, 253, 253);
+    border-style: solid;
+    border-radius: 20px;
+    width: 400px;
+    height: auto;
+    top: 49%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.save-project-button,
+.create-project-header,
+.create-project-input {
+    margin-top: 24px;
+    text-align: center;
+    display: inline;
+    margin-left: 10px;
+}
+
+.save-project-button {
+    padding: 10px;
+    background-color: lightslategray;
+    margin-bottom: 6px;
+}
+
+.create-project-input {
+    width: 200px;
+    margin-left: 8px;
+    padding-top: 6px;
+}
+
+.modal {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-main {
+    position: relative;
+    background: rgb(253, 253, 253);
+    border-style: solid;
+    border-radius: 20px;
+    width: 400px;
+    height: auto;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content {
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.modal-close-button {
+    font-size: 20px;
+    background-color: transparent;
+    width: 10px;
+    height: 10px;
+    border-radius: 0px;
+    float: right;
+    color: darkgray;
+    padding: 2px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.add-project-button {
+    padding: 10px;
+    background-color: lightslategray;
+    margin-bottom: 6px;
+    margin-left: 8px;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
 }
