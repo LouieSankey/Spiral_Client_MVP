@@ -14,7 +14,7 @@ export default class Splash extends Component {
 
 <div className="content">
                     <div className=" first-block">
-                            <div class="first-block-content two-column-split">
+                            <div className="first-block-content two-column-split">
                                 <div className="align-left heading">
 
                                     <h1 className="spiral-productivity">Spiral Productivity</h1>
@@ -89,7 +89,7 @@ export default class Splash extends Component {
                                                         <div>While for larger tasks (like reading an entire chapter) you can choose from minute values that are further apart, i.e. 21, 34, or 55.</div>
                                                     </li>
                                                     <li >
-                                                    <div class="bullet">How you break apart your work for maximum benefit is up to you!</div>
+                                                    <div className="bullet">How you break apart your work for maximum benefit is up to you!</div>
                                                 </li>
 
                                                 </ul>

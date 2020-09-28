@@ -44,7 +44,7 @@ export default class App extends Component {
         return (
          <Router>
               <div className="navBar">
-                  <button class="nav-button" onClick={this.ToggleMobileNav}>
+                  <button className="nav-button" onClick={this.ToggleMobileNav}>
                       <FaAlignRight />
                   </button>
                   <li className="splash"> <Link to="/splash">Spiral</Link></li>
