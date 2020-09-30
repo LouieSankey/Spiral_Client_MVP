@@ -25,7 +25,9 @@
         "react-router-dom": "^5.2.0",
         "react-scripts": "3.4.3",
         "react-split-button": "^1.0.1",
-        "reactstrap": "^8.6.0"
+        "react-uuid": "^1.0.2",
+        "reactstrap": "^8.6.0",
+        "uuid": "^8.3.0"
     },
     "scripts": {
         "predeploy": "npm run build",

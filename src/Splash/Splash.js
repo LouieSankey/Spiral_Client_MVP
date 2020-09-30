@@ -116,7 +116,7 @@ export default class Splash extends Component {
                                                             <div>Helping you break apart difficult or tedious tasks.</div>
                                                         </li>
                                                         <li className="bullet">
-                                                            <div>Encouraging you to take more meaningful breaks.</div>
+                                                            <div>Encouraging you to take effective breaks.</div>
                                                         </li>
                                                        
         

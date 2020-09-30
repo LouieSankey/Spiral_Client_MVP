@@ -14,7 +14,11 @@ export default class App extends Component {
   static defaultProps = {}
     state = {
         toggle:false
+   
     }
+
+
+
     ToggleMobileNav = () => {
         this.setState({toggle:!this.state.toggle})
     }
@@ -26,7 +30,7 @@ export default class App extends Component {
           <Route
             exact
             path='/'
-            component={Home}
+            component={() => <Home/>}
           />
           <Route
             path='/tracking'

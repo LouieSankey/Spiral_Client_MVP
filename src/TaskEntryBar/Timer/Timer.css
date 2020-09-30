@@ -1,0 +1,11 @@
+.pause {
+    margin-right: 12px;
+}
+
+#timer {
+    font-size: 28px;
+    margin-right: 12px;
+}
+
+.stop,
+.skip-next {}
