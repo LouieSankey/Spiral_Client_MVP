@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './MainRectangle.css'
-import uuid from 'react-uuid'
 
 export default class MainRectangle extends Component {
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-class Projects extends React.Component {
+class AllProjectsModal extends React.Component {
     render() {
     const showHideClassName = this.props.show ? "modal display-block" : "modal display-none";
     return (
@@ -18,4 +18,4 @@ class Projects extends React.Component {
     }
   };
 
-  export default Projects
+  export default AllProjectsModal

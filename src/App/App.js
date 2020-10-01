@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Home from '../Home/Home'
+import ModalPresenter from '../ModalPresenter/ModalPresenter'
 import Tracking from '../Tracking/Tracking'
 import Splash from '../Splash/Splash'
 import './App.css'
@@ -30,7 +30,7 @@ export default class App extends Component {
           <Route
             exact
             path='/'
-            component={() => <Home/>}
+            component={() => <ModalPresenter/>}
           />
           <Route
             path='/tracking'

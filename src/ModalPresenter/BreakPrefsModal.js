@@ -1,52 +1,14 @@
-import TaskEntryBar from '../TaskEntryBar/TaskEntryBar'
-import MainRectangle from '../MainRectangle/MainRectangle'
 import React, { Component } from 'react';
-import './Home.css'
 
-const Modal = ({ handleClose, show, children }) => {
+
+const BreakPrefsModal = ({ handleClose, show, children }) => {
     const showHideClassName = show ? "break-modal display-block" : "break-modal display-none";
   
     return (
       <div className={showHideClassName}>
         <section className="modal-break-main">
         <button className="modal-close-button" onClick={handleClose}>x</button>
-          {children}
-        </section>
-      </div>
-    );
-  };
-
-
-export default class Home extends Component {
-
-    state = { 
-      show: false,
-      cycleTimeSelected: 0
-    };
-
-    UpdateCycleSelected = (cycleTime) => {
-      this.setState({cycleTimeSelected: cycleTime})
-      console.log(this.state.cycleTimeSelected)
-      
-    }
-
-    showModal = () => {
-        this.setState({ show: true });
-        console.log('Click');
-      };
-    
-      hideModal = () => {
-        this.setState({ show: false });
-      };
-  
-  
-    render() {
-        return (
-            <>
-                <h1 className="center-text">Spiral</h1>
-                <h2 className="center-text">Estimate the duration of a task or subtask you're working on (in minutes), then be rewarded with <span className="break-clickable" onClick={this.showModal}>a break.</span></h2>
-                <Modal show={this.state.show} handleClose={this.hideModal}>
-                    <div className="modal-content">
+        <div className="modal-content">
                     <h2 className="break-modal-header">Break Preferences</h2>
                             <h3 className="prefs-label">Cycle: Break Time</h3>
                             <ul className="projects-list">
@@ -73,11 +35,9 @@ export default class Home extends Component {
                             <h3 className="gong-checkbox">Opening Gong <input type="checkbox" onChange={()=> console.log("value changed")} checked="checked"></input></h3>
                             <button className="save-break-prefs-button">SAVE</button>                 
                     </div>
-                </Modal>
-                <TaskEntryBar cycleTimeSelected={this.state.cycleTimeSelected}></TaskEntryBar>
-                <MainRectangle updateCycleSelected={this.UpdateCycleSelected}></MainRectangle>
-            </>
-        )
-    }
-}
+        </section>
+      </div>
+    );
+  };
 
+  export default BreakPrefsModal;
