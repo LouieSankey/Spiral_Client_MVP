@@ -1,4 +1,6 @@
-.content {}
+.content {
+    font-family: sans-serif;
+}
 
 body {
     /* background-color: blue;

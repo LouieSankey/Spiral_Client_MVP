@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
 
-class BarChart extends Component {
+class BarChart extends Component { 
   constructor(props) {
     super(props);
 
     this.state = {
+
+      data: this.props.data,
     
       series: [{
         name: 'Focus Time',
@@ -37,10 +39,12 @@ class BarChart extends Component {
       fill: {
         opacity: 0.8,
         type: 'solid',
+     
         pattern: {
           style: ['verticalLines', 'horizontalLines'],
           width: 5,
           height: 6
+         
         },
       },
       markers: {
@@ -56,8 +60,13 @@ class BarChart extends Component {
         intersect: true,
         shared: false
       },
+      // fill: {
+      //   colors: ['#847A5E']
+      // },
+      
       theme: {
         palette: 'palette1'
+     
       },
       xaxis: {
         // type: 'datetime',
@@ -77,6 +86,7 @@ class BarChart extends Component {
 
 
   render() {
+    // console.log("from chart: " + JSON.stringify(this.state.data))
     return (
       <div className="app">
         <h1>Tracking</h1>

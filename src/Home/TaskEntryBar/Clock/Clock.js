@@ -1,6 +1,9 @@
 import React from 'react'
 import { SkipNext, Stop, PausePresentation, PlayCircleOutline} from '@material-ui/icons';
-import './Timer.css'
+import './Clock.css'
+import useSound from 'use-sound';
+import bark from './dog_bark.wav';
+import tweet from './bird-tweet.mp3';
 
 //the countdown timer itself uses a hook, the class that implements it is at the bottom
 function Countdown(props) {
@@ -56,9 +59,9 @@ let breakDurations = {
                 console.log("timer set from 1")
                 setTimer((timer) => ({
                   ...timer, 
-                  time: props.cycleTimeSelected,
-                  timeRemaining: props.cycleTimeSelected,
-                  cycle: props.cycleTimeSelected,
+                  time: props.cycle,
+                  timeRemaining: props.cycle,
+                  cycle: props.cycle,
                   onBreak: false
                 }));
                
@@ -74,12 +77,15 @@ let breakDurations = {
             console.log("every start but the first one")
         setTimeout(function () {
         if(timer.onBreak){
+
+            playBark() 
             console.log(" the end of a break, so onBreak gets reset to false " )
           timer.onBreak = false
         }else{
            
           const breakDuration = breakDurations[timer.cycle] 
           if(breakDuration !== 0){
+            playTweet()
             console.log(" starts a break, after breakduration is check and > 0 " )
 
           setTimer((timer) => ({
@@ -88,9 +94,12 @@ let breakDurations = {
             time: breakDuration,
             timeRemaining: breakDuration
           }));
+        }else{
+            playBark() 
         }
+        props.updateDB(timer.cycle) 
         }
-
+   
       }, 1000);
 
       }else{
@@ -168,6 +177,22 @@ let breakDurations = {
       ret += "" + secs;
       return ret;
   }
+
+  const clickStop = () => {
+
+}
+
+const clickSkip = () => {
+
+}
+
+const [playBark] = useSound(bark, 
+  { volume: 0.35 }
+);
+
+const [playTweet] = useSound(tweet, 
+  { volume: 0.20 }
+);
     return <React.Fragment>
  
         {<div>
@@ -183,14 +208,14 @@ let breakDurations = {
 
 
 
-class Timer extends React.Component {
+class Clock extends React.Component {
 
 render(){
         return(
             <>
                 <div className="floatLeft"><i className="material-icons bottom-toolbar stop"><Stop onClick={this.clickStop}></Stop></i></div>
                 <div className="floatLeft"><i className="material-icons bottom-toolbar skip_next"><SkipNext onClick={this.clickSkip}></SkipNext></i></div>
-                <div className="floatLeft"><div id="timer"><Countdown pauseForModal={this.props.pauseForModal} cycleTimeSelected={this.props.cycleTimeSelected}></Countdown></div></div>
+                <div className="floatLeft"><div id="timer"><Countdown updateDB={this.props.updateDBFromClock} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle}></Countdown></div></div>
               
             </> 
         );
@@ -199,5 +224,4 @@ render(){
 }
 
 
-export default Timer;
-
+export default Clock;

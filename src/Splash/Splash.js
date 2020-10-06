@@ -1,13 +1,13 @@
 
 import React, { Component } from 'react';
 import './Splash.css'
-import galexy from '../img/spiral-galexy-transparent.png'
-import fibSpiral from '../img/55golden.png'
-import spiralIcon from '../img/spiral-icon.png'
+import galexy from '../Img/spiral-galexy-transparent.png'
+import fibSpiral from '../Img/55golden.png'
+import spiralIcon from '../Img/spiral-icon.png'
 
 export default class Splash extends Component {
   
-    render() {
+    render() { 
         return (
 
 <>

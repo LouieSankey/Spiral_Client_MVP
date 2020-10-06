@@ -3,36 +3,30 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import React, { Component } from 'react';
 import './Grid.css'
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
 
-
-
-
+import 'react-dropdown/style.css'; 
 
 class Grid extends Component {
+
     state = {
+
+        data: this.props.data, 
         columnDefs: [
             {headerName: "Task", field: "task"},
             {headerName: "Cycle", field: "cycle"},
             {headerName: "Date", field: "date"},
-            {headerName: "Start/End", field: "start"},
-            
-
+            {headerName: "Start/End", field: "time"},
         ],
         rowData: [
-            {task: "Task 1", cycle: "55 min", date: '07/23/2020', start: "7:51 PM - 8:34 PM"},
-            {task: "Task 2", cycle: "34 min", date: '07/23/2020', start: "7:51 PM - 8:34 PM"},
-            {task: "Task 3", cycle: "21 min", date: '07/23/2020', start:  "7:51 PM - 8:34 PM"}
-        ], 
+            {task: "Task 2", cycle: "34 min", date: '07/23/2020', time: "7:51 PM - 8:34 PM"},
+        ],
     }
 
+
     render() {
+        
         return (
             <>
-
-            <Dropdown className='dropdown' options={['one', 'two', 'three']} onChange={this._onSelect} value={"Project"} placeholder="Select an option" />
-            <Dropdown className='dropdown' options={['Today', 'This Week', 'This Month']} onChange={this._onSelect} value={"Time Period"} placeholder="Select an option" />
 
             <div
                 className="ag-theme-balham"
@@ -40,9 +34,8 @@ class Grid extends Component {
             >
                 <AgGridReact
                     columnDefs={this.state.columnDefs}
-                    rowData={this.state.rowData}>
+                    rowData={this.state.data}>
                 </AgGridReact>
-             
             </div>
           
             </>

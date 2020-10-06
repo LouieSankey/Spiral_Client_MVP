@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 
-const BreakPrefsModal = ({ handleClose, show, children }) => {
-    const showHideClassName = show ? "break-modal display-block" : "break-modal display-none";
+const BreakPrefsModal = ({ handleClose, showPrefs, children }) => {
+    const showHideClassName = showPrefs ? "break-modal display-block" : "break-modal display-none";
   
     return (
       <div className={showHideClassName}>
