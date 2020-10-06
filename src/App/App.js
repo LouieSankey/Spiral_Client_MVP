@@ -42,21 +42,21 @@ export default class App extends Component {
       })
   }
 
-  // handleAddProject = newProject => {
-  //   console.log(this.state.projects)
-  //   this.setState({
-  //     currentProject: newProject,
-  //     projects: [
-  //       ...this.state.projects,
-  //       newProject
-  //     ]
-  //   })
-  // }
+  handleAddProject = newProject => {
+    console.log(this.state.projects)
+    this.setState({
+      currentProject: newProject,
+      projects: [
+        ...this.state.projects,
+        newProject
+      ]
+    })
+  }
 
   setCurrentProject = (project) => {
-    // this.setState({
-    //   currentProject: project
-    // })
+    this.setState({
+      currentProject: project
+    })
   }
 
   // handleAddTask = newTask => {

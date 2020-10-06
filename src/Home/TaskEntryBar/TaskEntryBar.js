@@ -13,14 +13,14 @@ export default class TaskEntryBar extends Component {
       super(props);
       this.taskName= "No Task";
       this.setTaskName = this.setTaskName.bind(this);
-      this.postTask = this.postTask.bind(this);
+      this.updateDB = this.updateDB.bind(this);
   }
 
     setTaskName = event => {
       this.taskName = event.target.value
     } 
 
-    postTask = (cycle) => {
+    updateDB = (cycle) => {
       const task = {
         "account": this.context.account_id,
         "project": this.context.currentProject.id,
@@ -59,7 +59,7 @@ export default class TaskEntryBar extends Component {
     render() {
         return ( 
             <div className="taskbar">
-                <Clock postTask={this.postTask} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal}></Clock>
+                <Clock updateDB={this.updateDB} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal}></Clock>
                 <input className="taskInput"  onChange={this.setTaskName} type="text" placeholder="what are you working on?" name="taskInput"></input>
                 <div className="floatLeft"><img id="folder" src={folderIcon} onClick={this.props.showProjectsModal} width="30px" height="30px" alt=""></img></div>
             </div>

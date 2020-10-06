@@ -16,8 +16,8 @@ export default class TimerHome extends Component {
       showPrefs: false,
       showProjects: false,
       showAddProject: false,
-      pauseTimer: false
-
+      pauseTimer: false,
+      taskName: ""
     };
 
 
@@ -38,7 +38,7 @@ export default class TimerHome extends Component {
     showAllProjectsModal = () => {
       this.setState({ showProjects: true,
         pauseForModal:true });
-      console.log('Click');
+  
     };
   
     hideAllProjectsModal = () => {
@@ -63,7 +63,7 @@ export default class TimerHome extends Component {
                 <h1 className="center-text">Spiral</h1>
                 <h2 className="center-text">Estimate the duration of a task or subtask you're working on (in minutes), then be rewarded with <span className="break-clickable" onClick={this.showBreakPrefsModal}>a break.</span></h2>
                 <BreakPrefsModal showPrefs={this.state.showPrefs} handleClose={this.hideBreakPrefsModal}></BreakPrefsModal>
-                <TaskEntryBar  pauseForModal={this.state.pauseForModal} cycle={this.state.cycle} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
+                <TaskEntryBar setTaskName={this.setLocalTaskName} pauseForModal={this.state.pauseForModal} cycle={this.state.cycle} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
                 <MainRectangle updateCycle={this.updateCycle}></MainRectangle>
                 <AllProjectsModal show={this.state.showProjects} handleClose={this.hideAllProjectsModal} showAdd={this.showNewProjectModal}>
                 </AllProjectsModal>

@@ -51,30 +51,50 @@ let breakDurations = {
         }
     }
 
+      React.useEffect(() => {
+
+        if(props.pauseForModal){
+            timer.pauseForModal = true
+            handlePause()
+        }else{
+        setTimeout(() => {
+            timer.pauseForModal = false
+
+             handleStart()  
+        }, 300);
+            
+        }
+        
+    }, [props.pauseForModal])
+
 
     React.useEffect(() => {
-        console.log("useEffect 1")
 
-                if(!timer.pauseForModal){
-                console.log("timer set from 1")
-                setTimer((timer) => ({
-                  ...timer, 
-                  time: props.cycle,
-                  timeRemaining: props.cycle,
-                  cycle: props.cycle,
-                  onBreak: false
-                }));
-               
-            }
+            if(!timer.pauseForModal){
+            console.log("timer is being reset with props")
+            setTimer((timer) => ({
+              ...timer, 
+              time: props.cycle,
+              timeRemaining: props.cycle,
+              cycle: props.cycle,
+              onBreak: false
+            }));
+            
+          }
             if(timer.isPaused){
+               console.log("if timer is paused, it is being unpaused")
                 timer.isPaused = false;
+                
             }
+
             }, [props])
+
+
 
     React.useEffect(() => {
 
         if(timer.time === 0 && !timer.firstStart){
-            console.log("every start but the first one")
+            console.log("start for breaks (automatic start)")
         setTimeout(function () {
         if(timer.onBreak){
 
@@ -103,9 +123,9 @@ let breakDurations = {
       }, 1000);
 
       }else{
-       console.log("only the first start")
+      
         if(timer.time === timer.timeRemaining){
-        
+         console.log("called for non breaks (regular start)")
         timer.firstStart = false
       handleStart()
         }
@@ -114,17 +134,7 @@ let breakDurations = {
 
     }, [timer.time, timer.time === timer.timeRemaining])
 
-    React.useEffect(() => {
-
-        if(props.pauseForModal){
-            timer.pauseForModal = true
-            handlePause()
-        }else{
-            timer.pauseForModal = false
-             handleStart()    
-        }
-        
-    }, [props.pauseForModal])
+   
     
       React.useEffect(() => {
 
@@ -142,6 +152,8 @@ let breakDurations = {
 
    
 
+   
+
     const updateTimeRemaining = e => {
       setTimer(prev => {
         return { ...prev, timeRemaining: prev.timeRemaining - 1 }
@@ -155,7 +167,7 @@ let breakDurations = {
       }
     }
     const handlePause = e => {
-        console.log("something paused")
+        console.log("paused")
       clearInterval(timer.timerHandler)
       setTimer({ ...timer, isPaused: true })
     }
@@ -215,8 +227,8 @@ render(){
             <>
                 <div className="floatLeft"><i className="material-icons bottom-toolbar stop"><Stop onClick={this.clickStop}></Stop></i></div>
                 <div className="floatLeft"><i className="material-icons bottom-toolbar skip_next"><SkipNext onClick={this.clickSkip}></SkipNext></i></div>
-                <div className="floatLeft"><div id="timer"><Countdown updateDB={this.props.updateDBFromClock} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle}></Countdown></div></div>
-              
+                <div className="floatLeft"><div id="timer"><Countdown updateDB={this.props.updateDB} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle}></Countdown></div></div>
+
             </> 
         );
     }

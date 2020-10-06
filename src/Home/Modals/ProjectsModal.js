@@ -7,7 +7,7 @@ class AllProjectsModal extends React.Component {
 
  setCurrentProject(project){
    console.log("current project " + JSON.stringify(project))
-  this.context.currentProject = project
+    this.context.currentProject = project 
  }
 
     render() {
