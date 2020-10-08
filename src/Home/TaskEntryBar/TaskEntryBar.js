@@ -20,13 +20,23 @@ export default class TaskEntryBar extends Component {
       this.taskName = event.target.value
     } 
 
+
+
     updateDB = (cycle) => {
+
+//if no project selected
+let projectId;
+  if(typeof this.context.currentProject === 'undefined'){
+  projectId = "0000"
+  }else{
+    projectId = this.context.currentProject.id
+  }
+
       const task = {
         "account": this.context.account_id,
-        "project": this.context.currentProject.id,
+        "project": projectId,
          "task": this.taskName,
         "cycle": cycle
-      
       }
 
       console.log("my task " + JSON.stringify(task))

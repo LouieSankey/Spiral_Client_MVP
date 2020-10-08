@@ -12,9 +12,9 @@ export default class App extends Component {
     state = {
         toggleMobileNav:false,
         account_id: 1,
-        // currentProject: null,
-        // currentTask: null,
         tasks: []
+  
+   
     }
 
    componentDidMount() {
@@ -83,10 +83,10 @@ export default class App extends Component {
             path='/'
             component={Home}
           />
-          <Route
-            path='/tracking'
-            component={Tracking}
-          />
+          <Route path="/tracking">
+              <Tracking />
+          </Route>
+         
            <Route
             path='/splash'
             component={Splash}
@@ -101,7 +101,7 @@ export default class App extends Component {
         account_id: this.state.account_id,
         account: this.state.account,
         projects: this.state.projects,
-        // currentProject: this.state.currentProject,
+        currentProject: this.currentProject,
         // currentTask: this.state.currentTask,
         setCurrentProject: this.setCurrentProject,
         handleAddProject: this.handleAddProject,
@@ -118,7 +118,7 @@ export default class App extends Component {
                   <ul className={this.state.toggleMobileNav ? "nav-links show-nav" : "nav-links"}>
                       <li> <Link to="/">Timer</Link></li>
                       <li> <Link to="/tracking">Tracking</Link></li>
-                      <li> <Link to="/logout">Log Out</Link></li>
+                      <li> <Link to="/logout" >Log Out</Link></li>
                   </ul>
               </div>
               {this.renderMainRoutes()}

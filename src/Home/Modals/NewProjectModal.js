@@ -36,8 +36,8 @@ postNewProject = e => {
     })
     .then(project => {
        this.context.handleAddProject(project)
-       this.context.setCurrentProject(project)
-      //  this.props.history.push(`/folder/${folder.id}`)
+      this.context.currentProject = project 
+
     })
     .catch(error => {
       console.error({ error })

@@ -3,10 +3,14 @@
     float: left;
 }
 
+.Dropdown-control {
+    margin-top: 30px;
+}
+
 .ag-theme-balham {
     display: inline-block;
 }
 
 .ag-header-cell {
-    width: 280px;
+    width: 250px;
 }

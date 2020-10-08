@@ -21,6 +21,11 @@ export default class TimerHome extends Component {
     };
 
 
+setStateAfterTimeout(){
+  setTimeout(() => {
+    
+  }, 1000);
+}
 
     updateCycle = (cycleTime) => {
       this.setState({cycle: cycleTime})
