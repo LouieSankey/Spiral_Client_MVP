@@ -128,6 +128,7 @@ let timeData = {
     name: 'Focus Time',
     data: data
   }]
+  
 }
   return timeData
 }

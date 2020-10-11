@@ -2,6 +2,22 @@
     font-family: sans-serif;
 }
 
+
+/* .login-modal_loginBtn__3dfDV {
+    cursor: pointer !important;
+} */
+
+.login-modal_facebookBtnBg__ecXHz,
+.login-modal_googleBtnBg__qz2el,
+.login-modal_lineTextHolder__2Jj7U {
+    display: none !important;
+}
+
+.login-modal_logInHolder__3fA0H {
+    border-radius: 15px;
+    padding: 5px;
+}
+
 body {
     /* background-color: blue;
     color: black; */

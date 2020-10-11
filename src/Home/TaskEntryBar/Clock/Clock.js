@@ -35,22 +35,6 @@ let breakDurations = {
 
 }
 
-    const handleTimeChange = e => {
-      setTimer({
-        ...timer,
-        time: Number(e.target.value),
-        timeRemaining: Number(e.target.value),
-      })
-    }
-
-    const timeReset = () => {
-        if(timer.time === timer.timeRemaining){
-            return true
-        }else{
-            return false
-        }
-    }
-
       React.useEffect(() => {
 
         if(props.pauseForModal){

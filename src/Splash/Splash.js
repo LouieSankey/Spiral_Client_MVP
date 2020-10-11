@@ -4,23 +4,127 @@ import './Splash.css'
 import galexy from '../Img/spiral-galexy-transparent.png'
 import fibSpiral from '../Img/55golden.png'
 import spiralIcon from '../Img/spiral-icon.png'
+import LoginModal from "react-login-modal-sm";
+import config from '../config'
+import { Redirect, withRouter } from 'react-router-dom'
+import ApiContext from '../ApiContext';
 
-export default class Splash extends Component {
+
+class Splash extends Component {
+    static contextType = ApiContext;
+
+  constructor(props){
+    super(props);
+    this.handleSignupByEmail = this.handleSignupByEmail.bind(this)
+  }
+
+    state = {
+        showModal: false,
+        redirect: false,
+        account_id: null
+      };
+
+      setRedirect = () => {
+        this.setState({
+          redirect: true
+        })
+      }
+
+      renderRedirect = () => {
+        if (this.state.redirect) {
+          return <Redirect  to={{
+            pathname: "/",
+            state: { account_id: this.state.account_id }
+          }}/>
+        }
+      }
+    
+      toggleModal = () => {
+        this.setState({ showModal: !this.state.showModal });
+      };
+
+      handleLoginWithEmail = (email, password) => {
+        console.log("login called")
+
+        fetch(`${config.API_ENDPOINT}/account/email/${email}`, {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+          .then(res => {
+            if (!res.ok)
+              return res.json().then(e => Promise.reject(e))
+            return res.json()
+          })
+          .then(account => {
+          this.context.handleAPIRequest(account.id)
+           this.setRedirect()
+          })
+          .catch(error => {
+            console.error({ error })
+          })
+      };
+
+      handleSignupByEmail = (email, username, password) => {
+        console.log("sign up called")
+
+        //todo: complete auth
+           const account = {
+               email: email,
+               account_username: username,
+               password: "no password"
+           }
+
+           fetch(`${config.API_ENDPOINT}/account`, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(account),
+          })
+            .then(res => {
+              if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+              return res.json()
+            })
+            .then(account => {
+
+              console.log("created " + JSON.stringify(account))
+            this.context.handleAPIRequest(account.id)
+             this.setRedirect()
+            })
+            .catch(error => {
+              console.error({ error })
+            })
+
+      };
+     
+     
   
     render() { 
+        const customUsernameRegex = /^[a-zA-Z0-9_]{5,}/;
         return (
 
 <>
+{this.renderRedirect()}
 
 <div className="content">
                     <div className=" first-block">
                             <div className="first-block-content two-column-split">
                                 <div className="align-left heading">
+                                <LoginModal showModal={this.state.showModal}
+                                toggleModal={this.toggleModal} 
+                                onLoginEmail={this.handleLoginWithEmail}
+                                onSignupEmail={this.handleSignupByEmail}
+                                usernameRegex={customUsernameRegex}
+                               />
 
                                     <h1 className="spiral-productivity">Spiral Productivity</h1>
-                                    <p className="p-large">Spiral is a simple workflow optimization tool with built in time tracking and break reminders. </p>
-                                    <button>SIGN UP</button>
-                               
+                                    <p className="p-large">Spiral is a simple workflow optimization tool with built in time tracking and break taking reminders. </p>
+                                    <button onClick={this.toggleModal}>SIGN UP</button>
+                              
+                                    
                                 </div>
                             <div className="align-right">
 
@@ -93,7 +197,7 @@ export default class Splash extends Component {
                                                 </li>
 
                                                 </ul>
-                                                <button>TRY IT!</button>
+                                                <button onClick={this.toggleModal}>TRY IT!</button>
                                             
                                         </div>
                                         </div>
@@ -115,6 +219,7 @@ export default class Splash extends Component {
                                                         <li className="bullet">
                                                             <div>Helping you break apart difficult or tedious tasks.</div>
                                                         </li>
+    
                                                         <li className="bullet">
                                                             <div>Encouraging you to take effective breaks.</div>
                                                         </li>
@@ -123,7 +228,7 @@ export default class Splash extends Component {
                                                         <p>Plus, it's easy - just keep it open in a browser window while studying or doing computer work and it takes one click to begin a cycle.</p>
                                                     </ul>
 
-                                                    <button>YES, TRY SPIRAL!</button>
+                                                    <button onClick={this.toggleModal}>YES, TRY SPIRAL!</button>
 
                                                 </div>
                                          
@@ -147,3 +252,5 @@ export default class Splash extends Component {
         );
     }
 }
+
+export default withRouter(Splash)

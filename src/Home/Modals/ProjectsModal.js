@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ApiContext from '../../ApiContext'
 
 class AllProjectsModal extends React.Component {

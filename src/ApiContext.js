@@ -6,6 +6,7 @@ export default React.createContext({
   currentProject: [],
   chartData: [],
 
+  handleAPIRequest: () => {},
   setCurrentProject: () => {},
   setSelectedCycle: () => {},
   handleAddProject: () => {},

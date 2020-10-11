@@ -23,6 +23,7 @@
         "react-dom-factories": "^1.0.2",
         "react-dropdown": "^1.9.0",
         "react-icons": "^3.11.0",
+        "react-login-modal-sm": "^1.0.8",
         "react-router-dom": "^5.2.0",
         "react-scripts": "3.4.3",
         "react-split-button": "^1.0.1",
