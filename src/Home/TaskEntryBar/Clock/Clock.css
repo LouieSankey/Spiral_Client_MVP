@@ -9,3 +9,20 @@
 
 .stop,
 .skip-next {}
+
+.visible {
+    visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+@media screen and (min-width: 768px) {
+    #timer {
+        float: left;
+    }
+    .taskInput {
+        float: left;
+    }
+}

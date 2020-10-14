@@ -15,10 +15,6 @@ class App extends Component {
   constructor(props){
     super(props);
     this.handleAPIRequest = this.handleAPIRequest.bind(this);
-    this.state = {
-       account_id:null
-    };
-
   }
   
 
@@ -32,30 +28,29 @@ class App extends Component {
 
       console.log("account is " + account_id)
 
-      this.setState({
-        account_id: account_id
-      })
-
-
       //Leaving the second call (after login/sigup) to get account info here for 
       // because I'm not yet sure how to handle returning users
     Promise.all([
       fetch(`${config.API_ENDPOINT}/account/${account_id}`),
-      fetch(`${config.API_ENDPOINT}/project/account/${account_id}`)
+      fetch(`${config.API_ENDPOINT}/project/account/${account_id}`),
+      fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`)
     ])
-      .then(([accountRes, projectRes]) => {
+      .then(([accountRes, projectRes, prefsRes]) => {
         if (!accountRes.ok)
           return accountRes.json().then(e => Promise.reject(e))
         if (!projectRes.ok)
           return projectRes.json().then(e => Promise.reject(e))
+          if (!prefsRes.ok)
+          return prefsRes.json().then(e => Promise.reject(e))
 
         return Promise.all([
           accountRes.json(),
           projectRes.json(),
+          prefsRes.json()
         ])
       })
-      .then(([account, projects]) => {
-        this.setState({ account, projects })
+      .then(([account, projects, prefsRes]) => {
+        this.setState({ account, projects, prefsRes, account_id})
       })
       .catch(error => {
         console.error({ error })
@@ -79,8 +74,6 @@ class App extends Component {
     })
   }
 
-  
-
     ToggleMobileNav = () => {
         this.setState({toggleMobileNav:!this.state.toggleMobileNav})
     }
@@ -88,26 +81,18 @@ class App extends Component {
     renderMainRoutes() {
       return (  
         <> 
-
-      
-
       <Route
-           
            path='/spiral-react'
            component={Splash}/>
-         
-          
+        
           <Route path="/tracking">
               <Tracking />
           </Route>
 
-         
            <Route
             exact
             path='/'
             render={(props) => <Home {...props}/>}/>
-          
-
       </>
       )
     }
@@ -117,10 +102,11 @@ class App extends Component {
     render() {
 
       const value = {
-         account_id: this.state.account_id,
+        account_id: this.state.account_id,
         account: this.state.account,
         projects: this.state.projects,
         currentProject: this.state.currentProject,
+        prefs: this.state.prefsRes,
         // currentTask: this.state.currentTask,
         setCurrentProject: this.setCurrentProject,
         handleAddProject: this.handleAddProject,
@@ -130,25 +116,24 @@ class App extends Component {
       }
 
       const isSplashPage = (window.location.pathname === "/Spiral-React")
-      console.log(isSplashPage)
+
 
         return (
           <ApiContext.Provider value={value}>
             
              
-                  {isSplashPage ? null :
+                {isSplashPage ? null :
               <div className="navBar">
               <button className="nav-button" onClick={this.ToggleMobileNav}>
                   <FaAlignRight />
               </button>
                   <ul className={this.state.toggleMobileNav ? "nav-links show-nav" : "nav-links"}>
-                      <li> <Link to="/">Timer</Link></li>
-                      <li> <Link to="/tracking">Tracking</Link></li>
-                      <li> <Link to="/logout" >Log Out</Link></li>
+                      <li> <Link onClick={this.ToggleMobileNav} to="/">Timer</Link></li>
+                      <li> <Link onClick={this.ToggleMobileNav} to="/tracking">Tracking</Link></li>
+                      <li> <Link onClick={this.ToggleMobileNav} to="/logout" >Log Out</Link></li>
                   </ul>
               </div>}
             
-
               {this.renderMainRoutes()}
             
           </ApiContext.Provider>

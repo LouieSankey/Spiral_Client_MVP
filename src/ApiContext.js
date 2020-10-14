@@ -3,8 +3,9 @@ import React from 'react'
 export default React.createContext({
   project: "",
   tasks: "",
-  currentProject: [],
+  currentProject: {}, 
   chartData: [],
+  prefs: {},
 
   handleAPIRequest: () => {},
   setCurrentProject: () => {},

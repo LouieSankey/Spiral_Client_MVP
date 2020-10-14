@@ -1,5 +1,6 @@
 import React from 'react'
 import ApiContext from '../../ApiContext'
+import '../MainRectangle/MainRectangle.css'
 
 class AllProjectsModal extends React.Component {
 
@@ -7,7 +8,7 @@ class AllProjectsModal extends React.Component {
 
  setCurrentProject(project){
    console.log("current project " + JSON.stringify(project))
-    this.context.currentProject = project 
+    this.context.setCurrentProject(project)
  }
 
     render() {
@@ -22,14 +23,14 @@ class AllProjectsModal extends React.Component {
                    <h2>Current Project: {this.context.currentProject && this.context.currentProject.project}</h2>
                         <ul className="projects-list">
                           {projects.map((project, i) => 
-                              <li key={i}><a href="#" onClick={() => {this.setCurrentProject(project); this.props.handleClose();}}>{project.project}</a></li>
+                              <li key={i}><p className="underlined" onClick={() => {this.setCurrentProject(project); this.props.handleClose();}}>{project.project}</p></li>
                           )}
                        
                         </ul>
                     </div>
-          <button onClick={(event) => {
+          <button   onClick={(event) => {
         this.props.handleClose(); this.props.showAdd();
-     }} className="add-project-button">Create Project</button>
+     }} className="add-project-button splash-button">Create Project</button>
         </section>
       </div>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ApiContext from '../../ApiContext'
-import config from '../../config'
+import APIService from '../../api-services';
 
 class NewProjectModal extends Component {
 
@@ -15,6 +15,7 @@ class NewProjectModal extends Component {
 postNewProject = e => {
   
   const { account_id } = this.context
+
   const project = {
     "project": this.state.projectName,
     "account": account_id
@@ -22,21 +23,10 @@ postNewProject = e => {
 
   console.log("new project " + JSON.stringify(project))
  
-  fetch(`${config.API_ENDPOINT}/project`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(project),
-  })
-    .then(res => {
-      if (!res.ok)
-        return res.json().then(e => Promise.reject(e))
-      return res.json()
-    })
+    APIService.createProject(project)
     .then(project => {
        this.context.handleAddProject(project)
-      this.context.currentProject = project 
+      this.context.currentProject = project   
 
     })
     .catch(error => {
@@ -56,7 +46,7 @@ render(){
                         <h2 className="create-project-header">Create Project</h2>
                         <input  type="text" name="project" onChange={this.setProjectNameLocally} className="create-project-input"></input>
                     </div>
-              <button onClick={this.postNewProject} className="save-project-button">CREATE</button>
+              <button onClick={this.postNewProject} className="save-project-button splash-button">CREATE</button>
             </section>
           </div>
         );

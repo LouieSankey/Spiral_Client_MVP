@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './TaskEntryBar.css'
 import ApiContext from '../../ApiContext'
-import config from '../../config'
 import Clock from './Clock/Clock'
 import folderIcon from '../../Img/folder_icon.png'
+import ApiServices from '../../api-services'
 
 export default class TaskEntryBar extends Component {
     static defaultProps = {}
@@ -19,8 +19,6 @@ export default class TaskEntryBar extends Component {
     setTaskName = event => {
       this.taskName = event.target.value
     } 
-
-
 
     updateDB = (cycle) => {
 
@@ -39,31 +37,8 @@ let projectId;
         "cycle": cycle
       }
 
-      console.log("my task " + JSON.stringify(task))
+      ApiServices.postTask(task)
 
-  fetch(`${config.API_ENDPOINT}/task`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(task),
-    })
-      .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
-      })
-      .then(task => {
-        console.log("posted task to db: " + JSON.stringify(task))
-      
-        //  this.taskName = ""
-
-        //  this.context.setSelectedTask(task)
-        //  this.props.history.push(`/folder/${folder.id}`)
-      })
-      .catch(error => {
-        console.error({ error })
-      })
   }
 
     render() {

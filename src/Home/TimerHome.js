@@ -65,8 +65,8 @@ setStateAfterTimeout(){
     render() {
         return (
             <>
-                <h1 className="center-text">Spiral</h1>
-                <h2 className="center-text">Estimate the duration of a task or subtask you're working on (in minutes), then be rewarded with <span className="break-clickable" onClick={this.showBreakPrefsModal}>a break.</span></h2>
+                <h1 className="center-text spiral-title">Spiral</h1>
+                <h2 className="center-text spiral-headline">Estimate the duration of a task or subtask you're working on (in minutes), then be rewarded with <span className="break-clickable" onClick={this.showBreakPrefsModal}>a break.</span></h2>
                 <BreakPrefsModal showPrefs={this.state.showPrefs} handleClose={this.hideBreakPrefsModal}></BreakPrefsModal>
                 <TaskEntryBar setTaskName={this.setLocalTaskName} pauseForModal={this.state.pauseForModal} cycle={this.state.cycle} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
                 <MainRectangle updateCycle={this.updateCycle}></MainRectangle>

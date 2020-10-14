@@ -2,14 +2,14 @@ center {
     text-align: center;
 }
 
-li {
+
+/* li {
     padding: 10px 0;
-}
+} */
 
 .nav-button {
     font-size: 30px;
-    margin-right: 30px;
-    color: white;
+    color: black;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -33,6 +33,7 @@ li {
     font-weight: bold;
     margin: 12px;
     font-size: 20px;
+    height: 0px;
 }
 
 .logo-galexy {
@@ -45,7 +46,7 @@ li {
 }
 
 .show-nav {
-    height: 120px;
+    height: 140px;
 }
 
 .splash {
@@ -63,6 +64,7 @@ li {
 @media screen and (min-width: 768px) {
     .nav-button {
         display: none;
+        color: black;
     }
     .nav-links {
         height: auto;

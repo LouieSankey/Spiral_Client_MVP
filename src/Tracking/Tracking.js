@@ -9,9 +9,6 @@ import moment from 'moment'
 
 export default class Tracking extends Component {
 
-//   constructor(props) {
-//     super(props);
-// }
 
       state = {
         tasks: null,

@@ -14,13 +14,21 @@
     margin: auto;
     margin-top: 100px;
     margin-bottom: 60px;
-    background-color: aliceblue;
     /* sets a potential background image */
     /* background-image: url('./grspiral.jpeg');
     background-size: 700px 400px;
     background-repeat: no-repeat;
     background-color: black;
     margin-left: 96px; */
+}
+
+.underlined {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.create-project-input {
+    text-align: left;
 }
 
 .item {
@@ -31,12 +39,13 @@
     align-items: center;
     font-size: 24px;
     border: 1px solid rgb(139, 139, 139);
+    background-color: aliceblue;
     /* background-image: url('./copper.jpeg');
     background-repeat: no-repeat;
     background-size: contain; */
 }
 
-.item:hover {
+.clickable:hover {
     cursor: hand;
     cursor: pointer;
     opacity: .9;
@@ -57,6 +66,10 @@
     justify-content: center;
     align-items: center;
     font-size: 24px;
+    background-color: aliceblue;
+    border: 1px;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .box7 {
@@ -84,8 +97,12 @@
 
 .box0 {
     position: relative;
-    font-size: 22px;
+    font-size: 18px;
     cursor: hand;
     cursor: pointer;
     opacity: .9;
+}
+
+.plus-minus {
+    font-size: 18px;
 }

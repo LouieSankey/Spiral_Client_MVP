@@ -5,9 +5,9 @@ import galexy from '../Img/spiral-galexy-transparent.png'
 import fibSpiral from '../Img/55golden.png'
 import spiralIcon from '../Img/spiral-icon.png'
 import LoginModal from "react-login-modal-sm";
-import config from '../config'
 import { Redirect, withRouter } from 'react-router-dom'
 import ApiContext from '../ApiContext';
+import ApiServices from '../api-services'
 
 
 class Splash extends Component {
@@ -44,60 +44,71 @@ class Splash extends Component {
       };
 
       handleLoginWithEmail = (email, password) => {
-        console.log("login called")
 
-        fetch(`${config.API_ENDPOINT}/account/email/${email}`, {
-          method: 'GET',
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
-          .then(res => {
-            if (!res.ok)
-              return res.json().then(e => Promise.reject(e))
-            return res.json()
-          })
-          .then(account => {
+      ApiServices.getAccountByEmail(email)
+        .then(account => {
           this.context.handleAPIRequest(account.id)
-           this.setRedirect()
+          this.setRedirect()
           })
           .catch(error => {
             console.error({ error })
           })
-      };
+        }
 
       handleSignupByEmail = (email, username, password) => {
-        console.log("sign up called")
 
-        //todo: complete auth
            const account = {
                email: email,
-               account_username: username,
+               account_username: username,  
                password: "no password"
            }
 
-           fetch(`${config.API_ENDPOINT}/account`, {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(account),
+        ApiServices.createAccount(account)
+            .then((account) => {
+
+                  const project = {
+                    "project": "Uncategorized",
+                    "account": account.id
+                  }
+
+                ApiServices.createProject(project)
+                    .then(project => {
+                    console.log("posted task to db: " + JSON.stringify(project))
+                 
+                    this.context.setCurrentProject(project)
+                  
+                }).then(() =>{
+
+                      const userPrefs = {
+                        'account': account.id,
+                        'gong': true, 
+                        '_1': 0,
+                        '_2': 0, 
+                        '_3': 0, 
+                        '_5': 0, 
+                        '_8': 0, 
+                        '_13': 2, 
+                        '_21': 3, 
+                        '_34': 5, 
+                        '_55': 8, 
+                        '_89': 13  
+                      }
+
+                      console.log(JSON.stringify(userPrefs))
+
+                    ApiServices.createUserPrefs(userPrefs)
+                        .then(userPrefs => {
+                          console.log("posted user prefs to db: " + JSON.stringify(userPrefs))
+                          this.context.handleAPIRequest(account.id)
+                          this.setRedirect()
+                    }).catch(error => {
+                      console.error({ error })
+                    })
+                  })
+            })
+          .catch(error => {
+            console.error({ error })
           })
-            .then(res => {
-              if (!res.ok)
-                return res.json().then(e => Promise.reject(e))
-              return res.json()
-            })
-            .then(account => {
-
-              console.log("created " + JSON.stringify(account))
-            this.context.handleAPIRequest(account.id)
-             this.setRedirect()
-            })
-            .catch(error => {
-              console.error({ error })
-            })
-
       };
      
      
@@ -122,7 +133,7 @@ class Splash extends Component {
 
                                     <h1 className="spiral-productivity">Spiral Productivity</h1>
                                     <p className="p-large">Spiral is a simple workflow optimization tool with built in time tracking and break taking reminders. </p>
-                                    <button onClick={this.toggleModal}>SIGN UP</button>
+                                    <button className="splash-button" onClick={this.toggleModal}>SIGN UP</button>
                               
                                     
                                 </div>
@@ -130,7 +141,7 @@ class Splash extends Component {
 
                                 <div className="intro-image">
                                     <div className="img-wrapper">
-                                        <img className="galexy-image" src={galexy} alt="alternative"></img>
+                                        <img className="galexy-image" src={galexy} alt="a spiral galexy"></img>
                                     </div>
                                 </div>
 
@@ -148,19 +159,19 @@ class Splash extends Component {
 
                             <div className="col centered-text">
                                 <div className="inner">
-                                    <h4 className="card-title">Unbounded Timeframes</h4>
+                                    <h3 className="card-title">Unbounded Timeframes</h3>
                                     <p>No thought is given upfront to how long a task should take. You may even forget to stop the clock when your task is finished!</p>
                                     </div>
                             </div>
                             <div className="col centered-text">
                             <div className="inner">
-                                    <h4 className="card-title">Poor Incentives</h4>
+                                    <h3 className="card-title">Poor Incentives</h3>
                                     <p>The longer you take on a task, the more productive it looks in terms of time tracking, i.e. "Wow, you spent a lot of time on that!"</p>
                             </div>
                             </div>
                             <div className="col centered-text">
                                   <div className="inner">
-                                    <h4 className="card-title">Tedious to Use</h4>
+                                    <h3 className="card-title">Tedious to Use</h3>
                                     
                                 <p>There's no positive rewards cycle, so using it feels more like a chore than a productivity boost. </p>
                             </div>
@@ -178,7 +189,7 @@ class Splash extends Component {
                     <div className="two-column-split">
                                         <div className="align-left">
                                             <div className="image-container">
-                                                <img className="fib-spiral" src={fibSpiral} alt="alternative"></img>
+                                                <img className="fib-spiral" src={fibSpiral} alt="a rectangle with golden ratio proportions"></img>
                                             </div>
                                         </div>
                                         <div className="align-right">
@@ -197,7 +208,7 @@ class Splash extends Component {
                                                 </li>
 
                                                 </ul>
-                                                <button onClick={this.toggleModal}>TRY IT!</button>
+                                                <button className="splash-button" onClick={this.toggleModal}>TRY IT!</button>
                                             
                                         </div>
                                         </div>
@@ -206,7 +217,7 @@ class Splash extends Component {
                                     
                                                 <div className="align-left">
                                                     <h2>Productivity Benefits</h2>
-                                                    <p>Spiral improves your workflow and productivty by:</p>
+                                                    <p>Spiral improves your productivity by:</p>
         
                                                     <ul className="bullet-list">
                                                         <li className="bullet">
@@ -219,6 +230,10 @@ class Splash extends Component {
                                                         <li className="bullet">
                                                             <div>Helping you break apart difficult or tedious tasks.</div>
                                                         </li>
+
+                                                        <li className="bullet">
+                                                            <div>Tracking your time spent on projects.</div>
+                                                        </li>
     
                                                         <li className="bullet">
                                                             <div>Encouraging you to take effective breaks.</div>
@@ -228,7 +243,7 @@ class Splash extends Component {
                                                         <p>Plus, it's easy - just keep it open in a browser window while studying or doing computer work and it takes one click to begin a cycle.</p>
                                                     </ul>
 
-                                                    <button onClick={this.toggleModal}>YES, TRY SPIRAL!</button>
+                                                    <button className="splash-button" onClick={this.toggleModal}>YES, TRY SPIRAL!</button>
 
                                                 </div>
                                          
@@ -236,7 +251,7 @@ class Splash extends Component {
                                           <div className="align-right">
 
                                                 <div className="image-container">
-                                                    <img className="spiral-icon" src={spiralIcon} alt="alternative"></img>
+                                                    <img className="spiral-icon" src={spiralIcon} alt="a spiral"></img>
                                                 </div>
 
                                              </div>
