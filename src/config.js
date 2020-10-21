@@ -1,4 +1,4 @@
 export default {
-  API_ENDPOINT: `https://fierce-peak-53733.herokuapp.com/`,
+  API_ENDPOINT: `https://cors-anywhere.herokuapp.com/https://boiling-scrubland-00926.herokuapp.com`,
 
 }
