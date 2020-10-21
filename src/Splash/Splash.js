@@ -47,6 +47,7 @@ class Splash extends Component {
 
       ApiServices.getAccountByEmail(email)
         .then(account => {
+          localStorage.setItem("account_id", account.id)
           this.context.handleAPIRequest(account.id)
           this.setRedirect()
           })
@@ -98,6 +99,7 @@ class Splash extends Component {
 
                     ApiServices.createUserPrefs(userPrefs)
                         .then(userPrefs => {
+                          localStorage.setItem("account_id", account.id)
                           console.log("posted user prefs to db: " + JSON.stringify(userPrefs))
                           this.context.handleAPIRequest(account.id)
                           this.setRedirect()

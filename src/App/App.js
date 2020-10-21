@@ -16,7 +16,6 @@ class App extends Component {
     super(props);
     this.handleAPIRequest = this.handleAPIRequest.bind(this);
   }
-  
 
     state = {
         toggleMobileNav:false,
@@ -72,6 +71,23 @@ class App extends Component {
     this.setState({
       currentProject: project
     })
+  }
+
+  componentDidMount = () => {
+    let account_id = localStorage.getItem('account_id')
+    if(account_id){
+      this.handleAPIRequest(account_id)
+      console.log("logged in with token")
+    }else{
+      //redirect to splash page
+      console.log("redirected to splash")
+      return <Redirect  to={{
+        pathname: "/spiral-react"
+      }}/>
+
+    }
+
+
   }
 
     ToggleMobileNav = () => {
