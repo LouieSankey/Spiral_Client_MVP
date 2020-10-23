@@ -49,7 +49,8 @@ class App extends Component {
         ])
       })
       .then(([account, projects, prefsRes]) => {
-        this.setState({ account, projects, prefsRes, account_id})
+        const currentProject = projects[0]
+        this.setState({ account, projects, prefsRes, account_id, currentProject})
       })
       .catch(error => {
         console.error({ error })
@@ -75,15 +76,14 @@ class App extends Component {
 
   componentDidMount = () => {
     let account_id = localStorage.getItem('account_id')
+    account_id = Number(account_id)
     if(account_id){
       this.handleAPIRequest(account_id)
       console.log("logged in with token")
     }else{
       //redirect to splash page
       console.log("redirected to splash")
-      return <Redirect  to={{
-        pathname: "/spiral-react"
-      }}/>
+      this.props.history.push('/Spiral')
 
     }
 
@@ -98,7 +98,7 @@ class App extends Component {
       return (  
         <> 
       <Route
-           path='/spiral-react'
+           path='/spiral'
            component={Splash}/>
         
           <Route path="/tracking">
@@ -109,8 +109,35 @@ class App extends Component {
             exact
             path='/'
             render={(props) => <Home {...props}/>}/>
+
       </>
+      
       )
+    }
+
+    Logout = () => {
+      localStorage.setItem("account_id", null)
+      this.setState({
+        account: {},
+        prefsRes: {},
+        projects: [],
+        tasks: [],
+        account_id: null
+      })
+      console.log("account id :: " + localStorage.getItem("account_id"))
+      this.ToggleMobileNav()
+    }
+
+    changeBreakPrefs = (newPrefs) => {
+
+        for (const key in newPrefs) {
+          if(newPrefs[key] !== null){
+
+            console.log(`${key}: ${newPrefs[key]}`);
+          }
+       
+        }
+
     }
 
   
@@ -124,6 +151,7 @@ class App extends Component {
         currentProject: this.state.currentProject,
         prefs: this.state.prefsRes,
         // currentTask: this.state.currentTask,
+        changeBreakPrefs: this.changeBreakPrefs,
         setCurrentProject: this.setCurrentProject,
         handleAddProject: this.handleAddProject,
         handleAPIRequest: this.handleAPIRequest,
@@ -131,7 +159,7 @@ class App extends Component {
         // setCurrentTaskName: this.setCurrentTaskName
       }
 
-      const isSplashPage = (window.location.pathname === "/Spiral-React")
+      const isSplashPage = (window.location.pathname === "/Spiral" || window.location.pathname === "/spiral")
 
 
         return (
@@ -143,10 +171,12 @@ class App extends Component {
               <button className="nav-button" onClick={this.ToggleMobileNav}>
                   <FaAlignRight />
               </button>
+                  {/* <p> <Link className="example-workflow" onClick={this.Logout}>Example Workflow</Link></p> */}
+
                   <ul className={this.state.toggleMobileNav ? "nav-links show-nav" : "nav-links"}>
                       <li> <Link onClick={this.ToggleMobileNav} to="/">Timer</Link></li>
                       <li> <Link onClick={this.ToggleMobileNav} to="/tracking">Tracking</Link></li>
-                      <li> <Link onClick={this.ToggleMobileNav} to="/logout" >Log Out</Link></li>
+                      <li> <Link onClick={this.Logout} to="/Spiral" >Log Out</Link></li>
                   </ul>
               </div>}
             

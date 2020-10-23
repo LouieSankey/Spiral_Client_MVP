@@ -15,11 +15,18 @@
     margin-top: 100px;
     margin-bottom: 60px;
     /* sets a potential background image */
-    /* background-image: url('./grspiral.jpeg');
+    /* background-image: url('../../Img/grspiral.jpeg');
     background-size: 700px 400px;
     background-repeat: no-repeat;
     background-color: black;
     margin-left: 96px; */
+}
+
+.example-workflow {
+    text-decoration: underline;
+    text-align: center;
+    margin-top: 0px;
+    cursor: pointer;
 }
 
 .underlined {
@@ -39,7 +46,7 @@
     align-items: center;
     font-size: 24px;
     border: 1px solid rgb(139, 139, 139);
-    background-color: aliceblue;
+    background-color: transparent;
     /* background-image: url('./copper.jpeg');
     background-repeat: no-repeat;
     background-size: contain; */

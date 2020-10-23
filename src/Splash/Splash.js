@@ -234,11 +234,11 @@ class Splash extends Component {
                                                         </li>
 
                                                         <li className="bullet">
-                                                            <div>Tracking your time spent on projects.</div>
+                                                            <div>Tracking your time.</div>
                                                         </li>
     
                                                         <li className="bullet">
-                                                            <div>Encouraging you to take effective breaks.</div>
+                                                            <div>And encouraging you to take more meaningful and effective breaks!</div>
                                                         </li>
                                                        
         

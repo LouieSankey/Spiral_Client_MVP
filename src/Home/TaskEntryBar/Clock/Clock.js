@@ -31,7 +31,7 @@ let breakDurations = {
   8: 0,
   5: 0,
   3: 0,
-  2: 1
+  2: 0
 
 }
 
