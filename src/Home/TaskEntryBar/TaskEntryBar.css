@@ -3,9 +3,17 @@
         }
         
         #folder {
-            margin-left: 12px;
-            margin-top: 8px;
+            float: right;
+            /* margin-top: 22px; */
+            position: relative;
+            top: 23px;
             cursor: pointer;
+            width: 160px;
+            height: 30px;
+            margin-left: 20px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            /* background-color: whitesmoke; */
         }
         
         .bottom-toolbar {
@@ -39,29 +47,60 @@
             outline: 0;
             background: transparent;
             border-bottom: 1px solid black;
-            width: 200px;
+            width: 280px;
             font-size: 24px;
             font-family: 'Open Sans Condensed', sans-serif;
             float: left;
             /* margin-top: -6px; */
+            margin-top: 18px
+        }
+        
+        .task-name {
+            float: left;
+            font-size: 24px;
+            position: relative;
+            top: 20px;
+            margin-right: 10px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        
+        .plus-button {
+            width: 50px;
+            position: relative;
+            background-color: transparent;
+            border: none;
+            color: darkgray;
+            font-size: 50px;
+            float: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0%;
+            cursor: pointer;
+            margin-right: 40px;
+            outline-color: black;
+        }
+        
+        .plus-button:hover {
+            background-color: lightgray;
+        }
+        
+        .toggle-taskbar {}
+        
+        .taskbar {
+            /* display: block;
+            position: relative; */
+            margin-left: auto;
+            margin-right: auto;
+            width: 700px;
         }
         
         @media screen and (min-width: 768px) {
-            .taskbar {
-                width: 560px;
-            }
+            .taskbar {}
         }
-        
-        .taskbar {
-            display: block;
-            position: relative;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .floatLeft {
+        /* .floatLeft {
             float: left;
-        }
+        } */
         
         .add-project-modal {
             position: fixed;

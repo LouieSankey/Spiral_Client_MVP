@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './MainRectangle.css'
-import WorkflowModal from '../Modals/WorkflowModal'
+
 
 export default class MainRectangle extends Component {
 
@@ -43,8 +43,16 @@ state={
     
         return (
             <>
+
+
             <div className="container">
-                <div className="item box7"><button className="clickable" onClick={() => this.props.updateCycle(currentIndex[0])}>{currentIndex[0]}</button></div>
+
+                <div className="item box7"> 
+
+
+                <button className="clickable" onClick={() => this.props.updateCycle(currentIndex[0])}>{currentIndex[0]}</button>
+
+                </div>
                 <div className="item box6"><button className="clickable" onClick={() => this.props.updateCycle(currentIndex[1])}>{currentIndex[1]}</button></div>
                 <div className="item box5"><button className="clickable" onClick={() => this.props.updateCycle(currentIndex[2])}>{currentIndex[2]}</button></div>
                 <div className="item box3"><button className="clickable" onClick={() => this.props.updateCycle(currentIndex[3])}>{currentIndex[3]}</button></div>
@@ -53,10 +61,10 @@ state={
                 <div className="item box0"><button className="clickable" onClick={()=> this.changeSpiralNumbers()}>
                     <p className="plus-minus">+/-</p></button>
                 </div>
-            
+
             </div>
-            <button onClick={this.showWorkflow} className="example-workflow">Example?</button>
-            <WorkflowModal showWorkflow={this.state.showWorkflow} handleClose={this.hideWorkflow}></WorkflowModal>
+
+
           
             </>
         )}

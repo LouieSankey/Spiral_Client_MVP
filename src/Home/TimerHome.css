@@ -111,6 +111,33 @@
     margin-bottom: 6px;
 }
 
+.link-tracking {
+    text-decoration: underline;
+}
+
+.spiral-title {
+    clear: right;
+    margin-right: auto;
+    margin-left: auto;
+    width: 700px;
+    text-align: center;
+}
+
+.spiral-headline {
+    text-align: center;
+    clear: right;
+    margin-right: auto;
+    margin-left: auto;
+    width: 700px;
+}
+
+.bottom-text {
+    clear: right;
+    margin-right: auto;
+    margin-left: auto;
+    width: 700px;
+}
+
 @media screen and (max-width: 768px) {
     .modal-break-main {
         top: 50%;
@@ -118,8 +145,14 @@
     }
     .spiral-title {
         clear: right;
+        margin-right: auto !;
+        margin-left: auto;
+        width: 700px;
     }
     .spiral-headline {
         clear: right;
+        margin-right: auto;
+        margin-left: auto;
+        width: 700px;
     }
 }

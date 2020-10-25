@@ -9,6 +9,11 @@ export default class TaskEntryBar extends Component {
     static defaultProps = {}
     static contextType = ApiContext;
 
+    state={
+      showTaskbar: false,
+      taskBarCounter: 0
+    }
+
     constructor(props) {
       super(props);
       this.taskName= "No Task";
@@ -41,12 +46,47 @@ let projectId;
 
   }
 
+  toggleTaskbar = () => {
+    this.setState({
+      taskBarCounter: this.state.taskBarCounter + 1
+    })
+
+    if(this.state.showTaskbar){
+      this.setState({
+        showTaskbar: false
+      })
+    }else{
+      this.setState({
+        showTaskbar: true
+      })
+    }
+  }
+
     render() {
-        return ( 
+const plusbutton = this.state.showTaskbar ? "-" : "+"
+
+
+return ( 
+          <>
+          
+          <Clock updateDB={this.updateDB} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal} taskBarCounter={this.state.taskBarCounter}></Clock>
+
+
+
             <div className="taskbar">
-                <Clock updateDB={this.updateDB} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal}></Clock>
-                <input className="taskInput"  onChange={this.setTaskName} type="text" placeholder="what are you working on?" name="taskInput"></input>
-                <div className="floatLeft"><img id="folder" src={folderIcon} onClick={this.props.showProjectsModal} width="30px" height="30px" alt=""></img></div>
+               
+        <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
+                
+                {this.state.showTaskbar &&
+                <div className="toggle-taskbar">
+                  <p className="task-name">Task Name</p>
+                  <input className="taskInput"  onChange={this.setTaskName} type="text" placeholder="" name="taskInput"></input>
+                <div className="floatLeft"><button id="folder" onClick={this.props.showProjectsModal} alt="">PROJECT</button></div>
+                </div>
+                
+                }
+           
             </div>
+            </>
         )}
 }

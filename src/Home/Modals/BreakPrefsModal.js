@@ -29,12 +29,7 @@ const updateBreakPrefs = () => {
 }
 
 const changePreferenceValue = event => {
-
-  
   newPrefs[event.target.getAttribute('name')] = event.target.value
-
-
-  
 };
 
 const updateGongValue  = event => {

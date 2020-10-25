@@ -1,9 +1,10 @@
 import React from 'react'
-import { SkipNext, Stop, PausePresentation, PlayCircleOutline} from '@material-ui/icons';
 import './Clock.css'
 import useSound from 'use-sound';
 import bark from './dog_bark.wav';
 import tweet from './bird-tweet.mp3';
+import { SkipNext, Stop, PausePresentation, PlayCircleOutline} from '@material-ui/icons';
+
 
 //the countdown timer itself uses a hook, the class that implements it is at the bottom
 function Countdown(props) {
@@ -18,8 +19,18 @@ function Countdown(props) {
       timeRemaining: 0,
       timerHandler: null,
       cycle: 0,
-      timeEqualsTimeRemaning: true
+      timeEqualsTimeRemaning: true,
+      showToolbar: false
+    
     })
+
+    const [taskBarCounter] = React.useState({
+      counter: 0
+    })
+
+    
+    let taskBarProps = props.taskBarCounter
+    let allowCountdownRestart = (taskBarCounter.counter !== taskBarProps) ? true : false
 
 
 let breakDurations = {
@@ -27,13 +38,31 @@ let breakDurations = {
   55: 8,
   34: 5,
   21: 3,
-  13: 0,
+  13: 2,
   8: 0,
   5: 0,
   3: 0,
   2: 0
 
 }
+
+React.useEffect(() => { 
+
+  console.log(taskBarProps, taskBarCounter.counter, allowCountdownRestart)
+
+if(allowCountdownRestart){
+  taskBarCounter.counter = taskBarCounter.counter + 1
+  allowCountdownRestart = false
+}else{
+
+  allowCountdownRestart = true
+
+}
+
+}, [props, allowCountdownRestart])
+
+
+
 
       React.useEffect(() => {
 
@@ -54,6 +83,7 @@ let breakDurations = {
 
     React.useEffect(() => {
 
+      if(allowCountdownRestart){
             if(!timer.pauseForModal){
             console.log("timer is being reset with props")
             setTimer((timer) => ({
@@ -70,6 +100,7 @@ let breakDurations = {
                 timer.isPaused = false;
                 
             }
+          }
 
             }, [props])
 
@@ -83,6 +114,7 @@ let breakDurations = {
         if(timer.onBreak){
 
             playBark() 
+            timer.showToolbar = false
             console.log(" the end of a break, so onBreak gets reset to false " )
           timer.onBreak = false
         }else{
@@ -103,7 +135,9 @@ let breakDurations = {
           }));
         }else{
             playBark() 
+            timer.showToolbar = false
         }
+       
         props.updateDB(timer.cycle) 
         }
    
@@ -114,6 +148,7 @@ let breakDurations = {
         if(timer.time === timer.timeRemaining){
          console.log("called for non breaks (regular start)")
         timer.firstStart = false
+        timer.showToolbar = true
       handleStart()
         }
 
@@ -177,11 +212,16 @@ let breakDurations = {
       return ret;
   }
 
-  const clickStop = () => {
+  const handleSkip = () => {
 
+    clearInterval(timer.timerHandler)
+    setTimer({ ...timer, timeRemaining: 0 })
 }
 
-const clickSkip = () => {
+const handleStop = () => {
+
+  clearInterval(timer.timerHandler)
+  setTimer({ ...timer, onBreak:true, cycle:0, timeRemaining: 0 })
 
 }
 
@@ -197,17 +237,27 @@ const [playTweet] = useSound(tweet,
     return <React.Fragment>
 
 
+          {timer.onBreak ? 
+          <h2>On Break: {timeFormat(timer.timeRemaining)}</h2>
+          :  <h2>Countdown: {timeFormat(timer.timeRemaining)}</h2>}
 
-          {`Remaining: ${timeFormat(timer.timeRemaining)}`}
-      
+          {timer.showToolbar &&
+          <div className="toolbar-container">
+                
+                <div class="toolbar-icons">
+                  <i><Stop className="toolbar-icon" onClick={handleStop}></Stop></i>
+                  <i><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext></i>
+                  {!timer.isPaused ?
+                    <i><PausePresentation className="toolbar-icon" onClick={handlePause}></PausePresentation></i>
+                    :
+                    <i><PlayCircleOutline className="toolbar-icon" onClick={handleStart}></PlayCircleOutline></i>
+                  }
+                  </div>
+               
+               
+                </div>}
     
-        <div className="floatLeft"><i className={"material-icons bottom-toolbar stop " + (timer.isPaused ? 'visible' : 'invisible') } ><Stop onClick={clickStop}></Stop></i></div>
-        <div className="floatLeft"><i className={"material-icons bottom-toolbar skip_next " + (timer.isPaused ? 'visible' : 'invisible') }><SkipNext onClick={clickSkip}></SkipNext></i></div>
-       
-        {timer.isPaused &&  <div className="floatLeft"><i className={"material-icons pause " }><PlayCircleOutline onClick={handleStart}></PlayCircleOutline></i></div>}   
-        {!timer.isPaused &&  <div className="floatLeft"><i className={"material-icons pause " }><PausePresentation onClick={handlePause}></PausePresentation></i></div>}
-     
-          
+  
     </React.Fragment>
   }
 
@@ -217,9 +267,8 @@ class Clock extends React.Component {
 render(){
         return(
             <>
-        
-               
-                <div className="floatLeft"><div id="timer"><Countdown updateDB={this.props.updateDB} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle}></Countdown></div></div>
+
+                <div className="floatLeft"><p id="timer"><Countdown updateDB={this.props.updateDB} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle} taskBarCounter={this.props.taskBarCounter}></Countdown></p></div>
 
             </> 
         );
