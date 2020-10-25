@@ -8,7 +8,7 @@ state={
   
     sets:[[34,21,13,8,5,3], [21,13,8,5,3,2],  [89,55,34, 21,13,8], [55,34,21,13,8,5]],
     setIndex: 3,
-    showWorkflow: false,
+
     pauseForModal: false
 
 }
@@ -27,15 +27,7 @@ state={
 
     }
 
-    showWorkflow = () => {
-        console.log("attempting")
-        this.setState({ showWorkflow: true,
-        pauseForModal: true });
-      };
-    hideWorkflow = () => {
-        this.setState({ showWorkflow: false,
-        pauseForModal:false });
-      };
+  
 
     render() {
 

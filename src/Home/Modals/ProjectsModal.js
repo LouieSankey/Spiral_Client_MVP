@@ -30,7 +30,7 @@ class AllProjectsModal extends React.Component {
                     </div>
           <button   onClick={(event) => {
         this.props.handleClose(); this.props.showAdd();
-     }} className="add-project-button splash-button">Create Project</button>
+     }} className="add-project-button">Create Project</button>
         </section>
       </div>
     );

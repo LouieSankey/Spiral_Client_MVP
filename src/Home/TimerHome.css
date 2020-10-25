@@ -26,13 +26,14 @@
 
 .modal-break-main {
     position: relative;
+    overflow: auto;
     background: rgb(253, 253, 253);
     border-style: solid;
-    border-radius: 20px;
-    width: 200px;
-    height: auto;
+    border-radius: 8px;
+    width: 400px;
+    height: 80%;
     top: 50%;
-    left: 87%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
@@ -61,12 +62,12 @@
     position: relative;
     background: rgb(253, 253, 253);
     border-style: solid;
-    border-radius: 20px;
-    width: 340px;
-    height: 90%;
+    border-radius: 8px;
+    width: 80%;
+    height: 80%;
     overflow: auto;
     top: 50%;
-    left: 20%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
@@ -136,6 +137,11 @@
     margin-right: auto;
     margin-left: auto;
     width: 700px;
+}
+
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

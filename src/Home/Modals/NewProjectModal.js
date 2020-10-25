@@ -46,7 +46,7 @@ render(){
                         <h2 className="create-project-header">Create Project</h2>
                         <input  type="text" name="project" onChange={this.setProjectNameLocally} className="create-project-input"></input>
                     </div>
-              <button onClick={this.postNewProject} className="save-project-button splash-button">CREATE</button>
+              <button onClick={this.postNewProject} className="save-project-button">CREATE</button>
             </section>
           </div>
         );

@@ -18,10 +18,10 @@
     margin-bottom: 60px;
     background-color: aliceblue;
     /* sets a potential background image */
-    /* background-image: url('../../Img/grspiral.jpeg');
+    /* background-image: url('../../Img/cir'); */
     background-size: 700px 400px;
     background-repeat: no-repeat;
-    background-color: black;
+    /* background-color: black;
     margin-left: 96px; */
 }
 
@@ -51,7 +51,7 @@
     align-items: center;
     font-size: 24px;
     border: 1px solid rgb(139, 139, 139);
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     /* pointer-events: none; */
     /* background-image: url('./copper.jpeg');
     background-repeat: no-repeat;
@@ -66,6 +66,7 @@
 }
 
 .clickable {
+    /* color: white; */
     z-index: 2;
     /* pointer-events: auto; */
     position: absolute;

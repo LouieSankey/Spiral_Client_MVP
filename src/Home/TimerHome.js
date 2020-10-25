@@ -19,7 +19,8 @@ export default class TimerHome extends Component {
       showProjects: false,
       showAddProject: false,
       pauseTimer: false,
-      taskName: ""
+      taskName: "",
+      showWorkflow: false
     };
 
 
@@ -63,6 +64,16 @@ setStateAfterTimeout(){
       this.setState({ showAddProject: false,
         pauseForModal:false });
     };
+
+    showWorkflow = () => {
+      console.log("attempting")
+      this.setState({ showWorkflow: true,
+      pauseForModal: true });
+    };
+  hideWorkflow = () => {
+      this.setState({ showWorkflow: false,
+      pauseForModal:false });
+    };
   
     render() {
         return (
@@ -81,10 +92,9 @@ setStateAfterTimeout(){
                 <br/>
               
                 <h2 className="bottom-text">If you'd like this task to show up in <span className="link-tracking">tracking</span>, use the '+' button, then enter a project and task name.</h2>
-                
-                <button onClick={this.showWorkflow} className="example-workflow">Example?</button>
+                <br/>
+                <h2 onClick={this.showWorkflow} className=" bottom-text underline">Example Workflow</h2>
                 <WorkflowModal showWorkflow={this.state.showWorkflow} handleClose={this.hideWorkflow}></WorkflowModal>
-
                 
                 
             </>

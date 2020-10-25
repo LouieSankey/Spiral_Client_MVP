@@ -21,7 +21,8 @@ class Splash extends Component {
     state = {
         showModal: false,
         redirect: false,
-        account_id: null
+        account_id: null,
+      
       };
 
       setRedirect = () => {
@@ -68,7 +69,7 @@ class Splash extends Component {
             .then((account) => {
 
                   const project = {
-                    "project": "Uncategorized",
+                    "project": "My First Project",
                     "account": account.id
                   }
 

@@ -115,6 +115,11 @@ if(allowCountdownRestart){
 
             playBark() 
             timer.showToolbar = false
+            if(timer.cycle !== 0){
+              props.updateDB(timer.cycle) 
+            }
+            
+
             console.log(" the end of a break, so onBreak gets reset to false " )
           timer.onBreak = false
         }else{
@@ -221,6 +226,7 @@ if(allowCountdownRestart){
 const handleStop = () => {
 
   clearInterval(timer.timerHandler)
+  props.updateDB(timer.cycle)
   setTimer({ ...timer, onBreak:true, cycle:0, timeRemaining: 0 })
 
 }
@@ -244,7 +250,7 @@ const [playTweet] = useSound(tweet,
           {timer.showToolbar &&
           <div className="toolbar-container">
                 
-                <div class="toolbar-icons">
+                <div className="toolbar-icons">
                   <i><Stop className="toolbar-icon" onClick={handleStop}></Stop></i>
                   <i><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext></i>
                   {!timer.isPaused ?
@@ -268,7 +274,7 @@ render(){
         return(
             <>
 
-                <div className="floatLeft"><p id="timer"><Countdown updateDB={this.props.updateDB} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle} taskBarCounter={this.props.taskBarCounter}></Countdown></p></div>
+                <div className="floatLeft"><div id="timer"><Countdown updateDB={this.props.updateDB} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle} taskBarCounter={this.props.taskBarCounter}></Countdown></div></div>
 
             </> 
         );

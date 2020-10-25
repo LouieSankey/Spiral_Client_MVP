@@ -11,8 +11,11 @@ export default class TaskEntryBar extends Component {
 
     state={
       showTaskbar: false,
-      taskBarCounter: 0
+      taskBarCounter: 0,
+   
     }
+
+
 
     constructor(props) {
       super(props);
@@ -34,7 +37,6 @@ let projectId;
   }else{
     projectId = this.context.currentProject.id
   }
-
       const task = {
         "account": this.context.account_id,
         "project": projectId,
@@ -45,6 +47,9 @@ let projectId;
       ApiServices.postTask(task)
 
   }
+
+
+
 
   toggleTaskbar = () => {
     this.setState({
@@ -63,15 +68,15 @@ let projectId;
   }
 
     render() {
+
 const plusbutton = this.state.showTaskbar ? "-" : "+"
 
+const projectName = (typeof this.context.currentProject === 'undefined') ? "PROJECT" : this.context.currentProject.project
 
 return ( 
           <>
           
           <Clock updateDB={this.updateDB} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal} taskBarCounter={this.state.taskBarCounter}></Clock>
-
-
 
             <div className="taskbar">
                
@@ -81,7 +86,7 @@ return (
                 <div className="toggle-taskbar">
                   <p className="task-name">Task Name</p>
                   <input className="taskInput"  onChange={this.setTaskName} type="text" placeholder="" name="taskInput"></input>
-                <div className="floatLeft"><button id="folder" onClick={this.props.showProjectsModal} alt="">PROJECT</button></div>
+                <div className="floatLeft"><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
                 </div>
                 
                 }
