@@ -3,6 +3,7 @@ import './Clock.css'
 import useSound from 'use-sound';
 import bark from './dog_bark.wav';
 import tweet from './bird-tweet.mp3';
+import gong from './opening_gong.wav'
 import { SkipNext, Stop, PausePresentation, PlayCircleOutline} from '@material-ui/icons';
 
 
@@ -152,6 +153,7 @@ if(allowCountdownRestart){
       
         if(timer.time === timer.timeRemaining){
          console.log("called for non breaks (regular start)")
+       
         timer.firstStart = false
         timer.showToolbar = true
       handleStart()
@@ -241,6 +243,10 @@ const [playBark] = useSound(bark,
 );
 
 const [playTweet] = useSound(tweet, 
+  { volume: 0.20 }
+);
+
+const [playGong] = useSound(gong, 
   { volume: 0.20 }
 );
 
