@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-login-modal-sm/dist/index.es.js b/node_modules/react-login-modal-sm/dist/index.es.js
+index 707c685..1a4e095 100644
+--- a/node_modules/react-login-modal-sm/dist/index.es.js
++++ b/node_modules/react-login-modal-sm/dist/index.es.js
+@@ -529,7 +529,7 @@ var LoginModal = function (_Component) {
+     }
+ 
+     return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = LoginModal.__proto__ || Object.getPrototypeOf(LoginModal)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+-      subpageShown: 0
++      subpageShown: 0
+     }, _this.switchSubpage = function (to) {
+       return function (e) {
+         _this.setState({ subpageShown: to });
