@@ -1,14 +1,3 @@
-@media screen and (max-width: 768px) {
-    .container {
-        height: 300px;
-    }
-    .box0 {
-        font-size: 12px;
-        padding: 0px;
-        margin: 0px;
-    }
-}
-
 .container {
     /* pointer-events: none; */
     display: grid;
@@ -132,4 +121,15 @@
 
 .plus-minus {
     font-size: 18px;
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        height: 260px;
+    }
+    .box0 {
+        font-size: 12px;
+        padding: 0px;
+        margin: 0px;
+    }
 }

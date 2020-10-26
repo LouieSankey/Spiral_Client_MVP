@@ -213,5 +213,6 @@
             }
             .plus-button {
                 float: unset;
+                width: unset;
             }
         }
