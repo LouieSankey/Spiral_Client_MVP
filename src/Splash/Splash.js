@@ -118,6 +118,29 @@ class Splash extends Component {
   
     render() { 
         const customUsernameRegex = /^[a-zA-Z0-9_]{5,}/;
+
+      const loginModalLabels = {
+        loginTitle: "Log in: guest@spiral-productivity.com w/ pass: 123456789",
+        signupTitle: "Create new user",
+        forgotTitle: "Reset password",
+        loginFacebookButton: "Log in with Facebook",
+        loginGoogleButton: "Log in with Google",
+        loginEmailButton: "Log in with email",
+        signupFacebookButton: "Sign up with Facebook",
+        signupGoogleButton: "Sign up with Google",
+        signupEmailButton: "Sign up with email",
+        forgotButton: "Send new password",
+        loginEmailPlaceholder: "Type email",
+        loginPasswordPlaceholder: "Type password",
+        signupUsernamePlaceholder: "Type username",
+        signupLink: "Create new user?",
+        loginLink: "Already a user?",
+        forgotLink: "Forgot password?",
+        orLabel: "or"
+      }
+
+
+
         return (
 
 <>
@@ -131,6 +154,8 @@ class Splash extends Component {
                                 toggleModal={this.toggleModal} 
                                 onLoginEmail={this.handleLoginWithEmail}
                                 onSignupEmail={this.handleSignupByEmail}
+                                labels={loginModalLabels}
+
                                 usernameRegex={customUsernameRegex}
                                />
 
@@ -237,10 +262,18 @@ class Splash extends Component {
                                                         <li className="bullet">
                                                             <div>Tracking your time.</div>
                                                         </li>
-    
+
                                                         <li className="bullet">
-                                                            <div>And encouraging you to take more meaningful and effective breaks!</div>
+                                                            <div>Encouraging you to take regular breaks.</div>
                                                         </li>
+
+                                                        <li className="bullet">
+                                                            <div>And helping you avoid burnout!</div>
+                                                        </li>
+
+                                                      
+    
+                                                        
                                                        
         
                                                         <p>Plus, it's easy - just keep it open in a browser window while studying or doing computer work and it takes one click to begin a cycle.</p>

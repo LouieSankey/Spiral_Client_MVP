@@ -1,6 +1,7 @@
 .break-clickable {
     text-decoration: underline;
     cursor: pointer;
+    color: darkblue
 }
 
 #root {
@@ -114,6 +115,8 @@
 
 .link-tracking {
     text-decoration: underline;
+    cursor: pointer;
+    color: darkblue
 }
 
 .spiral-title {
@@ -142,6 +145,7 @@
 .underline {
     text-decoration: underline;
     cursor: pointer;
+    color: darkblue
 }
 
 @media screen and (max-width: 768px) {
