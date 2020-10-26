@@ -130,17 +130,19 @@ class App extends Component {
 
     changeBreakPrefs = (newPrefs) => {
 
+      let prefs = {}
+
         for (const key in newPrefs) {
           if(newPrefs[key] !== null){
-
-            console.log(`${key}: ${newPrefs[key]}`);
+            prefs[key] = newPrefs[key]
+        
           }
-       
         }
+
+       
 
     }
 
-  
 
     render() {
 

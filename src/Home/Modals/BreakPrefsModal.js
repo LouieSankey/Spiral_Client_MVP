@@ -24,7 +24,7 @@ const showHideClassName = showPrefs ? "break-modal display-block" : "break-modal
 
 const updateBreakPrefs = () => {
   //change global breakprefs to equal newPrefs
-  context.changeBreakPrefs(newPrefs)
+  context.changeBreakPrefs(newPrefs) 
   
 }
 

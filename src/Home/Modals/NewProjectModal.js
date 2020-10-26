@@ -25,7 +25,7 @@ postNewProject = e => {
  
     APIService.createProject(project)
     .then(project => {
-       this.context.handleAddProject(project)
+       this.context.handleAddProject(project) 
       this.context.currentProject = project   
 
     })

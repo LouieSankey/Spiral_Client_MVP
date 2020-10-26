@@ -153,12 +153,15 @@
         clear: right;
         margin-right: auto !;
         margin-left: auto;
-        width: 700px;
+        width: unset;
     }
     .spiral-headline {
         clear: right;
         margin-right: auto;
         margin-left: auto;
-        width: 700px;
+        width: unset;
+    }
+    .bottom-text {
+        width: unset;
     }
 }

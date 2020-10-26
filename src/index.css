@@ -9,6 +9,12 @@ body {
     margin-right: 10px;
     font-family: 'Open Sans', sans-serif;
     /* background-image: url(''); */
+    overflow: hidden;
+}
+
+html,
+body {
+    overflow-x: hidden;
 }
 
 h1 {

@@ -199,7 +199,9 @@ if(allowCountdownRestart){
       setTimer({ ...timer, isPaused: true })
     }
 
-     const timeFormat = (duration) => {   
+     const timeFormat = (duration) => { 
+       
+      if(duration > 0){
       // Hours, minutes and seconds
       var hrs = ~~(duration / 3600);
       var mins = ~~((duration % 3600) / 60);
@@ -215,6 +217,9 @@ if(allowCountdownRestart){
       ret += "" + mins + ":" + (secs < 10 ? "0" : "");
       ret += "" + secs;
       return ret;
+    }else{
+      return "00:00"
+    }
   }
 
   const handleSkip = () => {
@@ -246,6 +251,8 @@ const [playTweet] = useSound(tweet,
           {timer.onBreak ? 
           <h2>On Break: {timeFormat(timer.timeRemaining)}</h2>
           :  <h2>Countdown: {timeFormat(timer.timeRemaining)}</h2>}
+
+        
 
           {timer.showToolbar &&
           <div className="toolbar-container">

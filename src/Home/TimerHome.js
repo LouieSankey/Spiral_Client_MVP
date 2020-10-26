@@ -36,7 +36,8 @@ setStateAfterTimeout(){
 
     showBreakPrefsModal = () => {
         this.setState({ showPrefs: true,
-        pauseForModal: true });
+        pauseForModal: true 
+      });
       };
     hideBreakPrefsModal = () => {
         this.setState({ showPrefs: false,

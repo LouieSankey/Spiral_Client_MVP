@@ -83,10 +83,10 @@ return (
         <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
                 
                 {this.state.showTaskbar &&
-                <div className="toggle-taskbar">
+                <div className="">
                   <p className="task-name">Task Name</p>
                   <input className="taskInput"  onChange={this.setTaskName} type="text" placeholder="" name="taskInput"></input>
-                <div className="floatLeft"><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
+                <div className=""><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
                 </div>
                 
                 }
