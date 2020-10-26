@@ -34,7 +34,7 @@
         "uuid": "^8.3.0"
     },
     "scripts": {
-        "postinstall": "patch-package",
+
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
         "start": "react-scripts start",
