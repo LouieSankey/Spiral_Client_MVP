@@ -256,7 +256,7 @@ const [playGong] = useSound(gong,
 
           {timer.onBreak ? 
           <h2>On Break: {timeFormat(timer.timeRemaining)}</h2>
-          :  <h2>Countdown: {timeFormat(timer.timeRemaining)}</h2>}
+          :  <h2> Time Left: {timeFormat(timer.timeRemaining)}</h2>}
 
         
 
