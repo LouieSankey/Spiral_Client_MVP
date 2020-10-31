@@ -96,7 +96,7 @@ setStateAfterTimeout(){
                 <br/>
               
                 
-                <h2 className="bottom-text">After your countdown expires, you'll be rewarded with a break (listen for a bird tweet). You can configure your break preferences <span className="break-clickable" onClick={this.showBreakPrefsModal}> here.</span></h2>
+                <h2 className="bottom-text">After your countdown expires, you'll be rewarded with a break (a bird tweet begins a break, a dog bark ends one). You can configure your break preferences <span className="break-clickable" onClick={this.showBreakPrefsModal}> here.</span></h2>
                 <br/>
               
                 <h2 className="bottom-text">If you'd like this task to show up in <span onClick={() => this.props.history.push('./tracking')} className="link-tracking">tracking</span>, use the '+' button, then enter a project and task name.</h2>
