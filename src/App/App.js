@@ -75,6 +75,8 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+
+    document.title = "Spiral"
     let account_id = localStorage.getItem('account_id')
     account_id = Number(account_id)
     if(account_id){

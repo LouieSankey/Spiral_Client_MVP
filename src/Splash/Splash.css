@@ -7,6 +7,19 @@
     cursor: pointer !important;
 } */
 
+
+/* .styles_loginContainer__1OP_F {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+} */
+
+#submit_inp_brugernavn {
+    display: none;
+}
+
 .login-modal_facebookBtnBg__ecXHz,
 .login-modal_googleBtnBg__qz2el,
 .login-modal_lineTextHolder__2Jj7U {

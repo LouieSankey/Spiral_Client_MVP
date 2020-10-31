@@ -1,218 +1,213 @@
-        .center-text {
-            text-align: center;
-        }
-        
-        #folder {
-            float: right;
-            /* margin-top: 22px; */
-            position: relative;
-            top: 18px;
-            cursor: pointer;
-            width: 180px;
-            height: 35px;
-            font-size: 20px;
-            margin-left: 20px;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            overflow: hidden
-            /* background-color: whitesmoke; */
-        }
-        
-        .bottom-toolbar {
-            /* visibility: hidden; */
-            margin-right: 14px;
-            opacity: 0.7;
-        }
-        
-        .material-icons {
-            /* padding-top: 18px; */
-            cursor: pointer;
-            text-decoration: none;
-            color: lightslategrey;
-            /* font-size: 30px !important; */
-            /* font-size: 60px !important; */
-            /* raises anchor tag above everything else in div */
-            opacity: 0.5;
-            /*workaround to make clickable in IE */
-            /*workaround to make clickable in IE */
-            filter: alpha(opacity=0);
-            /*workaround to make clickable in IE */
-        }
-        
-        .MuiSvgIcon-root {
-            margin-top: 6px;
-            font-size: 1.9rem !important;
-        }
-        
-        .taskInput {
-            border: 0;
-            outline: 0;
-            background: transparent;
-            border-bottom: 1px solid black;
-            width: 280px;
-            font-size: 24px;
-            font-family: 'Open Sans Condensed', sans-serif;
-            float: left;
-            /* margin-top: -6px; */
-            margin-top: 18px
-        }
-        
-        .task-name {
-            float: left;
-            font-size: 24px;
-            position: relative;
-            top: 20px;
-            margin-right: 10px;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-        
-        .plus-button {
-            width: 50px;
-            position: relative;
-            background-color: transparent;
-            border: none;
-            color: darkgray;
-            font-size: 50px;
-            float: left;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            margin-left: 0%;
-            cursor: pointer;
-            margin-right: 20px;
-            outline-color: black;
-        }
-        
-        .plus-button:hover {
-            background-color: lightgray;
-        }
-        
-        .taskbar {
-            /* display: block;
+    .center-text {
+        text-align: center;
+    }
+    
+    #folder {
+        float: right;
+        /* margin-top: 22px; */
+        position: relative;
+        top: 18px;
+        cursor: pointer;
+        width: 180px;
+        height: 35px;
+        font-size: 20px;
+        margin-left: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        overflow: hidden;
+        /* background-image: url('../../Img/projectfolder.png'); */
+    }
+    
+    .bottom-toolbar {
+        /* visibility: hidden; */
+        margin-right: 14px;
+        opacity: 0.7;
+    }
+    
+    .material-icons {
+        /* padding-top: 18px; */
+        cursor: pointer;
+        text-decoration: none;
+        color: lightslategrey;
+        /* font-size: 30px !important; */
+        /* font-size: 60px !important; */
+        /* raises anchor tag above everything else in div */
+        opacity: 0.5;
+        /*workaround to make clickable in IE */
+        /*workaround to make clickable in IE */
+        filter: alpha(opacity=0);
+        /*workaround to make clickable in IE */
+    }
+    
+    .MuiSvgIcon-root {
+        margin-top: 6px;
+        font-size: 1.9rem !important;
+    }
+    
+    .taskInput {
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid black;
+        width: 280px;
+        font-size: 24px;
+        font-family: 'Open Sans Condensed', sans-serif;
+        float: left;
+        /* margin-top: -6px; */
+        margin-top: 18px
+    }
+    
+    .task-name {
+        float: left;
+        font-size: 24px;
+        position: relative;
+        top: 20px;
+        margin-right: 10px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    
+    .plus-button {
+        width: 50px;
+        position: relative;
+        background-color: transparent;
+        border: none;
+        color: darkgray;
+        font-size: 50px;
+        float: left;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0%;
+        cursor: pointer;
+        margin-right: 20px;
+        outline-color: black;
+    }
+    
+    .plus-button:hover {
+        background-color: lightgray;
+    }
+    
+    .taskbar {
+        /* display: block;
             position: relative; */
-            margin-left: auto;
-            margin-right: auto;
-            width: 700px;
-        }
-        
-        .add-project-modal {
-            position: fixed;
-            z-index: 9999;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-        }
-        
-        .add-project-modal-main {
-            position: relative;
-            background: rgb(253, 253, 253);
-            border-style: solid;
-            border-radius: 20px;
-            width: 400px;
-            height: auto;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .save-project-button,
-        .create-project-header,
-        .create-project-input {
-            margin-top: 24px;
-            text-align: center;
-            display: inline;
-            margin-left: 10px;
-        }
-        
-        .save-project-button {
-            padding: 10px;
-            background-color: lightgray;
-            margin-bottom: 6px;
-            border-radius: 10px;
-        }
-        
-        .create-project-input {
-            width: 200px;
-            margin-left: 8px;
-            padding-top: 6px;
-        }
-        
-        .modal {
-            position: fixed;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 9999;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .modal-main {
-            position: relative;
-            background: rgb(253, 253, 253);
-            border-style: solid;
-            border-radius: 20px;
-            width: 400px;
-            height: auto;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .modal-content {
-            margin-left: 20px;
-            margin-top: 8px;
-        }
-        
-        .modal-close-button {
-            font-size: 20px;
-            background-color: transparent;
-            /* width: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 700px;
+    }
+    /* .add-project-modal {
+        pointer-events: auto;
+        color: black;
+        background-color: black;
+    } */
+    
+    .add-project-modal-main {
+        z-index: 9999;
+        top: 350px;
+        /* left: 00px; */
+        position: absolute;
+        background: rgb(253, 253, 253);
+        border-style: solid;
+        border-radius: 20px;
+        width: 400px;
+        height: 150px;
+        bottom: 20%;
+        left: 42.5%;
+    }
+    
+    .modal {
+        display: none;
+    }
+    
+    .modal-main {
+        z-index: 9999;
+        top: 350px;
+        /* left: 00px; */
+        position: absolute;
+        background: rgb(253, 253, 253);
+        border-style: solid;
+        border-radius: 20px;
+        width: 400px;
+        height: auto;
+        /* bottom: 20%; */
+        left: 42.5%;
+        /* transform: translate(-50%, -50%); */
+    }
+    
+    .save-project-button,
+    .create-project-header,
+    .create-project-input {
+        margin-top: 24px;
+        text-align: center;
+        display: inline;
+        margin-left: 10px;
+    }
+    
+    .save-project-button {
+        padding: 10px;
+        background-color: lightgray;
+        margin-bottom: 6px;
+        border-radius: 10px;
+    }
+    
+    .create-project-input {
+        width: 200px;
+        margin-left: 8px;
+        padding-top: 6px;
+    }
+    
+    .modal-content {
+        margin-left: 20px;
+        margin-top: 8px;
+    }
+    
+    .modal-close-button {
+        font-size: 20px;
+        background-color: transparent;
+        /* width: 10px;
             height: 10px; */
-            border-radius: 0px;
-            float: right;
-            color: darkgray;
-            /* padding: 2px; */
-            /* margin-right: 10px; */
-            cursor: pointer;
-            border: none;
+        border-radius: 0px;
+        float: right;
+        color: darkgray;
+        /* padding: 2px; */
+        /* margin-right: 10px; */
+        cursor: pointer;
+        border: none;
+    }
+    
+    .add-project-button {
+        padding: 10px;
+        background-color: lightgray;
+        margin-bottom: 6px;
+        margin-left: 8px;
+        border-radius: 10px;
+    }
+    
+    .display-block {
+        display: inline !important;
+    }
+    
+    .display-none {
+        display: none;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .modal-main,
+        .add-project-modal-main {
+            top: 90%;
+            left: 0px;
+            width: 300px;
         }
-        
-        .add-project-button {
-            padding: 10px;
-            background-color: lightgray;
-            margin-bottom: 6px;
-            margin-left: 8px;
-            border-radius: 10px;
+        #folder {
+            float: none;
+            margin-bottom: 22px;
+            margin-left: 0px;
         }
-        
-        .display-block {
-            display: block;
+        .taskInput {
+            float: none;
+            width: unset;
         }
-        
-        .display-none {
-            display: none;
+        .plus-button {
+            float: unset;
+            width: unset;
         }
-        
-        @media screen and (max-width: 768px) {
-            .modal-main,
-            .add-project-modal-main {
-                top: 50%;
-                left: 50%;
-            }
-            #folder {
-                float: none;
-                margin-bottom: 22px;
-                margin-left: 0px;
-            }
-            .taskInput {
-                float: none;
-                width: unset;
-            }
-            .plus-button {
-                float: unset;
-                width: unset;
-            }
-        }
+    }

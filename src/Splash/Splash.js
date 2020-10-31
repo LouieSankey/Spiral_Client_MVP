@@ -8,6 +8,7 @@ import LoginModal from "react-login-modal-sm";
 import { Redirect, withRouter } from 'react-router-dom'
 import ApiContext from '../ApiContext';
 import ApiServices from '../api-services'
+import $ from 'jquery';
 
 
 class Splash extends Component {
@@ -24,6 +25,7 @@ class Splash extends Component {
         account_id: null,
       
       };
+
 
       setRedirect = () => {
         this.setState({
@@ -46,7 +48,14 @@ class Splash extends Component {
 
       handleLoginWithEmail = (email, password) => {
 
-      ApiServices.getAccountByEmail(email)
+        const credentials = {
+          email: email,
+          password: password
+      }
+
+        //this will need to authenticate with BOTH email and password
+
+      ApiServices.getAccountByEmail(credentials)
         .then(account => {
           localStorage.setItem("account_id", account.id)
           this.context.handleAPIRequest(account.id)
@@ -62,7 +71,7 @@ class Splash extends Component {
            const account = {
                email: email,
                account_username: username,  
-               password: "no password"
+               password: password
            }
 
         ApiServices.createAccount(account)
@@ -117,11 +126,11 @@ class Splash extends Component {
      
   
     render() { 
-        const customUsernameRegex = /^[a-zA-Z0-9_]{5,}/;
+        const customUsernameRegex = new RegExp("");
 
       const loginModalLabels = {
-        loginTitle: "Log in: guest@spiral-productivity.com w/ pass: 123456789",
-        signupTitle: "Create new user",
+        loginTitle: "Log in: guest@spiral.com w/ pass: 12345678",
+        signupTitle: "New User - Password 8 Characters",
         forgotTitle: "Reset password",
         loginFacebookButton: "Log in with Facebook",
         loginGoogleButton: "Log in with Google",
@@ -130,8 +139,8 @@ class Splash extends Component {
         signupGoogleButton: "Sign up with Google",
         signupEmailButton: "Sign up with email",
         forgotButton: "Send new password",
-        loginEmailPlaceholder: "Type email",
-        loginPasswordPlaceholder: "Type password",
+        loginEmailPlaceholder: "Email",
+        loginPasswordPlaceholder: "Password",
         signupUsernamePlaceholder: "Type username",
         signupLink: "Create new user?",
         loginLink: "Already a user?",

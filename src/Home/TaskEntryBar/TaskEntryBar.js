@@ -22,7 +22,16 @@ export default class TaskEntryBar extends Component {
       this.taskName= "No Task";
       this.setTaskName = this.setTaskName.bind(this);
       this.updateDB = this.updateDB.bind(this);
+      this.taskInput = React.createRef();
+      this.handleFocus = this.handleFocus.bind(this);
   }
+
+  handleFocus = event => {
+    console.log("enter")
+     this.taskInput.current.focus();
+  }
+
+
 
     setTaskName = event => {
       this.taskName = event.target.value
@@ -67,11 +76,14 @@ let projectId;
     }
   }
 
+
     render() {
 
-const plusbutton = this.state.showTaskbar ? "-" : "+"
 
+const plusbutton = this.state.showTaskbar ? "-" : "+"
 const projectName = (typeof this.context.currentProject === 'undefined') ? "PROJECT" : this.context.currentProject.project
+
+{this.taskInput.current && this.handleFocus()}
 
 return ( 
           <>
@@ -80,16 +92,16 @@ return (
 
             <div className="taskbar">
                
-        <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
+                <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
                 
                 {this.state.showTaskbar &&
                 <div className="">
                   <p className="task-name">Task Name</p>
-                  <input className="taskInput"  onChange={this.setTaskName} type="text" placeholder="" name="taskInput"></input>
+                  <input className="taskInput"  ref={this.taskInput}  onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="" onFocus={(event) => event.target.select()}name="taskInput"></input>
                 <div className=""><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
                 </div>
                 
-                }
+                } 
            
             </div>
             </>
