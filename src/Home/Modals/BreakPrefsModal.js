@@ -24,6 +24,7 @@ const showHideClassName = showPrefs ? "break-modal display-block" : "break-modal
 
 const updateBreakPrefs = () => {
   context.changeBreakPrefs(newPrefs) 
+  handleClose()
   
 }
 
