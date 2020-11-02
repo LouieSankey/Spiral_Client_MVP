@@ -8,6 +8,7 @@ import ApiContext from '../ApiContext'
 import config from '../config'
 import './App.css'
 import { useLocation } from 'react-router-dom'
+import APIService from '../api-services';
 
 
 class App extends Component {
@@ -49,6 +50,18 @@ class App extends Component {
         ])
       })
       .then(([account, projects, prefsRes]) => {
+             
+   
+      for (const key in prefsRes) {
+        // console.log("loop" + key.slice(1), key.substring(1))
+
+        if(key.charAt(0) === "_"){
+          console.log("removed _")
+          delete Object.assign(prefsRes, {[key.substring(1)]: prefsRes[key] })[key];
+        }
+      }
+
+
         const currentProject = projects[0]
         this.setState({ account, projects, prefsRes, account_id, currentProject})
       })
@@ -130,23 +143,46 @@ class App extends Component {
       this.ToggleMobileNav()
     }
 
+
     changeBreakPrefs = (newPrefs) => {
-
       let prefs = {}
-
+      let dbPrefs = {}
         for (const key in newPrefs) {
           if(newPrefs[key] !== null){
             prefs[key] = newPrefs[key]
-        
+            dbPrefs["_" + key] = newPrefs[key]
           }
         }
 
-       
+        const promises = []
+
+        for (const key in prefs) {
+
+          promises.push(Promise.resolve(
+          this.setState(prevState => ({
+            prefsRes: {
+            ...prevState.prefsRes,
+            [`${key}`]: Number(prefs[key])
+          }
+
+        }))))
 
     }
 
+    Promise.all(promises).then(() => {
+      APIService.saveUserPrefs(dbPrefs, this.state.account_id)   
+    })
+
+ 
+  }
+
+
+ 
 
     render() {
+
+ 
+
 
       const value = {
         account_id: this.state.account_id,

@@ -5,6 +5,7 @@ import bark from './dog_bark.wav';
 import tweet from './bird-tweet.mp3';
 import gong from './opening_gong.wav'
 import { SkipNext, Stop, PausePresentation, PlayCircleOutline} from '@material-ui/icons';
+import ApiContext from '../../../ApiContext'
 
 
 //the countdown timer itself uses a hook, the class that implements it is at the bottom
@@ -34,18 +35,24 @@ function Countdown(props) {
     let allowCountdownRestart = (taskBarCounter.counter !== taskBarProps) ? true : false
 
 
-let breakDurations = {
-  89: 13,
-  55: 8,
-  34: 5,
-  21: 3,
-  13: 2,
-  8: 0,
-  5: 0,
-  3: 0,
-  2: 0
+// let breakDurations1 = {
+//   89: 13,
+//   55: 8,
+//   34: 5,
+//   21: 3,
+//   13: 2,
+//   8: 0,
+//   5: 0,
+//   3: 0,
+//   2: 0
+// }
 
-}
+const context = React.useContext(ApiContext);
+let breakDurations = context.prefs
+
+// console.log("bread durations1 " + JSON.stringify(breakDurations1))
+
+console.log("break durations " + JSON.stringify(breakDurations))
 
 React.useEffect(() => { 
 
@@ -233,7 +240,7 @@ if(allowCountdownRestart){
 const handleStop = () => {
 
   clearInterval(timer.timerHandler)
-  props.updateDB(timer.cycle)
+  // props.updateDB(timer.cycle)
   setTimer({ ...timer, onBreak:true, cycle:0, timeRemaining: 0 })
 
 }
@@ -263,16 +270,25 @@ const [playGong] = useSound(gong,
           {timer.showToolbar &&
           <div className="toolbar-container">
                 
+
                 <div className="toolbar-icons">
-                  <i><Stop className="toolbar-icon" onClick={handleStop}></Stop></i>
-                  <i><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext></i>
+
+                  <i className="tooltip"><Stop className="toolbar-icon" onClick={handleStop}></Stop>
+                  <span class="tooltiptext">Stop</span></i>
+
+                  <i className="tooltip"><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext>
+                  <span class="tooltiptext">Skip to Break</span></i>
+
                   {!timer.isPaused ?
-                    <i><PausePresentation className="toolbar-icon" onClick={handlePause}></PausePresentation></i>
+                    <i className="tooltip"><PausePresentation className="toolbar-icon" onClick={handlePause}></PausePresentation>
+                    <span class="tooltiptext">Pause</span></i>
                     :
-                    <i><PlayCircleOutline className="toolbar-icon" onClick={handleStart}></PlayCircleOutline></i>
+                    <i className="tooltip"><PlayCircleOutline className="toolbar-icon" onClick={handleStart}></PlayCircleOutline>
+                    <span class="tooltiptext">Play</span></i>
                   }
                   </div>
                
+
                
                 </div>}
     

@@ -80,7 +80,7 @@ setStateAfterTimeout(){
         return (
             <>
                 <h1 className=" spiral-title">Spiral</h1>
-                <h2 className="spiral-headline">Start a countdown timer for your task using one of the provided minute durations in the rectangle.</h2>
+                <h2 className="spiral-headline">Start a timer for your task using one of the provided minute durations in the rectangle.</h2>
                 <br/>
              
                 

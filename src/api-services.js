@@ -85,8 +85,10 @@ createUserPrefs(pref){
       
 },
 
+
 saveUserPrefs(prefs, account_id){
-  return fetch(`${config.API_ENDPOINT}/account/${account_id}`, {
+
+  return fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`, {
       method: 'PATCH',
       headers: {
       'content-type': 'application/json'
@@ -94,12 +96,16 @@ saveUserPrefs(prefs, account_id){
       body: JSON.stringify(prefs),
   })
       .then(res => {
-      if (!res.ok)
+      if (!res.ok){
           return res.json().then(e => Promise.reject(e))
+      }
+
       return res.json()
       })
       
 }
+
+
 
 
 

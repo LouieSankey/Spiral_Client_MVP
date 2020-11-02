@@ -8,22 +8,21 @@ const BreakPrefsModal = ({ handleClose, showPrefs, children }) => {
 const context = useContext(ApiContext)
 
   const newPrefs = {
-    "_89": null,
-    "_55": null,
-    "_34": null,
-    "_21": null,
-    "_13": null,
-    "_8": null,
-    "_5": null,
-    "_3": null,
-    "_2": null,
+    "89": null,
+    "55": null,
+    "34": null,
+    "21": null,
+    "13": null,
+    "8": null,
+    "5": null,
+    "3": null,
+    "2": null,
     "gong": null
   }
 
 const showHideClassName = showPrefs ? "break-modal display-block" : "break-modal display-none";
 
 const updateBreakPrefs = () => {
-  //change global breakprefs to equal newPrefs
   context.changeBreakPrefs(newPrefs) 
   
 }
@@ -33,14 +32,12 @@ const changePreferenceValue = event => {
 };
 
 const updateGongValue  = event => {
-  
   if(event.target.checked){
     newPrefs["gong"] = false
   }else{
     newPrefs["gong"] = true
   }
 }
-
 
 const dontSave = () => {
   handleClose()
@@ -59,15 +56,15 @@ const dontSave = () => {
                             <>
                             <ul className="projects-list">
                               
-                        <li  className="pref-li">89 min: <input type="integer" onChange={changePreferenceValue} defaultValue={context.prefs['_89']} name="_89"  className="edit-break"></input>min</li>
-                        <li className="pref-li">55 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['_55']} name="_55" className="edit-break" ></input>min</li>
-                        <li className="pref-li">34 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['_34']} name="_34" className="edit-break" ></input>min</li>
-                        <li className="pref-li">21 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['_21']} name="_21" className="edit-break" ></input>min</li>
-                        <li className="pref-li">13 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['_13']} name="_13" className="edit-break" ></input>min</li>
-                        <li className="pref-li"> 08 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['_8']} name="_08" className="edit-break" ></input>min</li>
-                        <li className="pref-li"> 05 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['_5']} name="_05" className="edit-break" ></input>min</li>
-                        <li className="pref-li"> 03 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['_3']} name="_03" className="edit-break" ></input>min</li>
-                        <li className="pref-li"> 02 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['_2']} name="_02" className="edit-break" ></input>min</li>
+                        <li  className="pref-li">89 min: <input type="integer" onChange={changePreferenceValue} defaultValue={context.prefs['89']} name="89"  className="edit-break"></input>min</li>
+                        <li className="pref-li">55 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['55']} name="55" className="edit-break" ></input>min</li>
+                        <li className="pref-li">34 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['34']} name="34" className="edit-break" ></input>min</li>
+                        <li className="pref-li">21 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['21']} name="21" className="edit-break" ></input>min</li>
+                        <li className="pref-li">13 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['13']} name="13" className="edit-break" ></input>min</li>
+                        <li className="pref-li"> 08 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['8']} name="8" className="edit-break" ></input>min</li>
+                        <li className="pref-li"> 05 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['5']} name="5" className="edit-break" ></input>min</li>
+                        <li className="pref-li"> 03 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['3']} name="3" className="edit-break" ></input>min</li>
+                        <li className="pref-li"> 02 min: <input type="integer" onChange={changePreferenceValue}  defaultValue={context.prefs['2']} name="2" className="edit-break" ></input>min</li>
                         </ul>
 
                             <h3 className="prefs-label">Break Sound</h3>
