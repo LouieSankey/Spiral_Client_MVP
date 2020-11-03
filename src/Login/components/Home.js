@@ -60,7 +60,7 @@ class LoginHome extends Component {
         fontSize: "18px",
         fontFamily: this.props.fontFamily
       },
-      navigatePage: false,
+      navigatePage: true,
       signUpStyles: {
         color: this.props.buttonColor,
         cursor: "pointer"
@@ -456,7 +456,7 @@ class LoginHome extends Component {
       
       <div>
         <div className="loginContainer">
-          <img className= "xclose" src={xclose} alt="close dialog"/>
+          <img onClick={this.handleCloseModal} className= "xclose" src={xclose} alt="close dialog"/>
           Sign Up
           {errorList}
           {/* <div className="loginGroup">
