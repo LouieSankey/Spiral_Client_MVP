@@ -4,11 +4,10 @@ import './Splash.css'
 import galexy from '../Img/spiral-galexy-transparent.png'
 import fibSpiral from '../Img/55golden.png'
 import spiralIcon from '../Img/spiral-icon.png'
-import LoginModal from "react-login-modal-sm";
 import { Redirect, withRouter } from 'react-router-dom'
 import ApiContext from '../ApiContext';
 import ApiServices from '../api-services'
-import $ from 'jquery';
+import LoginModal from '../Login/login.js'
 
 
 class Splash extends Component {
@@ -16,13 +15,15 @@ class Splash extends Component {
 
   constructor(props){
     super(props);
-    this.handleSignupByEmail = this.handleSignupByEmail.bind(this)
+    // this.handleSignupByEmail = this.handleSignupByEmail.bind(this)
+    // this.handleCloseModal = this.handleCloseModal.bind(this)
   }
 
     state = {
         showModal: false,
         redirect: false,
         account_id: null,
+        incorrect_password: false
       
       };
 
@@ -42,11 +43,21 @@ class Splash extends Component {
         }
       }
     
-      toggleModal = () => {
-        this.setState({ showModal: !this.state.showModal });
-      };
+      handleOpenModal = () => {
+        this.setState({
+          showModal: true
+        })
+      }
+
+      handleCloseModal = () => {
+        console.log("close")
+        this.setState({
+          showModal: false
+        })
+      }
 
       handleLoginWithEmail = (email, password) => {
+
 
         const credentials = {
           email: email,
@@ -62,15 +73,26 @@ class Splash extends Component {
           this.setRedirect()
           })
           .catch(error => {
-            console.error({ error })
+            if(error.error.message === "Incorrect Password"){
+              this.setState({
+                incorrect_password: true
+              })
+              console.log("incorrect password")
+            }else{
+              console.error({ error })
+            }
+
+           
           })
         }
 
-      handleSignupByEmail = (email, username, password) => {
+      handleSignupByEmail = (email, password, username) => {
+
+        console.log("signup", email, password, username)
 
            const account = {
                email: email,
-               account_username: username,  
+               account_username: "",  
                password: password
            }
 
@@ -126,27 +148,7 @@ class Splash extends Component {
      
   
     render() { 
-        const customUsernameRegex = new RegExp("");
-
-      const loginModalLabels = {
-        loginTitle: "Log in: guest@spiral.com w/ pass: 12345678",
-        signupTitle: "New User - Password 8 Characters",
-        forgotTitle: "Reset password",
-        loginFacebookButton: "Log in with Facebook",
-        loginGoogleButton: "Log in with Google",
-        loginEmailButton: "Log in with email",
-        signupFacebookButton: "Sign up with Facebook",
-        signupGoogleButton: "Sign up with Google",
-        signupEmailButton: "Sign up with email",
-        forgotButton: "Send new password",
-        loginEmailPlaceholder: "Email",
-        loginPasswordPlaceholder: "Password",
-        signupUsernamePlaceholder: "Type username",
-        signupLink: "Create new user?",
-        loginLink: "Already a user?",
-        forgotLink: "Forgot password?",
-        orLabel: "or"
-      }
+        
 
 
 
@@ -159,18 +161,25 @@ class Splash extends Component {
                     <div className=" first-block">
                             <div className="first-block-content two-column-split">
                                 <div className="align-left heading">
-                                <LoginModal showModal={this.state.showModal}
-                                toggleModal={this.toggleModal} 
-                                onLoginEmail={this.handleLoginWithEmail}
-                                onSignupEmail={this.handleSignupByEmail}
-                                labels={loginModalLabels}
 
-                                usernameRegex={customUsernameRegex}
-                               />
+                      {this.state.showModal &&
+
+                          <LoginModal
+                          handleClose={this.handleCloseModal}
+                          handleSignup={this.handleSignupByEmail}
+                          handleLogin={this.handleLoginWithEmail}
+                          showPasswordError={this.state.incorrect_password}>
+
+                          </LoginModal>
+                          
+
+                         
+
+                      }
 
                                     <h1 className="spiral-productivity">Spiral Productivity</h1>
                                     <p className="p-large">Spiral is a simple workflow optimization tool with built in time tracking and break taking reminders. </p>
-                                    <button className="splash-button" onClick={this.toggleModal}>SIGN UP</button>
+                                    <button className="splash-button" onClick={this.handleOpenModal}>SIGN UP</button>
                               
                                     
                                 </div>
@@ -245,7 +254,7 @@ class Splash extends Component {
                                                 </li>
 
                                                 </ul>
-                                                <button className="splash-button" onClick={this.toggleModal}>TRY IT!</button>
+                                                <button className="splash-button" onClick={this.handleOpenModal}>TRY IT!</button>
                                             
                                         </div>
                                         </div>
@@ -269,11 +278,11 @@ class Splash extends Component {
                                                         </li>
 
                                                         <li className="bullet">
-                                                            <div>Tracking your time.</div>
+                                                            <div>Providing simple, no hassle time tracking that keeps an ongoing record of your work history.</div>
                                                         </li>
 
                                                         <li className="bullet">
-                                                            <div>Encouraging you to take regular breaks.</div>
+                                                            <div>Encouraging you to get more out of your breaks, and reminding you to take them reguarly.</div>
                                                         </li>
 
                                                         <li className="bullet">
@@ -288,7 +297,7 @@ class Splash extends Component {
                                                         <p>Plus, it's easy - just keep it open in a browser window while studying or doing computer work and it takes one click to begin a cycle.</p>
                                                     </ul>
 
-                                                    <button className="splash-button" onClick={this.toggleModal}>YES, TRY SPIRAL!</button>
+                                                    <button className="splash-button" onClick={this.handleOpenModal}>YES, TRY SPIRAL!</button>
 
                                                 </div>
                                          
