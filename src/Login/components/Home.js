@@ -419,6 +419,7 @@ class LoginHome extends Component {
         {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Incorrect password"}</div></div>}
         <div className="loginGroup">
           <input
+          className="modal-input"
             type="text"
             required
             style={font}
@@ -429,6 +430,7 @@ class LoginHome extends Component {
 
         <div className="loginGroup">
           <input
+          className="modal-input"
             style={font}
             required
             type="password"
@@ -470,7 +472,7 @@ class LoginHome extends Component {
           </div> */}
 
           <div className="loginGroup">
-            <input
+            <input className="modal-input"
               type="text"
               required
               style={font}
@@ -481,6 +483,7 @@ class LoginHome extends Component {
 
           <div className="loginGroup">
             <input
+            className="modal-input"
               required
               style={font}
               type="password"
@@ -490,6 +493,7 @@ class LoginHome extends Component {
           </div>
           <div className="loginGroup">
             <input
+            className="modal-input"
               type="password"
               required
               style={font}
