@@ -169,8 +169,9 @@ class App extends Component {
       <ApiContext.Provider value={value}>
         {isSplashPage ? null :
           <div className="navBar">
-            <button className="nav-button" onClick={this.ToggleMobileNav}>
+            <button className="nav-button" onClick={this.ToggleMobileNav} alt="a button that opens the navigation menu on mobile devices">
               <FaAlignRight />
+              
             </button>
             <ul className={this.state.toggleMobileNav ? "nav-links show-nav" : "nav-links"}>
               <li> <Link onClick={this.ToggleMobileNav} to="/">Timer</Link></li>

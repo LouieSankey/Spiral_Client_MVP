@@ -51,6 +51,7 @@
         font-size: 24px;
         position: relative;
         top: 20px;
+        color: black;
         margin-right: 10px;
         margin-top: 0px;
         margin-bottom: 0px;
@@ -61,7 +62,7 @@
         position: relative;
         background-color: transparent;
         border: none;
-        color: darkgray;
+        color: rgba(0, 0, 0, 0.644);
         font-size: 50px;
         float: left;
         margin-top: 0px;

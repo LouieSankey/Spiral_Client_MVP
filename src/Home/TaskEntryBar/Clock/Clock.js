@@ -196,7 +196,7 @@ function Countdown(props) {
 
     {timer.showToolbar &&
       <div className="toolbar-container">
-        <div className="toolbar-icons">
+        <div className={`toolbar-icons ${props.taskBarOpen ? "taskbar-open" : ""}`}>
           <i className="tooltip"><Stop className="toolbar-icon" onClick={handleStop}></Stop>
             <span class="tooltiptext">Stop</span></i>
           <i className="tooltip"><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext>
@@ -221,7 +221,7 @@ class Clock extends React.Component {
       <>
         <div className="floatLeft">
           <div id="timer">
-            <Countdown updateDB={this.props.updateDB} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle} taskBarCounter={this.props.taskBarCounter}>
+            <Countdown updateDB={this.props.updateDB} taskBarOpen={this.props.taskBarOpen} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle} taskBarCounter={this.props.taskBarCounter}>
             </Countdown>
           </div>
         </div>

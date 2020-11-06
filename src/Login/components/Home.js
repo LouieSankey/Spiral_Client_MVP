@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.css";
-import xclose from  "../../Img/xclose.png"
+import xclose from "../../Img/xclose.png"
 
 import {
   loginEmailValidator,
@@ -12,11 +12,7 @@ import {
   confirmPasswordValidator
 } from "../utilities/validator";
 
-//need to fix the rewriting the button styles
 
-/**
-* Represents the the login sign up functionalities
-*/
 class LoginHome extends Component {
 
   /**
@@ -65,14 +61,14 @@ class LoginHome extends Component {
         color: this.props.buttonColor,
         cursor: "pointer"
       },
-       errorMessageStyles :{
+      errorMessageStyles: {
         margin: "auto",
         width: "100%",
         paddingBottom: "30px",
         color: "#FF0000",
         font: this.props.fontFamily
       },
-      
+
       signUpPassword: "",
       signUpUsername: "",
       signUpConfirmPassword: "",
@@ -100,8 +96,8 @@ class LoginHome extends Component {
    * Hanlde sign up page navigation using props
    */
   handleSignUp = () => {
-    const {signUpEmail, signUpPassword } = this.state
-    this.props.handleSignup(signUpEmail, signUpPassword );
+    const { signUpEmail, signUpPassword } = this.state
+    this.props.handleSignup(signUpEmail, signUpPassword);
 
   }
 
@@ -119,17 +115,17 @@ class LoginHome extends Component {
     });
   };
 
-  
- navigateLogin = () => {
-   let error = this.state.error;
-   error.usernameMessage = "";
-   error.passwordMessage = "";
 
-   this.setState({
-     navigatePage: false,
-     error
-   });
- };
+  navigateLogin = () => {
+    let error = this.state.error;
+    error.usernameMessage = "";
+    error.passwordMessage = "";
+
+    this.setState({
+      navigatePage: false,
+      error
+    });
+  };
 
   /**
    * Handle setting login usernmae state
@@ -219,19 +215,7 @@ class LoginHome extends Component {
   /**
   * Handle setting signup username state
   * @param  {String} event Changer event of the signup username
-  // */
-  // handleSignupUsername = event => {
-  //   const username = `${event.target.value}`;
-  //   let error = this.state.error;
 
-  //   error.usernameMessage = loginEmailValidator(username);
-  //   error.usernameMessage = nameValidator(username);
-
-  //   this.setState({
-  //     error,
-  //     signUpUsername: username
-  //   });
-  // };
 
   /**
    * Handle setting signup password state
@@ -336,12 +320,12 @@ class LoginHome extends Component {
 
       errorList = (
         <div style={errorMessageStyles}>
-        <div  style={font}>
-        <div>{usernameError}</div>
-          <div>{passwordError}</div>
-          <div>{emailError}</div>
-          <div>{confirmPasswordError}</div>
-        </div>
+          <div style={font}>
+            <div>{usernameError}</div>
+            <div>{passwordError}</div>
+            <div>{emailError}</div>
+            <div>{confirmPasswordError}</div>
+          </div>
         </div>
       );
     }
@@ -368,13 +352,13 @@ class LoginHome extends Component {
     if (
       !signUpPassword.length ||
       !signUpConfirmPassword ||
-      !signUpEmail 
+      !signUpEmail
     ) {
       signupButton = disbaleSignupButton;
     } else if (
       error.confirmPasswordMessage ||
       error.emailMessage ||
-      error.passwordMessage 
+      error.passwordMessage
     ) {
       signupButton = disbaleSignupButton;
     } else {
@@ -411,16 +395,16 @@ class LoginHome extends Component {
     }
 
     const login = (
-  
+
       <div className="loginContainer">
-        <img onClick={this.handleCloseModal} className= "xclose" src={xclose} alt="close dialog"/>
+        <img onClick={this.handleCloseModal} className="xclose" src={xclose} alt="close dialog" />
         Login - guest@spiral.com | password: 12345678
-       
+
         {errorMessage}
         {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Incorrect password"}</div></div>}
         <div className="loginGroup">
           <input
-          className="modal-input"
+            className="modal-input"
             type="text"
             required
             style={font}
@@ -431,7 +415,7 @@ class LoginHome extends Component {
 
         <div className="loginGroup">
           <input
-          className="modal-input"
+            className="modal-input"
             style={font}
             required
             type="password"
@@ -456,21 +440,12 @@ class LoginHome extends Component {
     );
 
     const signUp = (
-      
+
       <div>
         <div className="loginContainer">
-          <img onClick={this.handleCloseModal} className= "xclose" src={xclose} alt="close dialog"/>
+          <img onClick={this.handleCloseModal} className="xclose" src={xclose} alt="close dialog" />
           Sign Up
           {errorList}
-          {/* <div className="loginGroup">
-            <input
-              type="text"
-              required
-              style={font}
-              onChange={this.handleSignupUsername}
-            ></input>
-            <label style={font}>Username</label>
-          </div> */}
 
           <div className="loginGroup">
             <input className="modal-input"
@@ -484,7 +459,7 @@ class LoginHome extends Component {
 
           <div className="loginGroup">
             <input
-            className="modal-input"
+              className="modal-input"
               required
               style={font}
               type="password"
@@ -494,7 +469,7 @@ class LoginHome extends Component {
           </div>
           <div className="loginGroup">
             <input
-            className="modal-input"
+              className="modal-input"
               type="password"
               required
               style={font}
@@ -506,13 +481,13 @@ class LoginHome extends Component {
           <div style={font}>
             {signupButton}
             <div
-            style={signUpContentStyles}
-            onClick={this.navigateLogin}
-            onMouseEnter={this.handleSignUpHoverEnter}
-            onMouseLeave={this.handleSignUpHoverLeave}
-          >
-            Already have an account? <b style={signUpStyles}>Log In</b>
-          </div>
+              style={signUpContentStyles}
+              onClick={this.navigateLogin}
+              onMouseEnter={this.handleSignUpHoverEnter}
+              onMouseLeave={this.handleSignUpHoverLeave}
+            >
+              Already have an account? <b style={signUpStyles}>Log In</b>
+            </div>
           </div>
         </div>
       </div>

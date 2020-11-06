@@ -38,6 +38,10 @@
     border-style: outset;
 }
 
+.taskbar-open {
+    top: 430px;
+}
+
 .toolbar-icon {
     position: relative;
     top: 3px;
