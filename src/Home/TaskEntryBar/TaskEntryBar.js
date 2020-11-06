@@ -6,70 +6,58 @@ import folderIcon from '../../Img/folder_icon.png'
 import ApiServices from '../../api-services'
 
 export default class TaskEntryBar extends Component {
-    static defaultProps = {}
-    static contextType = ApiContext;
+  static defaultProps = {}
+  static contextType = ApiContext;
 
-    state={
-      showTaskbar: false,
-      taskBarCounter: 0,
-   
-    }
+  state = {
+    showTaskbar: false,
+    taskBarCounter: 0,
 
+  }
 
-
-    constructor(props) {
-      super(props);
-      this.taskName= "No Task";
-      this.setTaskName = this.setTaskName.bind(this);
-      this.updateDB = this.updateDB.bind(this);
-      this.taskInput = React.createRef();
-      this.handleFocus = this.handleFocus.bind(this);
+  constructor(props) {
+    super(props);
+    this.taskName = "No Task";
+    this.setTaskName = this.setTaskName.bind(this);
+    this.updateDB = this.updateDB.bind(this);
+    this.taskInput = React.createRef();
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   handleFocus = event => {
-    console.log("enter")
-     this.taskInput.current.focus();
+    this.taskInput.current.focus();
   }
 
-
-
-    setTaskName = event => {
-      this.taskName = event.target.value
-    } 
-
-    updateDB = (cycle) => {
-
-//if no project selected
-let projectId;
-  if(typeof this.context.currentProject === 'undefined'){
-  projectId = "0000"
-  }else{
-    projectId = this.context.currentProject.id
-  }
-      const task = {
-        "account": this.context.account_id,
-        "project": projectId,
-         "task": this.taskName,
-        "cycle": cycle
-      }
-
-      ApiServices.postTask(task)
-
+  setTaskName = event => {
+    this.taskName = event.target.value
   }
 
-
-
+  updateDB = (cycle) => {
+    let projectId;
+    if (typeof this.context.currentProject === 'undefined') {
+      projectId = "0000"
+    } else {
+      projectId = this.context.currentProject.id
+    }
+    const task = {
+      "account": this.context.account_id,
+      "project": projectId,
+      "task": this.taskName,
+      "cycle": cycle
+    }
+    ApiServices.postTask(task)
+  }
 
   toggleTaskbar = () => {
     this.setState({
       taskBarCounter: this.state.taskBarCounter + 1
     })
 
-    if(this.state.showTaskbar){
+    if (this.state.showTaskbar) {
       this.setState({
         showTaskbar: false
       })
-    }else{
+    } else {
       this.setState({
         showTaskbar: true
       })
@@ -77,33 +65,26 @@ let projectId;
   }
 
 
-    render() {
+  render() {
+    const plusbutton = this.state.showTaskbar ? "-" : "+"
+    const projectName = (typeof this.context.currentProject === 'undefined') ? "PROJECT" : this.context.currentProject.project
 
+    { this.taskInput.current && this.handleFocus() }
 
-const plusbutton = this.state.showTaskbar ? "-" : "+"
-const projectName = (typeof this.context.currentProject === 'undefined') ? "PROJECT" : this.context.currentProject.project
-
-{this.taskInput.current && this.handleFocus()}
-
-return ( 
-          <>
-          
-          <Clock updateDB={this.updateDB} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal} taskBarCounter={this.state.taskBarCounter}></Clock>
-
-            <div className="taskbar">
-               
-                <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
-                
-                {this.state.showTaskbar &&
-                <div className="">
-                  <p className="task-name">Task Name</p>
-                  <input className="taskInput"  ref={this.taskInput}  onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="" onFocus={(event) => event.target.select()}name="taskInput"></input>
-                <div className=""><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
-                </div>
-                
-                } 
-           
+    return (
+      <>
+        <Clock updateDB={this.updateDB} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal} taskBarCounter={this.state.taskBarCounter}></Clock>
+        <div className="taskbar">
+        <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
+          {this.state.showTaskbar &&
+            <div className="">
+              <p className="task-name">Task Name</p>
+              <input className="taskInput" ref={this.taskInput} onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="" onFocus={(event) => event.target.select()} name="taskInput"></input>
+              <div className=""><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
             </div>
-            </>
-        )}
+          }
+        </div>
+      </>
+    )
+  }
 }

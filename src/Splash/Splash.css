@@ -2,20 +2,6 @@
     font-family: sans-serif;
 }
 
-
-/* .login-modal_loginBtn__3dfDV {
-    cursor: pointer !important;
-} */
-
-
-/* .styles_loginContainer__1OP_F {
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-} */
-
 #submit_inp_brugernavn {
     display: none;
 }
@@ -156,8 +142,6 @@ ul {
     margin-bottom: 20px;
 }
 
-.image-container {}
-
 @media screen and (max-width: 768px) {
     .bullet {
         padding-top: 20px;
@@ -172,6 +156,7 @@ ul {
     .image-container {
         position: relative;
         margin: auto;
+        z-index: 9999;
     }
     .galexy-image {
         display: none;

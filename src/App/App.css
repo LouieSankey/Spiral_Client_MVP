@@ -2,11 +2,6 @@ center {
     text-align: center;
 }
 
-
-/* li {
-    padding: 10px 0;
-} */
-
 .nav-button {
     font-size: 30px;
     color: black;
@@ -16,19 +11,6 @@ center {
     outline: none;
     float: right;
 }
-
-
-/* .example-workflow {
-    float: left;
-    padding-top: 10px;
-    font-size: 20px;
-    padding-left: 15px;
-    position: absolute;
-    color: darkgray
-} */
-
-
-/* Class */
 
 .navBar {
     width: 100%;
@@ -67,9 +49,6 @@ center {
     margin: 12px;
     font-size: 20px;
 }
-
-
-/* Media screen size */
 
 @media screen and (min-width: 768px) {
     .nav-button {
