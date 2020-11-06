@@ -414,7 +414,8 @@ class LoginHome extends Component {
   
       <div className="loginContainer">
         <img onClick={this.handleCloseModal} className= "xclose" src={xclose} alt="close dialog"/>
-        Login
+        Login - guest@spiral.com | password: 12345678
+       
         {errorMessage}
         {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Incorrect password"}</div></div>}
         <div className="loginGroup">
