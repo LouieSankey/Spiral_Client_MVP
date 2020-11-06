@@ -67,7 +67,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 0.9em;
     background-color: transparent;
     border: 1px;
     cursor: pointer;
@@ -119,24 +119,19 @@
         margin: 0px;
     }
     .box1 {
+        font-size: 1.2em;
         padding-right: 14px;
         padding-bottom: 14px;
         padding-left: 0px;
         padding-top: 18px;
         float: left;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
     }
     .box2 {
         padding: 22px;
     }
     .plus-minus {
-        font-size: 16px;
+        font-size: 1.2em;
         margin-left: 0px;
         float: left;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
     }
 }
