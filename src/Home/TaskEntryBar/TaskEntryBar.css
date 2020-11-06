@@ -58,7 +58,7 @@
     }
     
     .plus-button {
-        width: 50px;
+        /* width: 50px; */
         position: relative;
         background-color: transparent;
         border: none;
