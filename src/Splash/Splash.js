@@ -6,7 +6,7 @@ import spiralIcon from '../Img/spiral-icon.png'
 import { Redirect, withRouter } from 'react-router-dom'
 import ApiContext from '../ApiContext';
 import ApiServices from '../api-services'
-import LoginModal from '../Login/login.js'
+import LoginModal from '../Login/Login.js'
 
 
 class Splash extends Component {

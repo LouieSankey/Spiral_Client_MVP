@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Redirect, Route, Link, withRouter } from "react-router-dom";
+import { BrowserRouter as Redirect, useLocation, Route, Link, withRouter } from "react-router-dom";
 import { FaAlignRight } from 'react-icons/fa';
 import Home from '../Home/TimerHome'
 import Tracking from '../Tracking/Tracking'
@@ -7,7 +7,6 @@ import Splash from '../Splash/Splash'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './App.css'
-import { useLocation } from 'react-router-dom'
 import APIService from '../api-services';
 
 

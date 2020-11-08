@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import LoginHome from './components/Home';
+import LoginHome from './components/LoginHome';
 
 class LoginModal extends Component {
 
