@@ -100,12 +100,14 @@ class BarChart extends Component {
 
     let totalTime = 0
 
+    if(tasks){
     tasks.forEach(task => {
       if (task.day in week) {
         week[task.day] += task.cycle
         totalTime += task.cycle
       }
     })
+  }
 
     var hours = Math.floor(totalTime / 60);
     var minutes = totalTime % 60;
@@ -126,7 +128,10 @@ class BarChart extends Component {
     return timeData
   }
 
+  
+
   render() {
+
     let timeData = this.getSeries(this.context.tasks)
     return (
       <div className="app">
