@@ -3,8 +3,8 @@
     grid-gap: 0px;
     grid-template-rows: 8fr 1fr 1fr 3fr;
     grid-template-columns: 13fr 2fr 1fr 5fr;
-    height: 400px;
-    width: 700px;
+    height: 300px;
+    width: 500px;
     max-width: 100%;
     position: relative;
     top: 0;
@@ -14,7 +14,7 @@
     clear: left;
     margin: auto;
     margin-bottom: 60px;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     background-size: 700px 400px;
     background-repeat: no-repeat;
 }
@@ -38,12 +38,13 @@
 .item {
     z-index: 1;
     position: relative;
-    color: #000;
+    color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    border: 1px solid rgb(139, 139, 139);
+    /* border: 1px solid rgb(139, 139, 139); */
+    border: 2px solid white;
 }
 
 .clickable:hover {
@@ -54,6 +55,7 @@
 }
 
 .clickable {
+    color: white;
     z-index: 2;
     position: absolute;
     width: 100%;
@@ -75,24 +77,29 @@
 }
 
 .box7 {
+    font-size: 150px;
     grid-row: 1 / 5;
 }
 
 .box6 {
+    font-size: 110px;
     grid-column: 2 / 5;
 }
 
 .box5 {
+    font-size: 80px;
     grid-row: 2 / 5;
     grid-column: 4 / 5;
 }
 
 .box3 {
+    font-size: 50px;
     grid-row: 4 / 5;
     grid-column: 2 / 4;
 }
 
 .box2 {
+    font-size: 30px;
     grid-row: 2 / 4;
     grid-column: 2 / 3;
 }

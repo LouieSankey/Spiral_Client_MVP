@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Handlee&family=Open+Sans+Condensed:wght@300&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+/* @import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
 body {
     margin: 0;
-    margin-left: 10px;
     margin-right: 10px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     overflow: hidden;
+    background-image: url('./Img/dusksky.jpeg');
+    background-repeat: no-repeat;
+    /* background-size: contain; */
+    background-size: 100% 800px;
+    /* background-color: black; */
 }
 
 html,

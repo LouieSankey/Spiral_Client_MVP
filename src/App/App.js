@@ -8,6 +8,8 @@ import ApiContext from '../ApiContext'
 import config from '../config'
 import './App.css'
 import APIService from '../api-services';
+import Sidebar from '../Sidebar/sidebar'
+import '../Sidebar/sidebar.css'
 
 
 class App extends Component {
@@ -166,7 +168,7 @@ class App extends Component {
     const isSplashPage = (window.location.pathname === "/Spiral" || window.location.pathname === "/spiral")
     return (
       <ApiContext.Provider value={value}>
-        {isSplashPage ? null :
+        {/* {isSplashPage ? null :
           <div className="navBar">
             <button className="nav-button" onClick={this.ToggleMobileNav} alt="a button that opens the navigation menu on mobile devices">
               <FaAlignRight />
@@ -177,7 +179,9 @@ class App extends Component {
               <li> <Link onClick={this.ToggleMobileNav} to="/tracking">Tracking</Link></li>
               <li> <Link onClick={this.Logout} to="/Spiral" >Log Out</Link></li>
             </ul>
-          </div>}
+          </div>} */}
+
+          <Sidebar></Sidebar>
 
         {this.renderMainRoutes()}
       </ApiContext.Provider>

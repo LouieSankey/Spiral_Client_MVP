@@ -3,6 +3,7 @@
 }
 
 #timer {
+    color: white;
     font-size: 28px;
     font-weight: bolder;
     margin-top: 20px;
@@ -11,31 +12,42 @@
     margin-left: 0px;
 }
 
+.display-timer {
+    font-size: 100px;
+    margin: 0px;
+}
+
+.display-timer-header {
+    font-size: 22px;
+    margin: 0px;
+}
+
 .toolbar-container {
     z-index: 3;
     pointer-events: none;
     width: 700px;
     max-width: 100%;
-    position: relative;
-    top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
     clear: left;
     margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .toolbar-icons {
     pointer-events: auto !important;
     position: absolute;
-    top: 320px;
-    background-color: rgb(207, 214, 221);
+    top: 550px;
+    color: white;
+    /* background-color: rgb(207, 214, 221);
     border-radius: 10px;
-    border-color: rgb(175, 175, 175);
+    border-color: rgb(175, 175, 175); */
     pointer-events: inherit;
     padding: 1px 6px;
-    border-width: 2px;
-    border-style: outset;
+    /* border-width: 2px;
+    border-style: outset; */
+    margin-top: 20px;
 }
 
 .taskbar-open {
@@ -44,18 +56,30 @@
 
 .toolbar-icon {
     position: relative;
-    top: 3px;
-    height: 36px !important;
-    width: 36px !important;
-    padding: 1px 12px 1px 12px;
-    margin: 0px !important;
-    color: black;
+    padding: 12px;
+    /* top: 3px; */
+    height: 46px !important;
+    width: 46px !important;
+    /* margin: 0px !important; */
+    color: rgb(194, 194, 194);
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.pause {
+    padding: 17px;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+
+.pause.toolbar-icon {
+    padding: 20px;
 }
 
 .toolbar-icon:hover {
-    height: 38px !important;
-    width: 38px !important;
-    padding: 0px 11px 0px 11px;
+    /* height: 56px !important;
+    width: 56px !important; */
+    background-color: rgba(119, 136, 153, 0.342);
 }
 
 .visible {
@@ -109,7 +133,7 @@
 
 @media screen and (min-width: 500px) {
     .toolbar-icons {
-        top: 408px;
+        top: 550px;
     }
 }
 

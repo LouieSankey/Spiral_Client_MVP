@@ -75,14 +75,16 @@ export default class TaskEntryBar extends Component {
       <>
         <Clock updateDB={this.updateDB} taskBarOpen={this.state.showTaskbar} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal} taskBarCounter={this.state.taskBarCounter}></Clock>
         <div className="taskbar">
-        <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
+        {/* <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
           {this.state.showTaskbar &&
+          
+          } */}
+
             <div>
-              <label for="taskInput" className="task-name"  alt="an input for tracking to provide a name for your current task">Task Name</label>
-              <input className="taskInput" name="taskInput" id="taskInput" ref={this.taskInput} onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="" onFocus={(event) => event.target.select()} ></input>
+              <label for="taskInput" className="task-name"  alt="an input for tracking to provide a name for your current task"></label>
+              <input className="taskInput" name="taskInput" id="taskInput" ref={this.taskInput} onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="Task Name" onFocus={(event) => event.target.select()} ></input>
               <div><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
             </div>
-          }
         </div>
       </>
     )

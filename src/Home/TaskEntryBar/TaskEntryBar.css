@@ -6,9 +6,10 @@
         float: right;
         position: relative;
         top: 18px;
+        margin-right: 10px;
         cursor: pointer;
         width: 180px;
-        height: 35px;
+        height: 55px;
         font-size: 20px;
         margin-left: 20px;
         margin-top: 0px;
@@ -17,6 +18,12 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        position: absolute;
+        right: 0;
+        background: transparent;
+        border-color: white;
+        border-radius: 15px;
+        color: white;
     }
     
     .bottom-toolbar {
@@ -42,12 +49,40 @@
         outline: 0;
         background: transparent;
         border-bottom: 1px solid black;
-        width: 280px;
+        width: 120px;
         font-size: 24px;
         font-family: 'Open Sans Condensed', sans-serif;
-        float: left;
-        margin-top: 18px
+        text-align: center;
+        margin-bottom: 40px;
+        color: white;
+        border-bottom-color: whitesmoke;
     }
+    
+     ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: rgba(219, 219, 219, 0.575);
+        opacity: 1;
+        /* Firefox */
+    }
+    
+    .taskInput:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    
+    .taskInput:focus:-moz-placeholder {
+        color: transparent;
+    }
+    /* Firefox 18- */
+    
+    .taskInput:focus::-moz-placeholder {
+        color: transparent;
+    }
+    /* Firefox 19+ */
+    
+    .taskInput:focus:-ms-input-placeholder {
+        color: transparent;
+    }
+    /* oldIE ;) */
     
     .task-name {
         float: left;
@@ -84,9 +119,10 @@
     }
     
     .taskbar {
-        margin-left: auto;
+        margin-left: 8px;
         margin-right: auto;
-        width: 700px;
+        display: flex;
+        justify-content: center;
     }
     
     .add-project-modal-main {
@@ -183,7 +219,6 @@
             margin-bottom: 22px;
             margin-left: 0px;
             width: 220px;
-            background-color: lightgray;
         }
         .taskInput {
             float: none;
