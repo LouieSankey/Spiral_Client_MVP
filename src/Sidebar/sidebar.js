@@ -59,7 +59,7 @@ ToggleSidebar = () => {
 
 
   CloseSidebar = () =>{
-  console.log('f u')
+
     document.body.classList.add('body-margin-left-none')
     document.body.classList.remove('body-margin-left')
 
@@ -84,7 +84,7 @@ const isSplashPage = (window.location.pathname === "/Spiral" || window.location.
             <ul className={"nav-links show-nav"}>
               <li> <Link  to="/">Timer</Link></li>
               <li> <Link  to="/tracking">Tracking</Link></li>
-              <li> <Link onClick={() => this.props.logout()} to="/spiral" >Log Out</Link></li>
+              <li> <Link onClick={() => {this.props.logout(); this.ToggleSidebar()}} to="/spiral" >Log Out</Link></li>
             </ul>
           
 
