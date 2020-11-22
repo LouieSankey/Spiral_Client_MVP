@@ -203,7 +203,7 @@ class Splash extends Component {
               </div>
               <div className="align-right">
                 <h2>Why Spiral Works</h2>
-                <p> <br></br>Using The Golden Ratio, Spiral accounts for Webber's Law with a porortional framework where small time estimates
+                <p> <br></br>Using The Golden Ratio, Spiral accounts for Webber's Law with a proportional framework where small time estimates
                                             are closer together, and larger time estimates are farther apart.</p>
                 <ul className="bullet-list">
                   <li className="bullet">
