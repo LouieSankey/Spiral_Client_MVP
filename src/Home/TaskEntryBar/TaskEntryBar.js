@@ -69,7 +69,6 @@ export default class TaskEntryBar extends Component {
     const plusbutton = this.state.showTaskbar ? "-" : "+"
     const projectName = (typeof this.context.currentProject === 'undefined') ? "PROJECT" : this.context.currentProject.project
 
-    { this.taskInput.current && this.handleFocus() }
 
     return (
       <>

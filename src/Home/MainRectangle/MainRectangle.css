@@ -27,6 +27,15 @@
     margin: 6px;
 }
 
+.alarm-sound {
+    position: absolute;
+    z-index: 900;
+    height: 22px;
+    width: 22px;
+    margin: 3px;
+    margin-left: 34px;
+}
+
 .example-workflow {
     text-decoration: underline;
     text-align: center;

@@ -7,6 +7,12 @@ a {
 }
 
 .spiral-sidebar-logo {
+    padding-bottom: 10px;
+    color: white;
+}
+
+.break-modal-header {
+    padding-top: 20px;
     color: white;
 }
 
@@ -33,6 +39,10 @@ a {
     /* Place content 60px from the top */
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidebar */
+}
+
+.sidebar-content {
+    padding-left: 8px;
 }
 
 .sidebar-visible {

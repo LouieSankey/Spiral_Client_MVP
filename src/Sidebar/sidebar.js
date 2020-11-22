@@ -76,9 +76,11 @@ const isSplashPage = (window.location.pathname === "/Spiral" || window.location.
           {isSplashPage ? null : <> 
             <div id="mySidebar" className={`sidebar ${this.state.isSidebarVisible ? "sidebar-visible" : ""}`}>
             <a class="closebtn" onClick={this.ToggleSidebar}>&times;</a>
+            
+            <div className="sidebar-content">
             <h1 className="spiral-sidebar-logo">Spiral</h1>
             
-            <div className="navBar"></div>
+            
             <h2 className="white">Menu</h2>
 
             <ul className={"nav-links show-nav"}>
@@ -89,38 +91,42 @@ const isSplashPage = (window.location.pathname === "/Spiral" || window.location.
           
 
           <h2 className="break-modal-header">Breaks</h2>
-          <h3 className="prefs-label">Cycle: Break Time</h3>
-
-            {this.context.prefs && <>
-               <ul className="breakprefs-list">
-
-                <li className="pref-li">89 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['89']} name="89" className="edit-break"></input>min</li>
-                <li className="pref-li">55 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['55']} name="55" className="edit-break" ></input>min</li>
-                <li className="pref-li">34 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['34']} name="34" className="edit-break" ></input>min</li>
-                <li className="pref-li">21 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['21']} name="21" className="edit-break" ></input>min</li>
-                <li className="pref-li">13 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['13']} name="13" className="edit-break" ></input>min</li>
-                <li className="pref-li"> 08 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['8']} name="8" className="edit-break" ></input>min</li>
-                <li className="pref-li"> 05 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['5']} name="5" className="edit-break" ></input>min</li>
-                <li className="pref-li"> 03 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['3']} name="3" className="edit-break" ></input>min</li>
-                <li className="pref-li"> 02 min: <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['2']} name="2" className="edit-break" ></input>min</li>
-              </ul> 
-
-              <h3 className="prefs-label">Break Sound</h3>
+          <h3 className="prefs-label">Break Sound</h3>
               <select>
                 <option>Bird Tweet</option>
-                <option>Bell</option>
+             
               </select>
               <h3 className="prefs-label">Resume Sound</h3>
               <select>
                 <option>Dog Bark</option>
-                <option>Whistle</option>
+        
               </select>
-              <h3 className="white">Opening Gong <input type="checkbox" onChange={this.updateGongValue} name="gong" defaultChecked={this.context.prefs.gong}></input></h3>
+          <h3 className="prefs-label">Break Durations:</h3>
+
+            {this.context.prefs && <>
+               <ul className="breakprefs-list">
+
+                <li className="pref-li">89 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['89']} name="89" className="edit-break"></input></li>
+                <li className="pref-li">55 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['55']} name="55" className="edit-break" ></input></li>
+                <li className="pref-li">34 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['34']} name="34" className="edit-break" ></input></li>
+                <li className="pref-li">21 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['21']} name="21" className="edit-break" ></input></li>
+                <li className="pref-li">13 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['13']} name="13" className="edit-break" ></input></li>
+                <li className="pref-li"> 08 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['8']} name="8" className="edit-break" ></input></li>
+                <li className="pref-li"> 05 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['5']} name="5" className="edit-break" ></input></li>
+                <li className="pref-li"> 03 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['3']} name="3" className="edit-break" ></input></li>
+                <li className="pref-li"> 02 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['2']} name="2" className="edit-break" ></input></li>
+              </ul> 
+
+        
            
           
           <button onClick={this.updateBreakPrefs} className="save-break-prefs-button splash-button" >SAVE</button>
+            
+            
             </>
             }
+
+</div>
               </div>
             <div id="main">
             <button className="openbtn" onClick={this.ToggleSidebar} >{``}</button>
