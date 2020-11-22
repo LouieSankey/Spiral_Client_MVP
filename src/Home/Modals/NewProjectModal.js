@@ -41,7 +41,7 @@ class NewProjectModal extends Component {
         <section className="add-project-modal-main">
           <button className="modal-close-button" onClick={this.props.handleClose}>x</button>
           <div className="project-modal-content">
-            <h2 className="create-project-header">Create Project</h2>
+            <h3 className="create-project-header">Create Project</h3>
             <input type="text" name="project" onChange={this.setProjectNameLocally} className="create-project-input"></input>
           </div>
           <button onClick={this.postNewProject} className="save-project-button">CREATE</button>

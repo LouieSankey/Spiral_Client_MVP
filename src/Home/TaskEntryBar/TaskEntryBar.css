@@ -126,16 +126,21 @@
     }
     
     .add-project-modal-main {
+        color: white;
         z-index: 9999;
         top: 350px;
         position: absolute;
-        background: rgb(253, 253, 253);
-        border-style: solid;
-        border-radius: 20px;
-        width: 400px;
-        height: 150px;
-        bottom: 20%;
-        left: 42.5%;
+        background: #296e90f1;
+        border: solid white 1px;
+        border-radius: 5px;
+        width: 196px;
+        height: 170px;
+        top: 76px;
+        right: 10px;
+    }
+    
+    .project-modal-content {
+        padding-top: 18px;
     }
     
     .modal {
@@ -144,14 +149,16 @@
     
     .modal-main {
         z-index: 9999;
-        top: 350px;
+        top: 76px;
         position: absolute;
-        background: rgb(253, 253, 253);
-        border-style: solid;
-        border-radius: 20px;
-        width: 400px;
+        background: #296e90f1;
+        /* border-style: solid; */
+        border-radius: 5px;
+        width: 196px;
         height: auto;
-        left: 42.5%;
+        right: 10px;
+        color: white;
+        border: solid 1px;
     }
     
     .save-project-button,
@@ -171,7 +178,7 @@
     }
     
     .create-project-input {
-        width: 200px;
+        width: 160px;
         margin-left: 8px;
         padding-top: 6px;
     }
@@ -208,17 +215,17 @@
     }
     
     @media screen and (max-width: 768px) {
-        .modal-main,
+        /* .modal-main,
         .add-project-modal-main {
             top: 90%;
             left: 0px;
             width: 300px;
-        }
+        } */
         #folder {
             float: left;
             margin-bottom: 22px;
             margin-left: 0px;
-            width: 220px;
+            width: 180px;
         }
         .taskInput {
             float: none;

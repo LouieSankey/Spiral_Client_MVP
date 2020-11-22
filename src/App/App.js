@@ -111,6 +111,10 @@ class App extends Component {
   }
 
   Logout = () => {
+    // console.log("margin removed")
+    // document.body.classList.add('body-margin-left-none')
+    // document.body.classList.remove('body-margin-left')
+
     localStorage.setItem("account_id", null)
     this.setState({
       account: {},
@@ -165,23 +169,12 @@ class App extends Component {
       handleAddTask: this.handleAddTask,
     }
 
-    const isSplashPage = (window.location.pathname === "/Spiral" || window.location.pathname === "/spiral")
     return (
       <ApiContext.Provider value={value}>
-        {/* {isSplashPage ? null :
-          <div className="navBar">
-            <button className="nav-button" onClick={this.ToggleMobileNav} alt="a button that opens the navigation menu on mobile devices">
-              <FaAlignRight />
-              
-            </button>
-            <ul className={this.state.toggleMobileNav ? "nav-links show-nav" : "nav-links"}>
-              <li> <Link onClick={this.ToggleMobileNav} to="/">Timer</Link></li>
-              <li> <Link onClick={this.ToggleMobileNav} to="/tracking">Tracking</Link></li>
-              <li> <Link onClick={this.Logout} to="/Spiral" >Log Out</Link></li>
-            </ul>
-          </div>} */}
 
-          <Sidebar></Sidebar>
+        
+
+          <Sidebar logout={this.Logout}></Sidebar>
 
         {this.renderMainRoutes()}
       </ApiContext.Provider>

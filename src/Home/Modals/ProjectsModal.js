@@ -18,7 +18,7 @@ class AllProjectsModal extends React.Component {
         <section className="modal-main">
           <button className="modal-close-button" onClick={this.props.handleClose}>x</button>
           <div className="modal-content">
-            <h2>Current Project: {this.context.currentProject && this.context.currentProject.project}</h2>
+            <h3>Current Project: {this.context.currentProject && this.context.currentProject.project}</h3>
             <ul className="projects-list">
               {projects.map((project, i) =>
                 <li key={i}><p className="underlined" onClick={() => { this.setCurrentProject(project); this.props.handleClose(); }}>{project.project}</p></li>

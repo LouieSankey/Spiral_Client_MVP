@@ -19,6 +19,14 @@
     background-repeat: no-repeat;
 }
 
+.alarm {
+    position: absolute;
+    z-index: 900;
+    height: 18px;
+    width: 18px;
+    margin: 6px;
+}
+
 .example-workflow {
     text-decoration: underline;
     text-align: center;

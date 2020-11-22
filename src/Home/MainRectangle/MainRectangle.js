@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './MainRectangle.css'
 
 
+
+
 export default class MainRectangle extends Component {
 
     state = {
@@ -30,6 +32,9 @@ export default class MainRectangle extends Component {
         return (
             <>
                 <div className="container">
+
+                    <img className="alarm" src={require('./whitealarm2.png')} alt=""/>
+
                     <div className="item box7">
                         <button className="clickable" onClick={() => this.props.updateCycle(currentIndex[0])}>{currentIndex[0]}</button>
                     </div>

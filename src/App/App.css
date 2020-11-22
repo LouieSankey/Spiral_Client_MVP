@@ -19,7 +19,6 @@ center {
 }
 
 .nav-links {
-    float: right;
     overflow: hidden;
     list-style-type: none;
     font-weight: bold;
@@ -57,7 +56,6 @@ center {
     }
     .nav-links {
         height: auto;
-        display: flex;
         margin: 0px;
     }
     li {

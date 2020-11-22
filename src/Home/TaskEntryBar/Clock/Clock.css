@@ -2,6 +2,11 @@
     margin-right: 12px;
 }
 
+.pause>svg {
+    padding: 20px;
+    margin-top: 30px;
+}
+
 #timer {
     color: white;
     font-size: 28px;
@@ -20,6 +25,7 @@
 .display-timer-header {
     font-size: 22px;
     margin: 0px;
+    margin-top: 100px;
 }
 
 .toolbar-container {
@@ -140,5 +146,8 @@
 @media screen and (min-width: 768px) {
     .taskInput {
         float: left;
+    }
+    .display-timer-header {
+        margin-top: 40px;
     }
 }

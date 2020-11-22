@@ -135,8 +135,8 @@ class BarChart extends Component {
     let timeData = this.getSeries(this.context.tasks)
     return (
       <div className="app">
-        <h1>Tracking</h1>
-        <h2>{this.props.headline} - {timeData.displayTime}</h2>
+        <h1 className="tracking-header">Tracking</h1>
+        <h2 className="tracking-subheader">{this.props.headline} - {timeData.displayTime}</h2>
         <div className="row-">
           <div className="mixed-chart">
             <Chart

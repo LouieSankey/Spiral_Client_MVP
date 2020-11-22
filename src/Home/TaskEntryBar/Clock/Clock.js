@@ -198,7 +198,7 @@ function Countdown(props) {
       <div><h2 className="display-timer-header">On Break </h2> <h2 className="display-timer">{timeFormat(timer.timeRemaining)}</h2></div>
       : <div><h3 className="display-timer-header"> Time Left </h3> <h3 className="display-timer">{timeFormat(timer.timeRemaining)}</h3></div>}
 
-    {timer.showToolbar &&
+   
       <div className="toolbar-container">
         <div className={`toolbar-icons ${props.taskBarOpen ? "taskbar-open" : ""}`}>
           <i className="tooltip"><Stop className="toolbar-icon" onClick={handleStop}></Stop>
@@ -208,13 +208,13 @@ function Countdown(props) {
               <span class="tooltiptext">Pause</span></i>
             :
             <i className="tooltip pause"><PlayCircleOutline className="toolbar-icon" onClick={handleStart}></PlayCircleOutline>
-              <span class="tooltiptext">Play</span></i>
+              <span class="tooltiptext">Start</span></i>
           }
           <i className="tooltip"><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext>
             <span class="tooltiptext">Skip to Break</span></i>
          
         </div>
-      </div>}
+      </div>
 
   </React.Fragment>
 }

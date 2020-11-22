@@ -1,3 +1,13 @@
 .apexcharts-toolbar {
     display: none;
 }
+
+.tracking-header {
+    text-align: center;
+    color: white;
+}
+
+.tracking-subheader {
+    color: white;
+    text-align: center;
+}

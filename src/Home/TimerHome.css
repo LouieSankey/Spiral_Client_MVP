@@ -73,6 +73,7 @@
 
 .prefs-label {
     margin-bottom: 4px;
+    color: white;
 }
 
 .skip-img {
@@ -93,8 +94,16 @@
     margin-top: 4px;
 }
 
+.breakprefs-list {
+    list-style: none;
+    padding-left: 0px;
+    margin-top: 4px;
+    color: white;
+}
+
 .break-modal-header {
     display: inline;
+    color: white;
 }
 
 .save-break-prefs-button {
