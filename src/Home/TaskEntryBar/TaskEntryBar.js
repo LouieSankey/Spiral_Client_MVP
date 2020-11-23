@@ -4,6 +4,7 @@ import ApiContext from '../../ApiContext'
 import Clock from './Clock/Clock'
 import folderIcon from '../../Img/folder_icon.png'
 import ApiServices from '../../api-services'
+import { isElementOfType } from 'react-dom/test-utils'
 
 export default class TaskEntryBar extends Component {
   static defaultProps = {}
@@ -69,6 +70,10 @@ export default class TaskEntryBar extends Component {
     const plusbutton = this.state.showTaskbar ? "-" : "+"
     const projectName = (typeof this.context.currentProject === 'undefined') ? "PROJECT" : this.context.currentProject.project
 
+    { this.taskInput.current 
+      && this.taskName !== "No Task"
+      && this.taskName.length > 0
+      && this.handleFocus() }
 
     return (
       <>
