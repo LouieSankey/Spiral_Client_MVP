@@ -164,7 +164,6 @@ ul {
     .image-container {
         position: relative;
         margin: auto;
-        z-index: 9999;
     }
     .galexy-image {
         width: 110%;
