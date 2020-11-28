@@ -33,7 +33,7 @@
     height: 22px;
     width: 22px;
     margin: 3px;
-    margin-left: 34px;
+    margin-left: 6px;
 }
 
 .example-workflow {
@@ -96,29 +96,38 @@
 .box7 {
     font-size: 150px;
     grid-row: 1 / 5;
+    border-right: none;
 }
 
 .box6 {
     font-size: 110px;
     grid-column: 2 / 5;
+    border-bottom: none;
 }
 
 .box5 {
     font-size: 80px;
     grid-row: 2 / 5;
     grid-column: 4 / 5;
+    border-left: none;
 }
 
 .box3 {
     font-size: 50px;
     grid-row: 4 / 5;
     grid-column: 2 / 4;
+    border-top: none;
 }
 
 .box2 {
     font-size: 30px;
     grid-row: 2 / 4;
     grid-column: 2 / 3;
+    border-right: none;
+}
+
+.box1 {
+    border-bottom: none;
 }
 
 .box0 {

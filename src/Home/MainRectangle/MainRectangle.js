@@ -52,10 +52,11 @@ export default class MainRectangle extends Component {
             <>
                 <div className="container">
 
+                    
+                    {this.state.alarmIcon !== "" ?
+                    <img className="alarm-sound" src={this.state.alarmIcon} alt=""/> :
                     <img className="alarm" src={require('./whitealarm2.png')} alt=""/>
-                    {this.state.alarmIcon !== "" &&
-                    <img className="alarm-sound" src={this.state.alarmIcon} alt=""/>
-        }
+                    }
                     <div className="item box7"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[0]) ; this.SetAlarmIcon(currentIndex[0])}}>{currentIndex[0]}</button></div>
                     <div className="item box6"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[1]) ; this.SetAlarmIcon(currentIndex[1])}}>{currentIndex[1]}</button></div>
                     <div className="item box5"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[2]) ; this.SetAlarmIcon(currentIndex[2])}}>{currentIndex[2]}</button></div>

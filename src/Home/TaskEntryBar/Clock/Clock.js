@@ -205,7 +205,7 @@ function Countdown(props) {
             <span class="tooltiptext">Stop</span></i>
             {!timer.isPaused ?
             <i className="tooltip pause"><PausePresentation className="toolbar-icon" onClick={handlePause}></PausePresentation>
-              <span class="tooltiptext">Pause</span></i>
+              <span class="tooltiptext pause-tooltip">Pause</span></i>
             :
             <i className="tooltip pause"><PlayCircleOutline className="toolbar-icon" onClick={handleStart}></PlayCircleOutline>
               <span class="tooltiptext">Start</span></i>
