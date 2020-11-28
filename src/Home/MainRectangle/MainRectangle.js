@@ -64,7 +64,7 @@ export default class MainRectangle extends Component {
                     <div className="item box2"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[4]) ; this.SetAlarmIcon(currentIndex[4])}}>{currentIndex[4]}</button></div>
                     <div className="item box1"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[5]) ; this.SetAlarmIcon(currentIndex[5])}}>{currentIndex[5]}</button></div>
                     <div className="item box0"><button className="clickable" onClick={() => this.changeSpiralNumbers()}>
-                        <span className="plus-minus">+/-</span></button>
+                        <span className="plus-minus">-</span></button>
                     </div>
                 </div>
             </>
