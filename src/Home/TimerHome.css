@@ -1,3 +1,25 @@
+.trashIcon {
+    width: 22px;
+    height: 22px;
+    float: right;
+    padding-right: 4px;
+    cursor: pointer;
+}
+
+.trashIcon:hover {
+    opacity: 0.5;
+}
+
+.project-list-name {
+    display: inline;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.project-list-item {
+    padding-bottom: 14px;
+}
+
 .break-clickable {
     text-decoration: underline;
     cursor: pointer;

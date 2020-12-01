@@ -20,6 +20,7 @@ class BarChart extends Component {
     let todayLess5 = moment().subtract(5, 'days').format("ddd, MMM Do")
     let todayLess6 = moment().subtract(6, 'days').format("ddd, MMM Do")
     let days = [todayLess6, todayLess5, todayLess4, todayLess3, todayLess2, todayLess1, today]
+    
 
     this.state = {
 
@@ -37,7 +38,16 @@ class BarChart extends Component {
       },
       options: {
         dataLabels: {
-          enabled: true
+          offsetY: 10,
+          style: {
+            fontSize: '12px',
+          },
+        //   formatter: function (value, opts) {
+        //     const minutes = (value % 60 === 0) ? "" : value % 60 + ""
+        //     return (Math.floor(value/60) > 0) ? "0" +Math.floor(value / 60) + ":" + minutes :  minutes
+        // },
+          enabled: true,
+         
         },
         stroke: {
           curve: 'straight'
@@ -73,14 +83,34 @@ class BarChart extends Component {
         },
         xaxis: {
           labels: {
-            rotate: -45
+            rotate: -45,
+            style: {
+              colors: "#ffffff"
+          }
           },
           tickPlacement: 'on'
         },
         yaxis: {
+        tickAmount: 5,
+        max: 60 * 5, 
+          // max: (max) => { return (Math.floor(max / 60) * 60) + 30},
+          // forceNiceScale: true,
+          labels: {
+            tickAmount: 4,
+            style: {
+              colors: "#ffffff"
+          },
 
+          formatter: (value) => { 
+            const minutes = (value % 60 === 0) ? "" : value % 60 + "m"
+            return (Math.floor(value/60) > 0) ? Math.floor(value / 60) + "h " + minutes : minutes
+            }
+          },
           title: {
-            text: 'Focus Time (in minutes)'
+            style: {
+              color: "#ffffff"
+          },
+            text: 'Time in Minutes'
           },
 
         }
@@ -114,13 +144,28 @@ class BarChart extends Component {
     let headline = "This Week: " + hours + " hours and " + minutes + " Minutes"
     let data = []
     for (var key in week) {
-      data.push({ x: key, y: week[key] })
+
+      let formattedDate;
+      if((moment().format('dddd') ===  moment(key, "ddd, MMM Do").format('dddd'))){
+        formattedDate = "Today"
+      }else if((moment().subtract('days', 1).format('dddd') ===  moment(key, "ddd, MMM Do").format('dddd'))){
+      formattedDate = "Yesterday"
+    }else{
+      formattedDate = moment(key, "ddd, MMM Do").format('dddd')
+    }
+       
+      
+      
+      
+
+      data.push({ x: formattedDate, y: week[key] })
     }
 
     let timeData = {
+ 
       displayTime: headline,
       series: [{
-        name: 'Focus Time',
+        name: 'Time',
         data: data
       }]
 
@@ -135,8 +180,8 @@ class BarChart extends Component {
     let timeData = this.getSeries(this.context.tasks)
     return (
       <div className="app">
-        <h1 className="tracking-header">Tracking</h1>
-        <h2 className="tracking-subheader">{this.props.headline} - {timeData.displayTime}</h2>
+        <h2 className="tracking-header">All Tasks</h2>
+        <h2 className="tracking-subheader">{timeData.displayTime}</h2>
         <div className="row-">
           <div className="mixed-chart">
             <Chart

@@ -3,11 +3,12 @@
 }
 
 .tracking-header {
-    text-align: center;
+    padding-left: 50px;
     color: white;
 }
 
 .tracking-subheader {
+    padding-left: 50px;
     color: white;
-    text-align: center;
+    /* text-align: center; */
 }

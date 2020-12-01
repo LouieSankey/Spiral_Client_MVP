@@ -9,7 +9,6 @@ import moment from 'moment'
 
 export default class Tracking extends Component {
 
-
   state = {
     tasks: null,
     sortedTasks: [],
@@ -17,7 +16,6 @@ export default class Tracking extends Component {
     currentProject: {},
 
   }
-
 
   static contextType = ApiContext;
 
@@ -105,11 +103,16 @@ export default class Tracking extends Component {
 
     return (
       <ApiContext.Provider value={value}>
+
         <div className="tracking-container">
+          <div className="projects-dropdown">
+        <Dropdown className='dropdown' options={this.getProjectNames(projects)} onChange={this.sortTasks} value={currentProject.project} placeholder="Select an option" />
+        </div>
           <BarChart headline={this.state.projectName ? this.state.projectName : currentProject.project}>
           </BarChart>
-          <Dropdown className='dropdown' options={this.getProjectNames(projects)} onChange={this.sortTasks} value={currentProject.project} placeholder="Select an option" />
+          <div className="timeframe-dropdown">
           <Dropdown className='dropdown' options={['This Week']} onChange={this._onSelect} value={"This Week"} placeholder="Select an option" />
+          </div>
           <Grid></Grid>
         </div>
       </ApiContext.Provider>

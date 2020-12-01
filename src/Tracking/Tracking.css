@@ -3,12 +3,52 @@
 }
 
 .dropdown {
-    width: 200px;
+    width: 100%;
+}
+
+.projects-dropdown>.Dropdown-root>.Dropdown-control>.Dropdown-placeholder>.Dropdown-arrow {
+    display: none;
+}
+
+.Dropdown-menu {
+    width: 250px;
+}
+
+.projects-dropdown>.Dropdown-root>.Dropdown-control {
+    margin-top: 20px;
+    padding: 14px 0px 0px 0px;
+    text-align: center;
+    margin-right: 10px;
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+    width: 180px;
+    height: 55px;
+    float: right;
+}
+
+.projects-dropdown>.Dropdown-root>.Dropdown-menu {
+    right: 0;
+    background-color: black;
+    max-height: 400px;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+
+.projects-dropdown>.Dropdown-root>.Dropdown-menu>.Dropdown-option {
+    color: white;
+}
+
+.timeframe-dropdown>.Dropdown-root>.Dropdown-control {
+    width: 250px;
 }
 
 .tracking-header {
     margin-top: 0px;
 }
+
+.tracking-subheader {}
 
 @media screen and (max-width: 768px) {
     .Dropdown-control {

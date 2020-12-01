@@ -1,6 +1,7 @@
 import React from 'react'
 import ApiContext from '../../ApiContext'
 import '../MainRectangle/MainRectangle.css'
+const trash = require('../../Img/trash.png')
 
 class AllProjectsModal extends React.Component {
 
@@ -8,6 +9,10 @@ class AllProjectsModal extends React.Component {
   
   setCurrentProject(project) {
     this.context.setCurrentProject(project)
+  }
+
+  deleteProject(project){
+    console.log(project)
   }
 
   render() {
@@ -21,7 +26,9 @@ class AllProjectsModal extends React.Component {
             <h3>Current Project: {this.context.currentProject && this.context.currentProject.project}</h3>
             <ul className="projects-list">
               {projects.map((project, i) =>
-                <li key={i}><p className="underlined" onClick={() => { this.setCurrentProject(project); this.props.handleClose(); }}>{project.project}</p></li>
+                <li className="project-list-item" key={i}><p className="project-list-name" onClick={() => { this.setCurrentProject(project); this.props.handleClose(); }}>{project.project} </p>
+                <img className="trashIcon" onClick={() => this.deleteProject(project)} src={trash} alt="a button to delete the corresponding project"/>
+                </li>
               )}
 
             </ul>
