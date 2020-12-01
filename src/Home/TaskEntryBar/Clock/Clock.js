@@ -85,7 +85,7 @@ function Countdown(props) {
           playBark()
           timer.showToolbar = false
           if (timer.cycle !== 0) {
-            props.updateDB(timer.cycle)
+            
           }
           timer.onBreak = false
         } else {
