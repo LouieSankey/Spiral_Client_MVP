@@ -101,6 +101,7 @@ a {
     z-index: 900;
     font-size: 20px;
     cursor: pointer;
+    left: 0px;
     background-color: transparent;
     color: white;
     height: 40px;
@@ -129,6 +130,10 @@ a {
     /* padding: 20px; */
 }
 
+#mySidebar {
+    z-index: 9000;
+}
+
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 
@@ -152,8 +157,5 @@ a {
     }
     .body-margin-left {
         margin-left: 0px !important;
-    }
-    #mySidebar {
-        z-index: 9000;
     }
 }

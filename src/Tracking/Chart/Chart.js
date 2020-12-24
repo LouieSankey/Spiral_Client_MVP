@@ -3,7 +3,8 @@ import Chart from "react-apexcharts";
 import ApiContext from '../../ApiContext'
 import moment from 'moment'
 import './Chart.css'
-
+import { FormatTrackingHeader } from '../helper'
+ 
 
 class BarChart extends Component {
 
@@ -139,9 +140,7 @@ class BarChart extends Component {
     })
   }
 
-    var hours = Math.floor(totalTime / 60);
-    var minutes = totalTime % 60;
-    let headline = "This Week: " + hours + " hours and " + minutes + " Minutes"
+
     let data = []
     for (var key in week) {
 
@@ -153,17 +152,13 @@ class BarChart extends Component {
     }else{
       formattedDate = moment(key, "ddd, MMM Do").format('dddd')
     }
-       
       
-      
-      
-
       data.push({ x: formattedDate, y: week[key] })
     }
 
     let timeData = {
  
-      displayTime: headline,
+      displayTime: FormatTrackingHeader(totalTime),
       series: [{
         name: 'Time',
         data: data
@@ -173,15 +168,14 @@ class BarChart extends Component {
     return timeData
   }
 
-  
 
   render() {
 
     let timeData = this.getSeries(this.context.tasks)
     return (
       <div className="app">
-        <h2 className="tracking-header">All Tasks</h2>
-        <h2 className="tracking-subheader">{timeData.displayTime}</h2>
+     
+        {/* <h2 className="tracking-subheader">{timeData.displayTime}</h2> */}
         <div className="row-">
           <div className="mixed-chart">
             <Chart
@@ -189,7 +183,7 @@ class BarChart extends Component {
               series={timeData.series}
               type="bar"
               width="98%"
-              height="320px"
+              height="380px"
             />
 
           </div>

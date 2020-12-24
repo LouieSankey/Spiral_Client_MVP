@@ -146,7 +146,7 @@ class Splash extends Component {
                 }
 
                 <h1 className="spiral-productivity">Spiral</h1>
-                <p className="p-large">Spiral is a mindfulness tool for office work with built in time tracking and break taking reminders. </p>
+                <p className="p-large">Spiral is a time-tracking meets mindfulness app with  built in break taking reminders. </p>
                 <button className="splash-button" onClick={this.handleOpenModal}>SIGN UP</button>
               </div>
               <div className="align-right">
@@ -192,8 +192,8 @@ class Splash extends Component {
         
           <div className="third-section">
             <div className="centered-text">
-              <h2 className="spiral-diff">Backed by Science (and Sacred Geometry)</h2>
-              <p className="p-heading">As the time it takes to complete a task grows, small additions in time become less consequential (think 1 minute added to 5 minutes, vs 1 minute added to an hour). This is described by a scientific principal know as Webber's Law.</p>
+              <h2 className="spiral-diff">Based on a Scientific Principal</h2>
+              <p className="p-heading">As the time it takes to complete a task grows, small additions in time become less consequential (think 1 minute added to 5 minutes, vs 1 minute added to an hour). This is described by a principal know as Webber's Law.</p>
             </div>
             <div className="two-column-split">
               <div className="align-left">
@@ -222,10 +222,11 @@ class Splash extends Component {
             </div>
          
           </div>
+          <br/><br/>
 
           {/* <div className="second-section">
             <div className="centered-text">
-              <h2 className="fails-for"> Why Traditional "Stop Watch Style" Time Tracking Fails. </h2>
+              <h2 className="fails-for">Why Not Use Traditional Time Tracking? </h2>
             </div>
             <div className="row">
               <div className="col centered-text">

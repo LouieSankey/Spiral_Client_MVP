@@ -75,7 +75,7 @@ const isSplashPage = (window.location.pathname === "/Spiral" || window.location.
 
           {isSplashPage ? null : <> 
             <div id="mySidebar" className={`sidebar ${this.state.isSidebarVisible ? "sidebar-visible" : ""}`}>
-            <a class="closebtn" onClick={this.ToggleSidebar}>&times;</a>
+            <a className="closebtn" onClick={this.ToggleSidebar}>&times;</a>
             
             <div className="sidebar-content">
             <h1 className="spiral-sidebar-logo">Spiral</h1>
@@ -85,7 +85,7 @@ const isSplashPage = (window.location.pathname === "/Spiral" || window.location.
 
             <ul className={"nav-links show-nav"}>
               <li> <Link  to="/">Timer</Link></li>
-              <li> <Link  to="/tracking">Tracking</Link></li>
+              <li> <Link  to="/tracking">Insights</Link></li>
               <li> <Link onClick={() => {this.props.logout(); this.ToggleSidebar()}} to="/spiral" >Log Out</Link></li>
             </ul>
           

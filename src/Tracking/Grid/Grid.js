@@ -28,13 +28,16 @@ class Grid extends Component {
     render() {
         return (
             <>
+            <div className="grid-container">
                 <div
                     className="ag-theme-balham"
-                    style={{ height: '220px', width: '100%' }}>
+                    style={{ height: '370px', width: '100%' }}>
                     <AgGridReact
                         columnDefs={this.state.columnDefs}
                         rowData={this.context.tasks}>
                     </AgGridReact>
+                </div>
+
                 </div>
 
             </>
