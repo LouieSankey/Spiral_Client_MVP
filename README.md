@@ -9,7 +9,6 @@ Live App: https://spiral-ebon.vercel.app/
 
 Use Spiral while doing computer work to help you stay on track, take better breaks, and avoid burnout. 
 
-![spiral-2](https://user-images.githubusercontent.com/8163492/106219400-1c1f5d80-618e-11eb-9301-a90ee77d4ffc.png)
-
+![spiral-2](https://user-images.githubusercontent.com/8163492/106219716-d4e59c80-618e-11eb-8f69-dd797c7d8519.png)
 
 Client MVP built with React, Javascript, JSX, and Apex Charts
