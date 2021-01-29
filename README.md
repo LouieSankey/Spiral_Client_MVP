@@ -1,6 +1,6 @@
 ![spiral-icon](https://user-images.githubusercontent.com/8163492/106222026-85ee3600-6193-11eb-808b-e01853c7bf3b.png)
 
-Spiral - Mindfulness. Time Tracking. Productivity.
+Spiral - Mindfulness, Productivity.
 
 Client MVP built with React, Javascript, JSX, and Apex Charts
 
