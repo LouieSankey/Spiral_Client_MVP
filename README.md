@@ -1,7 +1,5 @@
 Spiral Productivity
-
 Copyright 2020 
-
 All Rights Reserved
 
 Spiral combines an Agile time estimation strategy with the utility of a pomodoro timer to give you an incredibly simple all in one time management tool. Make a time estimation for your task, enter a note for tracking, then let Spiral take care of the rest.
