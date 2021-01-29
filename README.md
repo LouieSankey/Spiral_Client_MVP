@@ -22,3 +22,4 @@ Use Spiral while studying, doing computer work, or even during household chores 
 
 Copyright 2020 
 All Rights Reserved
+ 
