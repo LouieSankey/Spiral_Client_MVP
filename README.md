@@ -1,4 +1,4 @@
-![spiral-app-icon](https://user-images.githubusercontent.com/8163492/106221168-ebd9be00-6191-11eb-8166-a2e281606788.png)
+![spiral-app-icon](https://user-images.githubusercontent.com/8163492/106221338-50951880-6192-11eb-9091-2494b8b4f4ea.png)
 
 Spiral Productivity
 Copyright 2020 
