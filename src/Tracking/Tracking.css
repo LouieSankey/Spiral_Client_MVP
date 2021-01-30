@@ -109,6 +109,11 @@
     width: 180px;
     height: 55px;
     float: right;
+    cursor: pointer;
+}
+
+.projects-dropdown>.Dropdown-root>.Dropdown-control:hover {
+    background-color: rgb(34, 34, 34)
 }
 
 .projects-dropdown>.Dropdown-root>.Dropdown-menu {

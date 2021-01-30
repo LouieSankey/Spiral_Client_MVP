@@ -158,9 +158,7 @@ export default class Tracking extends Component {
     <h1 className="bar-chart-header">Selected Task: {this.state.currentTaskName} </h1>
             <select name="timeframe" className="timeframe">
               <option value="today">This Week:</option>
-              <option value="week">This Week:</option>
-              <option value="month">This Month:</option>
-              <option value="all time">This Year:</option>
+    
             </select>
 
             <h2 className="bar-chart-sub-header">{this.state.taskTimeHeader}</h2>
@@ -168,12 +166,13 @@ export default class Tracking extends Component {
 
           <PieChart data={this.state.sortedProjectTasks} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
   
-         <h2 className="tracking-header">{`Daily Breakdown of "` + this.state.currentTaskName +  `" - this week`}</h2>
+         <h2 className="tracking-header">{`Daily Breakdown of "` + this.state.currentTaskName +  `" - This Week`}</h2>
           <BarChart  headline={this.state.projectName ? this.state.projectName : currentProject.project}>
           </BarChart>
           <h2 className="edit-label">Edit Task</h2>
           <Grid></Grid>
-          <p className="delete-project">Delete Project</p>
+          <br></br>
+          <p className="delete-project"></p>
         </div>
       </ApiContext.Provider>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Splash.css'
 import fibSpiral from '../Img/55golden.png'
-import spiralIcon from '../Img/spiral-icon.png'
+import spiralIcon from '../Img/Spiral-rotated.png'
 import { Redirect, withRouter } from 'react-router-dom'
 import ApiContext from '../ApiContext';
 import ApiServices from '../api-services'
@@ -68,7 +68,6 @@ class Splash extends Component {
           this.setState({
             incorrect_password: true
           })
-          console.log("incorrect password")
         } else {
           console.error({ error })
         }
@@ -114,7 +113,6 @@ class Splash extends Component {
             ApiServices.createUserPrefs(userPrefs)
               .then(userPrefs => {
                 localStorage.setItem("account_id", account.id)
-                console.log("posted user prefs to db: " + JSON.stringify(userPrefs))
                 this.context.handleAPIRequest(account.id)
                 this.setRedirect()
               }).catch(error => {
@@ -145,15 +143,41 @@ class Splash extends Component {
                   </LoginModal>
                 }
 
-                <h1 className="spiral-productivity">Spiral</h1>
-                <p className="p-large">Spiral is a time-tracking meets mindfulness app with  built in break taking reminders. </p>
+                <img className="spiral-text-logo" src={require("../Img/spiral-text-logo.png")} alt=""/>
+                <p className="p-large">Spiral is time tracking wrapped up in a mediation app. </p>
                 <button className="splash-button" onClick={this.handleOpenModal}>SIGN UP</button>
               </div>
               <div className="align-right">
                 <div className="intro-image">
                   <div className="img-wrapper">
-                    <img className="galexy-image" src={require('../Img/splashspiral.png')} alt="a spiral galexy"></img>
+                    <img className="galexy-image" src={require('../Img/spiral-mockup.png')} alt="a spiral galexy"></img>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="second-section">
+            <div className="centered-text">
+              <h2 className="fails-for">Traditional 'Stop Watch Style' Time Tracking has 3 Problems.</h2>
+            </div>
+            <div className="row">
+              <div className="col centered-text">
+                <div className="inner">
+                  <h3 className="card-title">Unbounded Timeframes</h3>
+                  <p>No thought is given upfront to how long a task should take so it may drag on far longer than intended.</p>
+                </div>
+              </div>
+              <div className="col centered-text">
+                <div className="inner">
+                  <h3 className="card-title">Poor Incentives</h3>
+                  <p>The longer you take on a task, the more productive it looks in terms of time tracking, i.e. "Wow, you spent a lot of time on that."</p>
+                </div>
+              </div>
+              <div className="col centered-text">
+                <div className="inner">
+                  <h3 className="card-title">Tedious to Use</h3>
+                  <p>There's no positive rewards cycle, so using it feels more like a chore than a productivity boost. </p>
                 </div>
               </div>
             </div>
@@ -161,7 +185,7 @@ class Splash extends Component {
 
           <div className="two-column-split benefits">
               <div className="align-left">
-                <h2 className="spiral-diff">Productivity Benefits</h2>
+                <h2 className="spiral-diff">The Spiral Difference</h2>
                 <h3>Spiral improves your productivity by:</h3>
                 <ul className="bullet-list">
                   <li className="bullet">
@@ -171,7 +195,7 @@ class Splash extends Component {
                     <div>Adding a time factor that encourages you to move through tasks more quickly.</div>
                   </li>
                   <li className="bullet">
-                    <div>Helping you break apart difficult or tedius tasks.</div>
+                    <div>Helping you break apart difficult or tedious tasks.</div>
                   </li>
                   <li className="bullet">
                     <div>Providing no hassle time tracking.</div>
@@ -192,7 +216,7 @@ class Splash extends Component {
         
           <div className="third-section">
             <div className="centered-text">
-              <h2 className="spiral-diff">Based on a Scientific Principal</h2>
+              <h2 className="spiral-diff">Based on a Webber's Law</h2>
               <p className="p-heading">As the time it takes to complete a task grows, small additions in time become less consequential (think 1 minute added to 5 minutes, vs 1 minute added to an hour). This is described by a principal know as Webber's Law.</p>
             </div>
             <div className="two-column-split">
@@ -210,7 +234,7 @@ class Splash extends Component {
                     <div>For small tasks (like writing a thank you email, for example) you can decide how long to give yourself with more fine grained control, i.e. minute values 3, 5 and 8. </div>
                   </li>
                   <li className="bullet">
-                    <div>While for larger tasks (like writting an estimate for a client) you can choose from larger values with more differentiation, i.e. 21, 34, or 55.</div>
+                    <div>While for larger tasks (like writing an estimate for a client) you can choose from larger values with more differentiation, i.e. 21, 34, or 55.</div>
                   </li>
                   <li >
                     <div className="bullet">How you break apart your work for maximum benefit is up to you!</div>
@@ -224,31 +248,7 @@ class Splash extends Component {
           </div>
           <br/><br/>
 
-          {/* <div className="second-section">
-            <div className="centered-text">
-              <h2 className="fails-for">Why Not Use Traditional Time Tracking? </h2>
-            </div>
-            <div className="row">
-              <div className="col centered-text">
-                <div className="inner">
-                  <h3 className="card-title">Unbounded Timeframes</h3>
-                  <p>No thought is given upfront to how long a task should take. You may even forget to stop the clock when your task is finished!</p>
-                </div>
-              </div>
-              <div className="col centered-text">
-                <div className="inner">
-                  <h3 className="card-title">Poor Incentives</h3>
-                  <p>The longer you take on a task, the more productive it looks in terms of time tracking, i.e. "Wow, you spent a lot of time on that!"</p>
-                </div>
-              </div>
-              <div className="col centered-text">
-                <div className="inner">
-                  <h3 className="card-title">Tedious to Use</h3>
-                  <p>There's no positive rewards cycle, so using it feels more like a chore than a productivity boost. </p>
-                </div>
-              </div>
-            </div>
-          </div> */}
+        
         </div>
       </>
     );

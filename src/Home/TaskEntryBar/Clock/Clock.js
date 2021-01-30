@@ -202,16 +202,16 @@ function Countdown(props) {
       <div className="toolbar-container">
         <div className={`toolbar-icons ${props.taskBarOpen ? "taskbar-open" : ""}`}>
           <i className="tooltip"><Stop className="toolbar-icon" onClick={handleStop}></Stop>
-            <span class="tooltiptext">Stop</span></i>
+            <span className="tooltiptext">Stop</span></i>
             {!timer.isPaused ?
             <i className="tooltip pause"><PausePresentation className="toolbar-icon" onClick={handlePause}></PausePresentation>
-              <span class="tooltiptext pause-tooltip">Pause</span></i>
+              <span className="tooltiptext pause-tooltip">Pause</span></i>
             :
             <i className="tooltip pause"><PlayCircleOutline className="toolbar-icon" onClick={handleStart}></PlayCircleOutline>
-              <span class="tooltiptext">Start</span></i>
+              <span className="tooltiptext">Start</span></i>
           }
           <i className="tooltip"><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext>
-            <span class="tooltiptext">Skip to Break</span></i>
+            <span className="tooltiptext">Skip to Break</span></i>
          
         </div>
       </div>

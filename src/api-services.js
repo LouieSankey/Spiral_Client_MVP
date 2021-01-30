@@ -61,9 +61,6 @@ createAccount(account) {
             return res.json().then(e => Promise.reject(e))
         return res.json()
         })
-        .then(task => {
-        console.log("posted task to db: " + JSON.stringify(task))
-        })
         .catch(error => {
         console.error({ error })
         })

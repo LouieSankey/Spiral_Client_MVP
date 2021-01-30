@@ -6,6 +6,11 @@
     display: none;
 }
 
+.spiral-text-logo {
+    width: 180px;
+    margin-top: 40px;
+}
+
 .login-modal_facebookBtnBg__ecXHz,
 .login-modal_googleBtnBg__qz2el,
 .login-modal_lineTextHolder__2Jj7U {
@@ -24,7 +29,7 @@
 
 .fails-for {
     font-size: 30px;
-    margin-top: 100px;
+    padding-top: 100px;
     margin-left: 60px;
     margin-right: 60px;
 }
@@ -49,6 +54,7 @@
 }
 
 .p-large {
+    margin-top: 0px;
     font-size: 18px;
 }
 
@@ -110,7 +116,7 @@
 }
 
 .splash-button {
-    background-color: #5f4dee;
+    background-color: #2B3E7C;
     border-radius: 2rem;
     border: none;
     padding: 20px;
@@ -127,7 +133,8 @@
 }
 
 .second-section {
-    margin-bottom: 100px;
+    padding-bottom: 100px;
+    background-color: #f2f7fd;
 }
 
 .third-section {
@@ -179,7 +186,7 @@ ul {
         margin-left: 8px;
     }
     .fails-for {
-        margin-top: 60px;
+        padding-top: 60px;
     }
     .fails-for,
     .p-heading {

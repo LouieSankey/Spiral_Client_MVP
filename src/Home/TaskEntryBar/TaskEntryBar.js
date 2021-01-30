@@ -85,7 +85,7 @@ export default class TaskEntryBar extends Component {
           } */}
 
             <div>
-              <label for="taskInput" className="task-name"  alt="an input for tracking to provide a name for your current task"></label>
+              <label htmlFor="taskInput" className="task-name"  alt="an input for tracking to provide a name for your current task"></label>
               <input className="taskInput" name="taskInput" id="taskInput" ref={this.taskInput} onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="Task Name" onFocus={(event) => event.target.select()} ></input>
               <div><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
             </div>

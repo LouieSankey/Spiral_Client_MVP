@@ -12,7 +12,6 @@ class AllProjectsModal extends React.Component {
   }
 
   deleteProject(project){
-    console.log(project)
   }
 
   render() {

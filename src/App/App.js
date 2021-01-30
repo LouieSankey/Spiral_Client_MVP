@@ -97,7 +97,7 @@ class App extends Component {
         <Route
           path='/spiral'
           component={Splash} />
-          
+
         <Route path="/tracking">
           <Tracking />
         </Route>
@@ -111,9 +111,6 @@ class App extends Component {
   }
 
   Logout = () => {
-    // console.log("margin removed")
-    // document.body.classList.add('body-margin-left-none')
-    // document.body.classList.remove('body-margin-left')
 
     localStorage.setItem("account_id", null)
     this.setState({
@@ -172,9 +169,9 @@ class App extends Component {
     return (
       <ApiContext.Provider value={value}>
 
-        
 
-          <Sidebar logout={this.Logout}></Sidebar>
+
+        <Sidebar logout={this.Logout}></Sidebar>
 
         {this.renderMainRoutes()}
       </ApiContext.Provider>

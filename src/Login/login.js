@@ -57,9 +57,9 @@ LoginModal.defaultProps = {
   disabledButtonColor: "#a8b1d6",
   fontFamily: "Nunito, Roboto, Arial, sans-serif",
   errorMessage: "Username or password is incorrect❓",
-  handleLogin: () => console.log('handle login'),
-  handleSignup: () => console.log('handle signup'),
-  handleClose: () => console.log("handle close"),
+  handleLogin: () => {},
+  handleSignup: () => {},
+  handleClose: () => {},
   showPasswordError: false,
   errorEnable: false
 };
