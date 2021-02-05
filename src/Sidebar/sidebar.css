@@ -94,6 +94,54 @@ a {
     margin-left: 50px;
 }
 
+.closebtn {
+    cursor: pointer;
+}
+
+.spiral-text-logo-small {
+    width: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.accordion {
+    border: solid 1px rgb(31, 31, 31);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0px;
+    margin-left: -10px;
+    padding-left: 10px;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+    transition: 0.2s;
+}
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+
+/* Style the accordion panel. Note: hidden by default */
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
 
 /* The button used to open the sidebar */
 

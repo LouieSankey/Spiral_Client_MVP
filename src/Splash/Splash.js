@@ -159,13 +159,13 @@ class Splash extends Component {
 
           <div className="second-section">
             <div className="centered-text">
-              <h2 className="fails-for">Traditional 'Stop Watch Style' Time Tracking has 3 Problems.</h2>
+              <h2 className="fails-for">Traditional 'Stop Watch Style' Time Tracking Falls Short for Three Reasons.</h2>
             </div>
             <div className="row">
               <div className="col centered-text">
                 <div className="inner">
                   <h3 className="card-title">Unbounded Timeframes</h3>
-                  <p>No thought is given upfront to how long a task should take so it may drag on far longer than intended.</p>
+                  <p>No thought is given upfront to how long a task should take, which can lead to it dragging out longer than necessary.</p>
                 </div>
               </div>
               <div className="col centered-text">
@@ -216,7 +216,7 @@ class Splash extends Component {
         
           <div className="third-section">
             <div className="centered-text">
-              <h2 className="spiral-diff">Based on a Webber's Law</h2>
+              <h2 className="spiral-diff">Based on Webber's Law</h2>
               <p className="p-heading">As the time it takes to complete a task grows, small additions in time become less consequential (think 1 minute added to 5 minutes, vs 1 minute added to an hour). This is described by a principal know as Webber's Law.</p>
             </div>
             <div className="two-column-split">

@@ -4,7 +4,7 @@ import ApiContext from '../../ApiContext'
 import moment from 'moment'
 import './Chart.css'
 import { FormatTrackingHeader } from '../helper'
- 
+
 
 class BarChart extends Component {
 
@@ -21,7 +21,7 @@ class BarChart extends Component {
     let todayLess5 = moment().subtract(5, 'days').format("ddd, MMM Do")
     let todayLess6 = moment().subtract(6, 'days').format("ddd, MMM Do")
     let days = [todayLess6, todayLess5, todayLess4, todayLess3, todayLess2, todayLess1, today]
-    
+
 
     this.state = {
 
@@ -39,16 +39,20 @@ class BarChart extends Component {
       },
       options: {
         dataLabels: {
+         
           offsetY: 10,
+          
+          formatter: (value) => {
+              //  return value + "m"
+            const minutes = (value % 60 === 0) ? "" : value % 60 + "m"
+            return (Math.floor(value / 60) > 0) ? Math.floor(value / 60) + "h " + minutes : minutes
+          },
           style: {
             fontSize: '12px',
           },
-        //   formatter: function (value, opts) {
-        //     const minutes = (value % 60 === 0) ? "" : value % 60 + ""
-        //     return (Math.floor(value/60) > 0) ? "0" +Math.floor(value / 60) + ":" + minutes :  minutes
-        // },
+
           enabled: true,
-         
+
         },
         stroke: {
           curve: 'straight'
@@ -87,31 +91,32 @@ class BarChart extends Component {
             rotate: -45,
             style: {
               colors: "#ffffff"
-          }
+            }
           },
           tickPlacement: 'on'
         },
         yaxis: {
-        tickAmount: 5,
-        max: 60 * 5, 
+          tickAmount: 5,
+          max: 60 * 5,
           // max: (max) => { return (Math.floor(max / 60) * 60) + 30},
           // forceNiceScale: true,
           labels: {
             tickAmount: 4,
             style: {
               colors: "#ffffff"
-          },
+            },
 
-          formatter: (value) => { 
-            const minutes = (value % 60 === 0) ? "" : value % 60 + "m"
-            return (Math.floor(value/60) > 0) ? Math.floor(value / 60) + "h " + minutes : minutes
+            formatter: (value) => {
+           
+              const minutes = (value % 60 === 0) ? "" : value % 60 + "m"
+              return (Math.floor(value / 60) > 0) ? Math.floor(value / 60) + "h " + minutes : minutes
             }
           },
           title: {
             style: {
               color: "#ffffff"
-          },
-            text: 'Time in Minutes'
+            },
+            text: ''
           },
 
         }
@@ -131,33 +136,33 @@ class BarChart extends Component {
 
     let totalTime = 0
 
-    if(tasks){
-    tasks.forEach(task => {
-      if (task.day in week) {
-        week[task.day] += task.cycle
-        totalTime += task.cycle
-      }
-    })
-  }
+    if (tasks) {
+      tasks.forEach(task => {
+        if (task.day in week) {
+          week[task.day] += task.cycle
+          totalTime += task.cycle
+        }
+      })
+    }
 
 
     let data = []
     for (var key in week) {
 
       let formattedDate;
-      if((moment().format('dddd') ===  moment(key, "ddd, MMM Do").format('dddd'))){
+      if ((moment().format('dddd') === moment(key, "ddd, MMM Do").format('dddd'))) {
         formattedDate = "Today"
-      }else if((moment().subtract('days', 1).format('dddd') ===  moment(key, "ddd, MMM Do").format('dddd'))){
-      formattedDate = "Yesterday"
-    }else{
-      formattedDate = moment(key, "ddd, MMM Do").format('dddd')
-    }
-      
+      } else if ((moment().subtract('days', 1).format('dddd') === moment(key, "ddd, MMM Do").format('dddd'))) {
+        formattedDate = "Yesterday"
+      } else {
+        formattedDate = moment(key, "ddd, MMM Do").format('dddd')
+      }
+
       data.push({ x: formattedDate, y: week[key] })
     }
 
     let timeData = {
- 
+
       displayTime: FormatTrackingHeader(totalTime),
       series: [{
         name: 'Time',
@@ -174,8 +179,7 @@ class BarChart extends Component {
     let timeData = this.getSeries(this.context.tasks)
     return (
       <div className="app">
-     
-        {/* <h2 className="tracking-subheader">{timeData.displayTime}</h2> */}
+
         <div className="row-">
           <div className="mixed-chart">
             <Chart

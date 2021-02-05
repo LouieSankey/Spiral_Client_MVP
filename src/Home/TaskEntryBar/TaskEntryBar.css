@@ -3,9 +3,11 @@
     }
     
     #folder {
+        font-family: inherit;
+        outline: none;
         float: right;
         position: relative;
-        top: 18px;
+        top: 20px;
         margin-right: 10px;
         cursor: pointer;
         width: 180px;
@@ -152,15 +154,16 @@
     }
     
     .modal-main {
+        padding: 14px;
         z-index: 9999;
-        top: 76px;
+        top: 74px;
         position: absolute;
         background: #296e90f1;
         /* border-style: solid; */
         border-radius: 15px;
         width: 196px;
         height: auto;
-        right: 10px;
+        right: 9px;
         color: white;
         border: solid 1px;
     }

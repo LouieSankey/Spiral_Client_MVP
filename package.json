@@ -30,6 +30,7 @@
         "react-login-modal": "^1.2.1",
         "react-login-modal-sm": "^1.0.8",
         "react-modal-login": "^1.4.5",
+        "react-pro-sidebar": "^0.5.0",
         "react-render-html": "^0.6.0",
         "react-router-dom": "^5.2.0",
         "react-scripts": "3.4.3",

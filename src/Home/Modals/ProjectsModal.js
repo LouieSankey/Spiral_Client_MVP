@@ -20,7 +20,7 @@ class AllProjectsModal extends React.Component {
     return (
       <div className={showHideClassName}>
         <section className="modal-main">
-          <button className="modal-close-button" onClick={this.props.handleClose}>x</button>
+          {/* <button className="modal-close-button" onClick={this.props.handleClose}>x</button> */}
           <div className="modal-content">
             <h3>Current Project: {this.context.currentProject && this.context.currentProject.project}</h3>
             <ul className="projects-list">

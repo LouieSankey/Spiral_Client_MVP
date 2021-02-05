@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Redirect, useLocation, Route, Link, withRouter } from "react-router-dom";
+import React, { Component } from 'react'
+import { BrowserRouter as Redirect, useLocation, Route, Link, withRouter } from "react-router-dom"
 import { FaAlignRight } from 'react-icons/fa';
 import Home from '../Home/TimerHome'
 import Tracking from '../Tracking/Tracking'
@@ -10,6 +10,7 @@ import './App.css'
 import APIService from '../api-services';
 import Sidebar from '../Sidebar/sidebar'
 import '../Sidebar/sidebar.css'
+
 
 
 class App extends Component {
@@ -168,7 +169,6 @@ class App extends Component {
 
     return (
       <ApiContext.Provider value={value}>
-
 
 
         <Sidebar logout={this.Logout}></Sidebar>

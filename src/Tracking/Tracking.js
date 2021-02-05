@@ -8,6 +8,7 @@ import config from '../config'
 import moment from 'moment'
 import PieChart from './PieChart/PieChart'
 import { FormatTrackingHeader } from './helper'
+import APIService from '../api-services'
 
 export default class Tracking extends Component {
 
@@ -17,6 +18,7 @@ export default class Tracking extends Component {
     projects: [],
     currentProject: {},
     sortedProjectTasks: [],
+    tasksForBarChart: [],
     data: [
       { label: "apple", y: 10 },
       { label: "orange", y: 15 },
@@ -68,16 +70,19 @@ export default class Tracking extends Component {
     let projectName = currentProject.value ? currentProject.value : currentProject.id
     let sortedTasks = this.state.tasks.filter(task => task.project === projectName)
 
-    let sortedProjectTime = 0
+
+    let allTasksTime = 0
     sortedTasks.forEach(task => {
-      sortedProjectTime += task.cycle
+      allTasksTime += task.cycle
     })
 
     let sortedProjectTasks = this.filterArrayForPieChart(sortedTasks)
-    
+
     this.setState({
       sortedTasks: this.formatTasks(sortedTasks),
-      taskTimeHeader: FormatTrackingHeader(sortedProjectTime),
+      tasksForBarChart: this.formatTasks(sortedTasks),
+      taskTimeHeader: FormatTrackingHeader(allTasksTime),
+      allTasksTime: allTasksTime,
       selectedProjectName: projectName,
       sortedProjectTasks: this.formatTasks(sortedProjectTasks)
 
@@ -85,28 +90,29 @@ export default class Tracking extends Component {
 
   }
 
-  sortedProjectTasks = () => { return 
+  sortedProjectTasks = () => {
+    return
   }
 
   filterArrayForPieChart = (tasks) => {
 
-		let hash = {}
-		tasks.forEach(task => {
-			if(hash[task.task]){
-				hash[task.task] += task.cycle
-			}else{
-				hash[task.task] = task.cycle
-			}
-		})
-
-		let data = []
-		
-		Object.keys(hash).forEach(key => {
-			data.push({y: hash[key], label: key})
+    let hash = {}
+    tasks.forEach(task => {
+      if (hash[task.task]) {
+        hash[task.task] += task.cycle
+      } else {
+        hash[task.task] = task.cycle
+      }
     })
-    
-		return data
-	}
+
+    let data = []
+
+    Object.keys(hash).forEach(key => {
+      data.push({ y: hash[key], label: key })
+    })
+
+    return data
+  }
 
   formatTasks = (tasks) => {
     tasks.forEach(task => {
@@ -125,27 +131,39 @@ export default class Tracking extends Component {
 
   }
 
+
   onSliceSelected = (event) => {
-    //sets the display header and total task time
+    console.log(this.state.sortedTasks)
 
-      this.setState({
-        currentTaskName: this.state.currentTaskName === event.dataPoint.label 
-        ? "All" 
+    this.setState({
+      tasksForBarChart: this.state.currentTaskName === event.dataPoint.label
+        ? this.state.sortedTasks
+        : this.formatTasks(this.state.sortedTasks.filter(task => task.task === event.dataPoint.label)),
+
+      currentTaskName: this.state.currentTaskName === event.dataPoint.label
+        ? "All"
         : event.dataPoint.label,
-        taskTimeHeader: FormatTrackingHeader(event.dataPoint.y)
 
-      })
+      taskTimeHeader: this.state.currentTaskName === event.dataPoint.label
+        ? FormatTrackingHeader(this.state.allTasksTime)
+        : FormatTrackingHeader(event.dataPoint.y),
 
- 
+    })
+
+  }
+
+  DeleteProject = () => {
+    APIService.deleteProject(this.state.currentProject.id)
+
   }
 
   render() {
     const { projects = [], currentProject = {} } = this.context
     const value = {
 
-      tasks: this.state.sortedTasks,
+      tasks: this.state.tasksForBarChart,
       currentProject: currentProject,
- 
+
     }
 
     return (
@@ -155,24 +173,25 @@ export default class Tracking extends Component {
 
             <Dropdown className='dropdown' options={this.mapProjectsForDropdown(projects)} onChange={this.getTasksForProject} value={currentProject.project} placeholder="Select an option" />
 
-    <h1 className="bar-chart-header">Selected Task: {this.state.currentTaskName} </h1>
+            <h1 className="bar-chart-header">Selected Task: {this.state.currentTaskName} </h1>
             <select name="timeframe" className="timeframe">
               <option value="today">This Week:</option>
-    
+
             </select>
 
             <h2 className="bar-chart-sub-header">{this.state.taskTimeHeader}</h2>
           </div>
 
           <PieChart data={this.state.sortedProjectTasks} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
-  
-         <h2 className="tracking-header">{`Daily Breakdown of "` + this.state.currentTaskName +  `" - This Week`}</h2>
-          <BarChart  headline={this.state.projectName ? this.state.projectName : currentProject.project}>
+
+          <h2 className="tracking-header">{`Daily View (This Week - ${this.state.currentTaskName})`}</h2>
+          <BarChart tasks={this.state.tasksForPieChart} headline={this.state.projectName ? this.state.projectName : currentProject.project}>
           </BarChart>
           <h2 className="edit-label">Edit Task</h2>
           <Grid></Grid>
+
           <br></br>
-          <p className="delete-project"></p>
+          <p onClick={() => this.DeleteProject()} className="delete-project">DELETE PROJECT</p>
         </div>
       </ApiContext.Provider>
     )

@@ -47,6 +47,32 @@ createAccount(account) {
         })
  },
 
+ deleteProject(project_id){
+  return fetch(`${config.API_ENDPOINT}/project/${project_id}`, {
+      method: 'DELETE',
+      // headers: {
+      //   'content-type': 'application/json'
+      // },
+      // body: JSON.stringify(project),
+    })
+      .then(res => {
+        if (!res.ok)
+          return res.json().then(e => Promise.reject(e))
+        return res.json()
+      })
+},
+
+deleteTask(task_id){
+  return fetch(`${config.API_ENDPOINT}/task/${task_id}`, {
+      method: 'DELETE'
+    })
+      .then(res => {
+        if (!res.ok)
+          return res.json().then(e => Promise.reject(e))
+        return res.json()
+      })
+},
+
  postTask(task){
 
     return fetch(`${config.API_ENDPOINT}/task`, {
