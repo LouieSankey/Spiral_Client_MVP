@@ -3,6 +3,7 @@ import React from 'react'
 export default React.createContext({
   project: "",
   tasks: "",
+  tasksRes: [],
   currentProject: {}, 
   chartData: [],
   prefs: {},

@@ -138,9 +138,9 @@
 }
 
 @media screen and (min-width: 768px) {
-    .taskInput {
+    /* .taskInput {
         float: left;
-    }
+    } */
     .display-timer-header {
         margin-top: 40px;
     }

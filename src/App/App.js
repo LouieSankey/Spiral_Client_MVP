@@ -29,31 +29,36 @@ class App extends Component {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/account/${account_id}`),
       fetch(`${config.API_ENDPOINT}/project/account/${account_id}`),
-      fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`)
+      fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`),
+      fetch(`${config.API_ENDPOINT}/task/account/${account_id}`),
     ])
-      .then(([accountRes, projectRes, prefsRes]) => {
+      .then(([accountRes, projectRes, prefsRes, tasksRes]) => {
         if (!accountRes.ok)
           return accountRes.json().then(e => Promise.reject(e))
         if (!projectRes.ok)
           return projectRes.json().then(e => Promise.reject(e))
         if (!prefsRes.ok)
           return prefsRes.json().then(e => Promise.reject(e))
+          if (!tasksRes.ok)
+          return tasksRes.json().then(e => Promise.reject(e))
 
         return Promise.all([
           accountRes.json(),
           projectRes.json(),
-          prefsRes.json()
+          prefsRes.json(),
+          tasksRes.json()
         ])
       })
-      .then(([account, projects, prefsRes]) => {
+      .then(([account, projects, prefsRes, tasksRes]) => {
         for (const key in prefsRes) {
           if (key.charAt(0) === "_") {
             delete Object.assign(prefsRes, { [key.substring(1)]: prefsRes[key] })[key];
           }
         }
 
+
         const currentProject = projects[0]
-        this.setState({ account, projects, prefsRes, account_id, currentProject })
+        this.setState({ account, projects, prefsRes, account_id, currentProject, tasksRes })
       })
       .catch(error => {
         console.error({ error })
@@ -157,6 +162,7 @@ class App extends Component {
     const value = {
       account_id: this.state.account_id,
       account: this.state.account,
+      tasksRes: this.state.tasksRes,
       projects: this.state.projects,
       currentProject: this.state.currentProject,
       prefs: this.state.prefsRes,
@@ -169,10 +175,7 @@ class App extends Component {
 
     return (
       <ApiContext.Provider value={value}>
-
-
         <Sidebar logout={this.Logout}></Sidebar>
-
         {this.renderMainRoutes()}
       </ApiContext.Provider>
 

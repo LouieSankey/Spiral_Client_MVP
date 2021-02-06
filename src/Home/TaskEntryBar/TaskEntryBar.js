@@ -5,6 +5,7 @@ import Clock from './Clock/Clock'
 import folderIcon from '../../Img/folder_icon.png'
 import ApiServices from '../../api-services'
 import { isElementOfType } from 'react-dom/test-utils'
+import config from '../../config'
 
 export default class TaskEntryBar extends Component {
   static defaultProps = {}
@@ -13,8 +14,11 @@ export default class TaskEntryBar extends Component {
   state = {
     showTaskbar: false,
     taskBarCounter: 0,
+    tasks: []
 
   }
+
+ 
 
   constructor(props) {
     super(props);
@@ -24,6 +28,10 @@ export default class TaskEntryBar extends Component {
     this.taskInput = React.createRef();
     this.handleFocus = this.handleFocus.bind(this);
   }
+ 
+ 
+  
+  
 
   handleFocus = event => {
     this.taskInput.current.focus();
@@ -65,10 +73,16 @@ export default class TaskEntryBar extends Component {
     }
   }
 
+ onlyUnique(value, index, self) { 
+   console.log(value)
+    return self.indexOf(value) === index;
+}
+
 
   render() {
     const plusbutton = this.state.showTaskbar ? "-" : "+"
     const projectName = (typeof this.context.currentProject === 'undefined') ? "PROJECT" : this.context.currentProject.project
+    const tasks = (typeof this.context.tasksRes === 'undefined') ? [] : this.context.tasksRes
 
     { this.taskInput.current 
       && this.taskName !== "No Task"
@@ -86,7 +100,20 @@ export default class TaskEntryBar extends Component {
 
             <div>
               <label htmlFor="taskInput" className="task-name"  alt="an input for tracking to provide a name for your current task"></label>
-              <input className="taskInput" name="taskInput" id="taskInput" ref={this.taskInput} onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="Task Name" onFocus={(event) => event.target.select()} ></input>
+              <input list="tasks" autocomplete="off" className="taskInput" name="taskInput" id="taskInput" ref={this.taskInput} onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="Task Name" onFocus={(event) => event.target.select()} ></input>
+              <datalist id="tasks">
+                  {
+       
+                  
+                  
+                  tasks.filter(task => {return task.project === this.context.currentProject.id})
+                  .map(task => {return task.task})
+                  .filter( this.onlyUnique )
+                  .map((task, key) =>
+                    <option key={key} value={task} />
+                  )}
+              </datalist>
+              <hr id="fake-underline"></hr>
               <div><button id="folder" onClick={this.props.showProjectsModal} alt="">{projectName}</button></div>
             </div>
         </div>

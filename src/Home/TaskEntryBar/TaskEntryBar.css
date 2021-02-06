@@ -54,14 +54,11 @@
         border: 0;
         outline: 0;
         background: transparent;
-        border-bottom: 1px solid black;
-        width: 120px;
+        width: 240px;
         font-size: 24px;
         font-family: 'Open Sans Condensed', sans-serif;
         text-align: center;
-        margin-bottom: 40px;
         color: white;
-        border-bottom-color: whitesmoke;
     }
     
      ::placeholder {
@@ -69,6 +66,31 @@
         color: rgba(219, 219, 219, 0.575);
         opacity: 1;
         /* Firefox */
+    }
+    
+    #fake-underline {
+        color: white;
+        padding-right: 20px;
+        width: 120px !important;
+        margin: 0px auto;
+        /* margin-top: 20px; */
+        display: block;
+        margin-bottom: 50px;
+        margin-left: calc(50% - 6px);
+        transform: translateX(-50%);
+    }
+    /* #taskInput {
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: white;
+    } */
+    
+    #taskInput::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+    
+    #taskInput:-webkit-autofill::first-line {
+        font-family: 'Roboto Condensed', sans-serif !important;
+        font-size: 28px !important;
     }
     
     .taskInput:focus::-webkit-input-placeholder {
@@ -222,12 +244,6 @@
     }
     
     @media screen and (max-width: 768px) {
-        /* .modal-main,
-        .add-project-modal-main {
-            top: 90%;
-            left: 0px;
-            width: 300px;
-        } */
         #folder {
             font-size: 18px;
             float: left;
@@ -236,7 +252,7 @@
             width: 180px;
         }
         #folder:hover {
-            background-color: ##447b9c;
+            background-color: #447b9c;
         }
         .taskInput {
             float: none;

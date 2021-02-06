@@ -38,9 +38,17 @@ class BarChart extends Component {
         },
       },
       options: {
+         plotOptions: {
+          bar: {
+            dataLabels: {
+              position: 'top', // top, center, bottom
+            },
+          }
+        },
         dataLabels: {
          
-          offsetY: 10,
+          offsetY: -20,
+          position: 'top', // top, center, bottom
           
           formatter: (value) => {
               //  return value + "m"
