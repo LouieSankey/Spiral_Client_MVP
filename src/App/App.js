@@ -11,8 +11,6 @@ import APIService from '../api-services';
 import Sidebar from '../Sidebar/sidebar'
 import '../Sidebar/sidebar.css'
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +23,18 @@ class App extends Component {
     tasks: []
   }
 
+  //you need to get all the projects to display them in the dropdown no matter what
+  //but the task you only need for the current project (to display in the task bar)
+  //and requrey when project is changed
+  //right now, selecting a task changes how the tasks are filtered here in app.js
+  //it should re-query (remember you're just getting the names but still)
+
   handleAPIRequest = (account_id) => {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/account/${account_id}`),
       fetch(`${config.API_ENDPOINT}/project/account/${account_id}`),
       fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`),
+
       fetch(`${config.API_ENDPOINT}/task/account/${account_id}`),
     ])
       .then(([accountRes, projectRes, prefsRes, tasksRes]) => {

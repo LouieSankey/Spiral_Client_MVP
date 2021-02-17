@@ -165,7 +165,7 @@ class Splash extends Component {
               <div className="col centered-text">
                 <div className="inner">
                   <h3 className="card-title">Unbounded Timeframes</h3>
-                  <p>No thought is given upfront to how long a task should take, which can lead to it dragging out longer than necessary.</p>
+                  <p>No thought is given upfront to how long a task should take, which means some tasks drag on longer than necesary, while others don't get enough focus.</p>
                 </div>
               </div>
               <div className="col centered-text">

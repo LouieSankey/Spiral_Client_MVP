@@ -7,12 +7,20 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJS = CanvasJSReact.CanvasJS;
 
 CanvasJS.addColorSet("colorset1",
+
 [
-	"#1500ff",
-	"#0700cc",
-	"#050090",
-	"#03004b"
-       
+
+	'#15447a',
+	'#2f77bd',
+	'#3788d0',
+	'#419ce5',
+	'#48a9f4',
+	'#4fb6f6',
+	'#57c2f7',
+	'#80d3f9',
+	'#b2e4fb',
+	'#e0f5fd'
+
    ]);
 
 
