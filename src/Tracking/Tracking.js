@@ -42,6 +42,11 @@ export default class Tracking extends Component {
     this.getTasks()
   }
 
+
+  //right now I'm querying all tasks associated with a user then sorting, 
+  //instead you should query each time the project or date paramaters change and display what you get
+  //to avoid refresh issues could store the current project and date selection in local storage
+  
   getTasks() {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/task/account/${this.context.account_id}`),
@@ -90,9 +95,9 @@ export default class Tracking extends Component {
 
   }
 
-  sortedProjectTasks = () => {
-    return
-  }
+  // sortedProjectTasks = () => {
+  //   return
+  // }
 
   filterArrayForPieChart = (tasks) => {
 
@@ -130,7 +135,6 @@ export default class Tracking extends Component {
     })
 
   }
-
 
   onSliceSelected = (event) => {
     console.log(this.state.sortedTasks)
@@ -182,14 +186,13 @@ export default class Tracking extends Component {
             <h2 className="bar-chart-sub-header">{this.state.taskTimeHeader}</h2>
           </div>
 
-          <PieChart data={this.state.sortedProjectTasks} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
+          <PieChart data={this.state.sortedProjectTasks.sort()} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
 
           <h2 className="tracking-header">{`Daily View (This Week - ${this.state.currentTaskName})`}</h2>
           <BarChart tasks={this.state.tasksForPieChart} headline={this.state.projectName ? this.state.projectName : currentProject.project}>
           </BarChart>
           <h2 className="edit-label">Edit Task</h2>
           <Grid></Grid>
-
           <br></br>
           <p onClick={() => this.DeleteProject()} className="delete-project">DELETE PROJECT</p>
         </div>

@@ -10,16 +10,27 @@ CanvasJS.addColorSet("colorset1",
 
 [
 
-	'#15447a',
-	'#2f77bd',
-	'#3788d0',
-	'#419ce5',
-	'#48a9f4',
-	'#4fb6f6',
-	'#57c2f7',
-	'#80d3f9',
-	'#b2e4fb',
-	'#e0f5fd'
+
+	'#B6B8BA',
+	'#a3abba',
+	'#91A1BA',
+	'#7e95b8',
+	'#6b8bba',
+	'#587eba',
+	'#4673b9',
+	'#3368ba',
+	'#225db9',
+
+	'#1352b9',
+	
+
+
+	
+
+	
+
+
+
 
    ]);
 
@@ -39,6 +50,7 @@ class PieChart extends Component {
 
 
 	render() {
+		console.log("data " + JSON.stringify(this.props.data))
 
 		const onSelect = (event) => {
 			var dataSeries = event.dataSeries;
@@ -88,7 +100,8 @@ class PieChart extends Component {
 				indexLabelFontSize: 16,
 				indexLabelFontColor: "white",
 				indexLabel: "{label}",
-				dataPoints: this.props.data
+				dataPoints: this.props.data.sort(function(a,b) {
+					return a.y - b.y; })
 
 
 			}]

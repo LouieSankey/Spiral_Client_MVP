@@ -68,7 +68,7 @@ class BarChart extends Component {
         fill: {
           opacity: 0.8,
           type: 'solid',
-          colors: '#48a9f4',
+          colors: '#1352b9',
 
           pattern: {
             style: ['verticalLines', 'horizontalLines'],
