@@ -12,12 +12,12 @@ Server Repo: https://github.com/LouieSankey/Spiral_Server
 
 Spiral combines an Agile time estimation strategy with the utility of a pomodoro timer to give you an incredibly simple all in one time management tool. Make a time estimation for your task, enter a note for tracking, then let Spiral take care of the rest.
 
-
-![spiral-1](https://user-images.githubusercontent.com/8163492/106219392-19246d00-618e-11eb-870c-884585f8d407.png)
-
 Use Spiral while studying, doing computer work, or even during household chores to help you stay on track, take better breaks, and avoid burnout. 
 
-![spiral-2](https://user-images.githubusercontent.com/8163492/106219716-d4e59c80-618e-11eb-8f69-dd797c7d8519.png)
+
+![spiral-mockup](https://user-images.githubusercontent.com/8163492/108412186-62406d80-71de-11eb-9230-c6e89f519b5b.png)
+
+
 
 
 Copyright 2020 
