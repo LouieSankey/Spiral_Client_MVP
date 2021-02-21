@@ -10,11 +10,7 @@ CanvasJS.addColorSet("colorset1",
 
 	[
 
-		'#082454',
-		'#092a60',
-		'#0a2f6d',
-		'#0d3a85',
-		'#0f459f',
+	
 		'#1352b9',
 		'#225db9',
 		'#3368ba',
@@ -25,6 +21,12 @@ CanvasJS.addColorSet("colorset1",
 		'#91A1BA',
 		'#a3abba',
 		'#B6B8BA',
+
+		'#082454',
+		'#092a60',
+		'#0a2f6d',
+		'#0d3a85',
+		'#0f459f',
 		
 		
 		
