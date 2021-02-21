@@ -47,7 +47,7 @@ export default class Tracking extends Component {
       this.setState({
         displayLoader:false
       });
-    }, 6000)  }
+    }, 3000)  }
 
 
   //right now I'm querying all tasks associated with a user then sorting, 
