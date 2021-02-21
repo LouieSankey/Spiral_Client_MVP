@@ -4,7 +4,7 @@ const APIService = {
 
 getAccountByEmail(credentials) {
 
-return fetch(`${config.API_ENDPOINT}/account/email/${credentials.email}`, {
+return fetch(`${config.API_ENDPOINT}/account/${credentials.email}`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json'

@@ -2,6 +2,26 @@
     background-color: black;
 }
 
+.loaderContainer {
+    position: relative;
+    height: 400px;
+}
+
+.loader-empty {
+    color: white;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.css-eud0db {
+    position: absolute;
+    top: 60%;
+    left: 46%;
+    transform: translate(-50%, -50%);
+}
+
 .delete-project {
     padding-right: 10px;
     margin: 0px;

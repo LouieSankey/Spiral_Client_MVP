@@ -9,6 +9,7 @@ import moment from 'moment'
 import PieChart from './PieChart/PieChart'
 import { FormatTrackingHeader } from './helper'
 import APIService from '../api-services'
+import DotLoader from "react-spinners/ClipLoader"
 
 export default class Tracking extends Component {
 
@@ -19,6 +20,7 @@ export default class Tracking extends Component {
     currentProject: {},
     sortedProjectTasks: [],
     tasksForBarChart: [],
+    displayLoader: true,
     data: [
       { label: "apple", y: 10 },
       { label: "orange", y: 15 },
@@ -40,13 +42,18 @@ export default class Tracking extends Component {
     })
 
     this.getTasks()
-  }
+
+    setTimeout(() => {
+      this.setState({
+        displayLoader:false
+      });
+    }, 6000)  }
 
 
   //right now I'm querying all tasks associated with a user then sorting, 
   //instead you should query each time the project or date paramaters change and display what you get
   //to avoid refresh issues could store the current project and date selection in local storage
-  
+
   getTasks() {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/task/account/${this.context.account_id}`),
@@ -161,6 +168,9 @@ export default class Tracking extends Component {
 
   }
 
+
+
+
   render() {
     const { projects = [], currentProject = {} } = this.context
     const value = {
@@ -169,6 +179,8 @@ export default class Tracking extends Component {
       currentProject: currentProject,
 
     }
+
+    console.log('front end data ' + this.state.sortedProjectTasks)
 
     return (
       <ApiContext.Provider value={value}>
@@ -186,7 +198,24 @@ export default class Tracking extends Component {
             <h2 className="bar-chart-sub-header">{this.state.taskTimeHeader}</h2>
           </div>
 
-          <PieChart data={this.state.sortedProjectTasks.sort()} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
+          {this.state.sortedProjectTasks.length > 0 ?
+
+            <PieChart data={this.state.sortedProjectTasks.sort()} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
+            :
+         
+          
+              <div className={"loaderContainer"}> 
+                {this.state.displayLoader ? 
+              <DotLoader className={this.state.displayLoader} color={'#6b8bba'} size={60}></DotLoader>
+              : <p className={'loader-empty'}>No Tasks Found</p>}
+
+
+              </div>
+          
+
+        
+
+          }
 
           <h2 className="tracking-header">{`Daily View (This Week - ${this.state.currentTaskName})`}</h2>
           <BarChart tasks={this.state.tasksForPieChart} headline={this.state.projectName ? this.state.projectName : currentProject.project}>

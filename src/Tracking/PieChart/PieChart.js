@@ -8,35 +8,35 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 
 CanvasJS.addColorSet("colorset1",
 
-[
+	[
 
 
-	'#B6B8BA',
-	'#a3abba',
-	'#91A1BA',
-	'#7e95b8',
-	'#6b8bba',
-	'#587eba',
-	'#4673b9',
-	'#3368ba',
-	'#225db9',
-	'#1352b9',
-	'#0f459f',
-	'#0d3a85',
-	'#0a2f6d',
-	'#092a60',
-	'#082454'
-	
-
-
-	
-
-	
+		'#B6B8BA',
+		'#a3abba',
+		'#91A1BA',
+		'#7e95b8',
+		'#6b8bba',
+		'#587eba',
+		'#4673b9',
+		'#3368ba',
+		'#225db9',
+		'#1352b9',
+		'#0f459f',
+		'#0d3a85',
+		'#0a2f6d',
+		'#092a60',
+		'#082454'
 
 
 
 
-   ]);
+
+
+
+
+
+
+	]);
 
 
 class PieChart extends Component {
@@ -94,6 +94,18 @@ class PieChart extends Component {
 				fontColor: 'white'
 
 			},
+			// noData: {
+			// 	text: "you haven't logged any data",
+			// 	align: 'center',
+			// 	verticalAlign: 'middle',
+			// 	offsetX: 0,
+			// 	offsetY: 0,
+			// 	style: {
+			// 		color: 'white',
+			// 		fontSize: '14px',
+			// 		fontFamily: undefined
+			// 	}
+			// },
 			data: [{
 				type: "pie",
 				click: onSelect,
@@ -104,8 +116,9 @@ class PieChart extends Component {
 				indexLabelFontSize: 16,
 				indexLabelFontColor: "white",
 				indexLabel: "{label}",
-				dataPoints: this.props.data.sort(function(a,b) {
-					return a.y - b.y; })
+				dataPoints: this.props.data.sort(function (a, b) {
+					return a.y - b.y;
+				})
 
 
 			}]
