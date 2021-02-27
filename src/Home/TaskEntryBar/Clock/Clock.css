@@ -70,6 +70,7 @@
     color: rgb(194, 194, 194);
     border: 1px solid;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .pause {

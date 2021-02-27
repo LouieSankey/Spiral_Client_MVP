@@ -17,14 +17,15 @@ const WorkflowModal = ({ handleClose, showWorkflow, children }) => {
       <section className="modal-workflow-main">
         <button className="modal-close-button" onClick={handleClose}>x</button>
         <div className="modal-content">
-          <h2 className="break-modal-header">Example Workflow</h2>
+          <h2 className="break-modal-header">Welcome!</h2>
           <ol className="workflow-list">
-            <li className="workflow-item">Keep Spiral open in a browser tab, and size up a task (or subtask) you'd like to accomplish.</li>
-            <li className="workflow-item">Use the provided minute values to estimate a timeframe for completion, and don't be afraid to challenge yourself!</li>
-            <li className="workflow-item">If you finish the task before your estimate expires, you can skip to your break period with the skip button. <img className="skip-img" src={skip}></img>  </li>
-            <li className="workflow-item">If your estimate expires and you're still working, take your break then return to Spiral and make another estimate to finish off your task.</li>
-            <li className="workflow-item">Create a new project using the folder icon <img className="folder-img" src={folder}></img> , and name your tasks to keep a detailed accounting of your work history. </li>
-            <li className="workflow-item">Make sure your volume is up - a bird chirp signifies the beginning of a break, and a dog bark means get back to work! </li>
+
+            <li className="workflow-item">To use Spiral, keep it open in a browser tab while you work.</li>
+            <li className="workflow-item">To give yourself a timeframe for a task you're working on, select from any of the minute durations in the rectangle.</li>
+            <li className="workflow-item">Spiral will alert you with a bird chirp when your time is up.</li>
+            <li className="workflow-item">If you've set a break period, Spiral will automatically start a second countdown, and alert you with a dog bark when your break is over.</li>
+            <li className="workflow-item">If you use Spiral consistently, you can take advantage of its time tracking features.</li>
+            <li className="workflow-item">Enjoy!</li>
           </ol>
         </div>
       </section>

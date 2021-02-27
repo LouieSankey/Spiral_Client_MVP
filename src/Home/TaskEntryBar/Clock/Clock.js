@@ -196,7 +196,7 @@ function Countdown(props) {
 
     {timer.onBreak ?
       <div><h2 className="display-timer-header">On Break </h2> <h2 className="display-timer">{timeFormat(timer.timeRemaining)}</h2></div>
-      : <div><h3 className="display-timer-header"> Time Left </h3> <h3 className="display-timer">{timeFormat(timer.timeRemaining)}</h3></div>}
+      : <div><h3 className="display-timer-header"> Time Left </h3> <h3 ref={context.timerRef} className="display-timer">{timeFormat(timer.timeRemaining)}</h3></div>} 
 
    
       <div className="toolbar-container">

@@ -7,6 +7,7 @@ export default React.createContext({
   currentProject: {}, 
   chartData: [],
   prefs: {},
+ 
   changeBreakPrefs: () => {},
   handleAPIRequest: () => {},
   setCurrentProject: () => {},

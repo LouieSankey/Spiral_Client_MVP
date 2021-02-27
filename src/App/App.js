@@ -15,13 +15,40 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleAPIRequest = this.handleAPIRequest.bind(this);
+    this.timerRef = React.createRef();
   }
 
   state = {
     toggleMobileNav: false,
     account_id: null,
-    tasks: []
+    tasks: [],
+    showWorkflow: false
   }
+
+  componentDidMount = () => {
+
+    document.title = "Spiral"
+    let account_id = localStorage.getItem('account_id')
+    account_id = Number(account_id)
+    if (account_id) {
+      this.handleAPIRequest(account_id)
+    
+    } else {
+      this.props.history.push('/Spiral')
+    }
+  }
+
+  ShowHelpAtFirstLogin = () => {
+    if(!localStorage.getItem("workflowShown")){
+      localStorage.setItem("workflowShown", true)
+      this.setState({showWorkflow: true})
+    }
+
+  }
+
+
+
+
 
   //you need to get all the projects to display them in the dropdown no matter what
   //but the task you only need for the current project (to display in the task bar)
@@ -30,6 +57,7 @@ class App extends Component {
   //it should re-query (remember you're just getting the names but still)
 
   handleAPIRequest = (account_id) => {
+    this.ShowHelpAtFirstLogin()
     Promise.all([
       fetch(`${config.API_ENDPOINT}/account/${account_id}`),
       fetch(`${config.API_ENDPOINT}/project/account/${account_id}`),
@@ -86,21 +114,13 @@ class App extends Component {
     })
   }
 
-  componentDidMount = () => {
 
-    document.title = "Spiral"
-    let account_id = localStorage.getItem('account_id')
-    account_id = Number(account_id)
-    if (account_id) {
-      this.handleAPIRequest(account_id)
-    } else {
-      this.props.history.push('/Spiral')
-    }
-  }
 
   ToggleMobileNav = () => {
     this.setState({ toggleMobileNav: !this.state.toggleMobileNav })
   }
+
+
 
   renderMainRoutes() {
     return (
@@ -115,11 +135,29 @@ class App extends Component {
         <Route
           exact
           path='/'
-          render={(props) => <Home {...props} />} />
+          render={(props) => <Home {...props} hideWorkflow={this.hideWorkflow} showWorkflow={this.state.showWorkflow} />} />
       </>
 
     )
   }
+
+  showWorkflow = () => {
+    this.setState({
+      showWorkflow: true,
+      pauseForModal: true
+    });
+  };
+  hideWorkflow = () => {
+    this.setState({
+      showWorkflow: false,
+      pauseForModal: false
+    });
+  };
+
+  //   ToggleWorkflow = () => {
+  //   this.setState({showWorkflow: !this.showWorkflow})
+  //   console.log("toggle")
+  // }
 
   Logout = () => {
 
@@ -176,11 +214,13 @@ class App extends Component {
       handleAddProject: this.handleAddProject,
       handleAPIRequest: this.handleAPIRequest,
       handleAddTask: this.handleAddTask,
+      timerRef: this.timerRef
+
     }
 
     return (
       <ApiContext.Provider value={value}>
-        <Sidebar logout={this.Logout}></Sidebar>
+        <Sidebar logout={this.Logout} toggleWorkflowModal={() => this.showWorkflow}></Sidebar>
         {this.renderMainRoutes()}
       </ApiContext.Provider>
 

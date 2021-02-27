@@ -8,7 +8,6 @@ import './TimerHome.css'
 import ApiContext from '../ApiContext'
 import WorkflowModal from './Modals/WorkflowModal'
 
-
 export default class TimerHome extends Component {
 
   static contextType = ApiContext;
@@ -20,7 +19,7 @@ export default class TimerHome extends Component {
     showAddProject: false,
     pauseTimer: false,
     taskName: "",
-    showWorkflow: false
+ 
   };
 
 
@@ -70,18 +69,7 @@ export default class TimerHome extends Component {
     });
   };
 
-  showWorkflow = () => {
-    this.setState({
-      showWorkflow: true,
-      pauseForModal: true
-    });
-  };
-  hideWorkflow = () => {
-    this.setState({
-      showWorkflow: false,
-      pauseForModal: false
-    });
-  };
+
 
   render() {
     return (
@@ -95,7 +83,7 @@ export default class TimerHome extends Component {
         <NewProjectModal show={this.state.showAddProject} handleClose={this.hideNewProjectModal}>
         </NewProjectModal>
         <br />
-        <WorkflowModal showWorkflow={this.state.showWorkflow} handleClose={this.hideWorkflow}></WorkflowModal>
+        <WorkflowModal showWorkflow={this.props.showWorkflow} handleClose={this.props.hideWorkflow}></WorkflowModal>
       </>
     )
   }

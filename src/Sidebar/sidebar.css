@@ -13,7 +13,7 @@ a {
 
 .break-modal-header {
     padding-top: 20px;
-    color: white;
+    color: black;
 }
 
 .sidebar {
@@ -53,7 +53,8 @@ a {
 
 /* The sidebar links */
 
-.sidebar a {
+.nav-link {
+    cursor: pointer;
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 18px;
@@ -77,9 +78,20 @@ a {
 }
 
 
+/* .nav-link {
+    color: lightgray;
+    cursor: pointer;
+    padding-bottom: 6px;
+} */
+
+.nav-link:hover {
+    color: darkgray;
+}
+
+
 /* When you mouse over the navigation links, change their color */
 
-.sidebar a:hover {
+.nav-link:hover {
     color: #f1f1f1;
 }
 
@@ -96,6 +108,7 @@ a {
 
 .closebtn {
     cursor: pointer;
+    color: white;
 }
 
 .spiral-text-logo-small {
@@ -196,7 +209,7 @@ a {
     .sidebar {
         padding-top: 15px;
     }
-    .sidebar a {
+    .nav-link {
         font-size: 18px;
     }
     .sidebar-visible {

@@ -180,7 +180,6 @@ export default class Tracking extends Component {
 
     }
 
-    console.log('front end data ' + this.state.sortedProjectTasks)
 
     return (
       <ApiContext.Provider value={value}>

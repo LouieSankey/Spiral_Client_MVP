@@ -167,23 +167,18 @@
         right: 10px;
     }
     
-    .project-modal-content {
-        padding-top: 18px;
-    }
-    
     .modal {
         display: none;
     }
     
     .modal-main {
-        padding: 14px;
         z-index: 9999;
         top: 74px;
         position: absolute;
         background: #296e90f1;
         /* border-style: solid; */
         border-radius: 15px;
-        width: 196px;
+        width: 300px;
         height: auto;
         right: 9px;
         color: white;
@@ -213,11 +208,14 @@
     }
     
     .modal-content {
-        margin-left: 20px;
         margin-top: 8px;
     }
     
     .modal-close-button {
+        padding: 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
         font-size: 20px;
         background-color: transparent;
         border-radius: 0px;
@@ -233,6 +231,7 @@
         margin-bottom: 6px;
         margin-left: 8px;
         border-radius: 10px;
+        cursor: pointer;
     }
     
     .display-block {

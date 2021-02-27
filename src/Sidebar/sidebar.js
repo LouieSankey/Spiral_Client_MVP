@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './sidebar.css'
 import { Link } from "react-router-dom"
+import NavModal from '../Home/Modals/NavModal'
 
 import ApiContext from '../ApiContext'
 
@@ -10,7 +11,8 @@ class Sidebar extends Component {
     isSidebarVisible: false,
     showNav: false,
     showBreakPrefs: false,
-    showPrefs: false
+    showPrefs: false,
+    showNavModal: false
   };
 
   constructor(props) {
@@ -28,6 +30,10 @@ class Sidebar extends Component {
       "2": null,
       "gong": null
     }
+
+    this.homeLinkRef = React.createRef()
+    this.insightsLinkRef = React.createRef()
+    this.logoutLinkRef = React.createRef()
 
   }
 
@@ -68,9 +74,35 @@ class Sidebar extends Component {
 
   }
 
-  // ToggleNav = () => {
+  handleClose = () => {
+    this.setState({showNavModal:false})
+  }
 
-  // }
+  navigateToInsights = () => {
+    if(this.context.timerRef.current?.innerText === "00:00"  || this.context.timerRef.current?.innerText === undefined){
+      this.insightsLinkRef.current.click()
+    }else{
+     this.setState({showNavModal:true})
+    }
+  }
+
+  navigateToLogout = () => {
+    if(this.context.timerRef.current?.innerText === "00:00" || this.context.timerRef.current?.innerText === undefined){
+      this.logoutLinkRef.current.click()
+    }else{
+      this.setState({showNavModal:true})
+    }
+  }
+
+  navigateToTimer = () => {
+    if(this.context.timerRef.current?.innerText === "00:00"  || this.context.timerRef.current?.innerText === undefined){
+      this.homeLinkRef.current.click()
+    }
+
+  }
+
+
+
 
   render() {
 
@@ -85,18 +117,23 @@ class Sidebar extends Component {
             <a className="closebtn" onClick={this.ToggleSidebar}>&times;</a>
 
             <div className="sidebar-content">
-              {/* <h1 className="spiral-sidebar-logo">Spiral</h1> */}
               <img className="spiral-text-logo-small" src={require("../Img/spiral-text-logo.png")} alt="" />
 
 
               <h2 onClick={() => this.setState({ showNav: !this.state.showNav })} className="white accordion">Menu</h2>
               <div className="panel" className={this.state.showNav ? 'display-block' : 'display-none'}>
+              
+
                 <ul className={this.state.showNav ? 'display-block' : 'display-none'}>
-                  <li> <Link to="/">Timer</Link></li>
-                  <li> <Link to="/tracking">Insights</Link></li>
-                  <li> <Link onClick={() => { this.props.logout(); this.ToggleSidebar() }} to="/spiral" >Log Out</Link></li>
+                 
+                  <li className="nav-link" onClick={() => this.navigateToTimer()}> <Link  ref={this.homeLinkRef} to="/"></Link>Timer</li>
+                  <li className="nav-link" onClick={() => this.navigateToInsights()}> <Link ref={this.insightsLinkRef} to="/tracking"></Link>Insights</li>
+                  <li className="nav-link" onClick={() => this.navigateToLogout()}> <Link ref={this.logoutLinkRef} onClick={() => { this.props.logout(); this.ToggleSidebar() }} to="/spiral" ></Link>Logout</li>
+               
+                
                 </ul>
               </div>
+              <NavModal handleClose={this.handleClose} show={this.state.showNavModal}></NavModal>
 
 
               <h2 onClick={() => this.setState({ showBreakPrefs: !this.state.showBreakPrefs })} className="white accordion">Breaks</h2>
@@ -120,7 +157,7 @@ class Sidebar extends Component {
 
 
 
-                  <button onClick={this.updateBreakPrefs} className="save-break-prefs-button splash-button" >SAVE</button>
+                  <button onClick={this.updateBreakPrefs} className="save-break-prefs-button" >SAVE</button>
 
 
                 </>
@@ -128,7 +165,7 @@ class Sidebar extends Component {
               </div>
 
 
-              <h2 onClick={() => this.setState({ showPrefs: !this.state.showPrefs })} className="white accordion">Sounds</h2>
+              <h2 onClick={() => this.setState({ showPrefs: !this.state.showPrefs })} className="white accordion">Theme</h2>
               <div className="panel" className={this.state.showPrefs ? 'display-block' : 'display-none'}>
 
               <h3 className="prefs-label">Break Sound</h3>
@@ -148,9 +185,13 @@ class Sidebar extends Component {
 
               </div>
 
+              <h2 className="white accordion" onClick={this.props.toggleWorkflowModal()}>Help</h2>
 
 
             </div>
+
+
+
           </div>
           <div id="main">
             <button className="openbtn" onClick={this.ToggleSidebar} >{``}</button>
