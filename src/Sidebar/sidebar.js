@@ -185,7 +185,7 @@ class Sidebar extends Component {
 
               </div>
 
-              <h2 className="white accordion" onClick={this.props.toggleWorkflowModal()}>Help</h2>
+              <h2 className="white accordion" onClick={() => this.props.toggleWorkflowModal()}>Help</h2>
 
 
             </div>

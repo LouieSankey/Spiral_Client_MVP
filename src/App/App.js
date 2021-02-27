@@ -154,10 +154,10 @@ class App extends Component {
     });
   };
 
-  //   ToggleWorkflow = () => {
-  //   this.setState({showWorkflow: !this.showWorkflow})
-  //   console.log("toggle")
-  // }
+    ToggleWorkflow = () => {
+    this.setState({showWorkflow: !this.state.showWorkflow})
+ 
+  }
 
   Logout = () => {
 
@@ -220,7 +220,7 @@ class App extends Component {
 
     return (
       <ApiContext.Provider value={value}>
-        <Sidebar logout={this.Logout} toggleWorkflowModal={() => this.showWorkflow}></Sidebar>
+        <Sidebar logout={this.Logout} toggleWorkflowModal={this.ToggleWorkflow}></Sidebar>
         {this.renderMainRoutes()}
       </ApiContext.Provider>
 
