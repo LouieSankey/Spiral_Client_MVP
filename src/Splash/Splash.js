@@ -144,7 +144,7 @@ class Splash extends Component {
                 }
 
                 <img className="spiral-text-logo" src={require("../Img/spiral-text-logo.png")} alt=""/>
-                <p className="p-large">Spiral is time tracking wrapped up in a mediation app. </p>
+                <p className="p-large">Spiral is time tracking wrapped up in a meditation app. </p>
                 <button className="splash-button" onClick={this.handleOpenModal}>SIGN UP</button>
               </div>
               <div className="align-right">
