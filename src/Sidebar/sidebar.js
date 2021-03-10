@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './sidebar.css'
 import { Link } from "react-router-dom"
-import NavModal from '../Home/Modals/NavModal'
+import NavModal from '../Main/Modals/NavModal'
 
 import ApiContext from '../ApiContext'
 
@@ -107,12 +107,12 @@ class Sidebar extends Component {
   render() {
 
     this.state.isSidebarVisible ? document.body.classList.add('body-margin-left') : this.CloseSidebar()
-    const isSplashPage = (window.location.pathname === "/Spiral" || window.location.pathname === "/spiral")
+    const isLandingPage = (window.location.pathname === "/Spiral" || window.location.pathname === "/spiral")
 
     return (
       <>
 
-        {isSplashPage ? null : <>
+        {isLandingPage ? null : <>
           <div id="mySidebar" className={`sidebar ${this.state.isSidebarVisible ? "sidebar-visible" : ""}`}>
             <a className="closebtn" onClick={this.ToggleSidebar}>&times;</a>
 
@@ -138,7 +138,7 @@ class Sidebar extends Component {
 
               <h2 onClick={() => this.setState({ showBreakPrefs: !this.state.showBreakPrefs })} className="white accordion">Breaks</h2>
               <div className="panel" className={this.state.showBreakPrefs ? 'display-block' : 'display-none'}>
-            <h3 class="white">Cycle : Break Duration</h3>
+            <h3 className="white">Cycle : Break Duration</h3>
 
                 {this.context.prefs && <>
                   <ul className="breakprefs-list">
@@ -185,7 +185,7 @@ class Sidebar extends Component {
 
               </div>
 
-              <h2 className="white accordion" onClick={() => this.props.toggleWorkflowModal()}>Help</h2>
+              <h2 className="white accordion" onClick={() => this.props.toggleHelpModal()}>Help</h2>
 
 
             </div>

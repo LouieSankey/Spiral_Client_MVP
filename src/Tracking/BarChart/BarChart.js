@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import ApiContext from '../../ApiContext'
 import moment from 'moment'
 import './BarChart.css'
-import { FormatTrackingHeader } from '../helper'
+import { FormatTrackingHeader } from './helper'
 
 
 class BarChart extends Component {

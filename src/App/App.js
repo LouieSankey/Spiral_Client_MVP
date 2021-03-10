@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Redirect, useLocation, Route, Link, withRouter } from "react-router-dom"
 import { FaAlignRight } from 'react-icons/fa';
-import Home from '../Home/TimerHome'
-import Tracking from '../Tracking/Tracking'
-import Splash from '../Splash/Splash'
+import Home from '../Main/MainContainer/MainContainer'
+import Tracking from '../Tracking/TrackingHome/Tracking'
+import Landing from '../Landing/Landing'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './App.css'
@@ -22,7 +22,7 @@ class App extends Component {
     toggleMobileNav: false,
     account_id: null,
     tasks: [],
-    showWorkflow: false
+    showHelp: false
   }
 
   componentDidMount = () => {
@@ -41,20 +41,10 @@ class App extends Component {
   ShowHelpAtFirstLogin = () => {
     if(!localStorage.getItem("workflowShown")){
       localStorage.setItem("workflowShown", true)
-      this.setState({showWorkflow: true})
+      this.setState({showHelp: true})
     }
 
   }
-
-
-
-
-
-  //you need to get all the projects to display them in the dropdown no matter what
-  //but the task you only need for the current project (to display in the task bar)
-  //and requrey when project is changed
-  //right now, selecting a task changes how the tasks are filtered here in app.js
-  //it should re-query (remember you're just getting the names but still)
 
   handleAPIRequest = (account_id) => {
     this.ShowHelpAtFirstLogin()
@@ -89,7 +79,6 @@ class App extends Component {
           }
         }
 
-
         const currentProject = projects[0]
         this.setState({ account, projects, prefsRes, account_id, currentProject, tasksRes })
       })
@@ -114,20 +103,16 @@ class App extends Component {
     })
   }
 
-
-
   ToggleMobileNav = () => {
     this.setState({ toggleMobileNav: !this.state.toggleMobileNav })
   }
-
-
 
   renderMainRoutes() {
     return (
       <>
         <Route
           path='/spiral'
-          component={Splash} />
+          component={Landing} />
 
         <Route path="/tracking">
           <Tracking />
@@ -135,27 +120,27 @@ class App extends Component {
         <Route
           exact
           path='/'
-          render={(props) => <Home {...props} hideWorkflow={this.hideWorkflow} showWorkflow={this.state.showWorkflow} />} />
+          render={(props) => <Home {...props} hideHelp={this.hideHelp} showHelp={this.state.showHelp} />} />
       </>
 
     )
   }
 
-  showWorkflow = () => {
+  showHelp = () => {
     this.setState({
-      showWorkflow: true,
+      showHelp: true,
       pauseForModal: true
     });
   };
-  hideWorkflow = () => {
+  hideHelp = () => {
     this.setState({
-      showWorkflow: false,
+      showHelp: false,
       pauseForModal: false
     });
   };
 
-    ToggleWorkflow = () => {
-    this.setState({showWorkflow: !this.state.showWorkflow})
+    ToggleHelp = () => {
+    this.setState({showHelp: !this.state.showHelp})
  
   }
 
@@ -220,7 +205,7 @@ class App extends Component {
 
     return (
       <ApiContext.Provider value={value}>
-        <Sidebar logout={this.Logout} toggleWorkflowModal={this.ToggleWorkflow}></Sidebar>
+        <Sidebar logout={this.Logout} toggleHelpModal={this.ToggleHelp}></Sidebar>
         {this.renderMainRoutes()}
       </ApiContext.Provider>
 
