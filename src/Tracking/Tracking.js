@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import BarChart from './Chart/Chart'
+import BarChart from './BarChart/BarChart'
 import Grid from './Grid/Grid'
 import './Tracking.css'
 import Dropdown from 'react-dropdown'
