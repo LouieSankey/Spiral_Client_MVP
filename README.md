@@ -1,15 +1,25 @@
-Spiral Productivity
-Copyright 2020 All Rights Reserved
+![spiral-icon](https://user-images.githubusercontent.com/8163492/106222026-85ee3600-6193-11eb-808b-e01853c7bf3b.png)
 
-Spiral combines an Agile time estimation strategy with the utility of a pomodoro timer to give you an incredibly simple all in one time managment tool. Make a time estimation for your task, enter a note for tracking, then let Spiral take care of the rest.
+Spiral - Mindfulness, Productivity.
+
+Client MVP built with React, Javascript, JSX, and Apex Charts
 
 Live App: https://spiral-ebon.vercel.app/
 
-![spiral](https://user-images.githubusercontent.com/8163492/98314565-177e4b00-1f8b-11eb-880f-4965583d0cca.png)
+Server Repo: https://github.com/LouieSankey/Spiral_Server
+
+## Spiral
+
+Spiral combines an Agile time estimation strategy with the utility of a pomodoro timer to give you an incredibly simple all in one time management tool. Make a time estimation for your task, enter a note for tracking, then let Spiral take care of the rest.
+
+Use Spiral while studying, doing computer work, or even during household chores to help you stay on track, take better breaks, and avoid burnout. 
 
 
-Use Spiral while doing computer work to help you stay on track, take better breaks, and avoid burnout. 
+![spiral-mockup](https://user-images.githubusercontent.com/8163492/108412186-62406d80-71de-11eb-9230-c6e89f519b5b.png)
 
-![Screen Shot 2020-11-05 at 5 20 50 PM](https://user-images.githubusercontent.com/8163492/98314634-45638f80-1f8b-11eb-98f7-2d359b5c39d1.png)
 
-Client MVP built with React, Javascript, JSX, and Apex Charts
+
+
+Copyright 2020 
+All Rights Reserved
+ 
