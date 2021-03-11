@@ -31,7 +31,9 @@ export default class GoldenRectangle extends Component {
     }
 
     SetAlarmIcon = (selectedValue) => {
+        //this needs to check if its currenctly on a brek period, you could check the dom text
         const breakValue = this.context.prefs[selectedValue]
+
         if(breakValue > 0){
 
             this.setState(prevState => {
@@ -40,7 +42,8 @@ export default class GoldenRectangle extends Component {
 
         }else{
             this.setState(prevState => {
-                return { alarmIcon: dogBark}
+                //this will be dog bark on break
+                return { alarmIcon: birdTweet}
             })
         }
     }

@@ -66,11 +66,11 @@ function Countdown(props) {
   React.useEffect(() => {
     if (props.pauseForModal) {
       timer.pauseForModal = true
-      handlePause()
+      // handlePause()
     } else {
       setTimeout(() => {
         timer.pauseForModal = false
-        handleStart()
+        // handleStart()
       }, 300);
     }
   }, [props.pauseForModal])
@@ -87,7 +87,7 @@ function Countdown(props) {
         }));
       }
       if (timer.isPaused) {
-        timer.isPaused = false;
+        // timer.isPaused = false;
       }
     }
 
@@ -99,14 +99,14 @@ function Countdown(props) {
         if (timer.onBreak) {
           playBark()
           timer.showToolbar = false
-          if (timer.cycle !== 0) {
-            
-          }
           timer.onBreak = false
         } else {
           const breakDuration = breakDurations[timer.cycle] * 60
+
+          playTweet()
           if (breakDuration !== 0) {
-            playTweet()
+
+            // playTweet()
             setTimer((timer) => ({
               ...timer,
               onBreak: true,
@@ -114,7 +114,7 @@ function Countdown(props) {
               timeRemaining: breakDuration
             }));
           } else {
-            playBark()
+            // playBark()
             timer.showToolbar = false
           }
           props.updateDB(timer.cycle)
