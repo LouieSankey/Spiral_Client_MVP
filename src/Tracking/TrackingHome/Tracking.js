@@ -45,14 +45,12 @@ export default class Tracking extends Component {
 
     setTimeout(() => {
       this.setState({
-        displayLoader:false
+        displayLoader: false
       });
-    }, 3000)  }
+    }, 3000)
+  }
 
 
-  //right now I'm querying all tasks associated with a user then sorting, 
-  //instead you should query each time the project or date paramaters change and display what you get
-  //to avoid refresh issues could store the current project and date selection in local storage
 
   getTasks() {
     Promise.all([
@@ -67,22 +65,18 @@ export default class Tracking extends Component {
         ])
       })
       .then(([tasks]) => {
-
         this.setState({ tasks })
         this.getTasksForProject(this.state.currentProject, tasks)
-
       })
       .catch(error => {
         console.error({ error })
       })
   }
 
-  getTasksForProject = (currentProject) => {
 
+  getTasksForProject = (currentProject) => {
     let projectName = currentProject.value ? currentProject.value : currentProject.id
     let sortedTasks = this.state.tasks.filter(task => task.project === projectName)
-
-
     let allTasksTime = 0
     sortedTasks.forEach(task => {
       allTasksTime += task.cycle
@@ -102,12 +96,9 @@ export default class Tracking extends Component {
 
   }
 
-  // sortedProjectTasks = () => {
-  //   return
-  // }
+
 
   filterArrayForPieChart = (tasks) => {
-
     let hash = {}
     tasks.forEach(task => {
       if (hash[task.task]) {
@@ -136,6 +127,7 @@ export default class Tracking extends Component {
     return tasks
   }
 
+  
   mapProjectsForDropdown = (projects) => {
     return projects.map(project => {
       return { value: project.id, label: project.project }
@@ -143,9 +135,10 @@ export default class Tracking extends Component {
 
   }
 
-  onSliceSelected = (event) => {
-    console.log(this.state.sortedTasks)
 
+  // when a pie chart slice is selected
+
+  onSliceSelected = (event) => {
     this.setState({
       tasksForBarChart: this.state.currentTaskName === event.dataPoint.label
         ? this.state.sortedTasks
@@ -165,19 +158,14 @@ export default class Tracking extends Component {
 
   DeleteProject = () => {
     APIService.deleteProject(this.state.currentProject.id)
-
   }
-
-
 
 
   render() {
     const { projects = [], currentProject = {} } = this.context
     const value = {
-
       tasks: this.state.tasksForBarChart,
       currentProject: currentProject,
-
     }
 
 
@@ -186,40 +174,41 @@ export default class Tracking extends Component {
         <div className="tracking-container">
           <div className="projects-dropdown">
 
+            {/* select project dropdown */}
             <Dropdown className='dropdown' options={this.mapProjectsForDropdown(projects)} onChange={this.getTasksForProject} value={currentProject.project} placeholder="Select an option" />
-
+           
+           
             <h1 className="bar-chart-header">Selected Task: {this.state.currentTaskName} </h1>
+
+            {/* select time period dropdown */}
             <select name="timeframe" className="timeframe">
               <option value="today">This Week:</option>
-
             </select>
+
 
             <h2 className="bar-chart-sub-header">{this.state.taskTimeHeader}</h2>
           </div>
 
+          {/* sortedProjectTasks is passed in to the pie chart */}
           {this.state.sortedProjectTasks.length > 0 ?
 
             <PieChart data={this.state.sortedProjectTasks.sort()} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
             :
-         
-          
-              <div className={"loaderContainer"}> 
-                {this.state.displayLoader ? 
-              <DotLoader className={this.state.displayLoader} color={'#6b8bba'} size={60}></DotLoader>
-              : <p className={'loader-empty'}>No Tasks Found</p>}
-
-
-              </div>
-          
-
-        
-
+            <div className={"loaderContainer"}>
+              {this.state.displayLoader ?
+                <DotLoader className={this.state.displayLoader} color={'#6b8bba'} size={60}></DotLoader>
+                : <p className={'loader-empty'}>No Tasks Found</p>}
+            </div>
           }
-
           <h2 className="tracking-header">{`Daily View (This Week - ${this.state.currentTaskName})`}</h2>
+
+          {/* tasksForPieChart chart is passed to bar chart */}
           <BarChart tasks={this.state.tasksForPieChart} headline={this.state.projectName ? this.state.projectName : currentProject.project}>
           </BarChart>
           <h2 className="edit-label">Edit Task</h2>
+
+
+          {/* tasks are available to grid via context */}
           <Grid></Grid>
           <br></br>
           <p onClick={() => this.DeleteProject()} className="delete-project">DELETE PROJECT</p>

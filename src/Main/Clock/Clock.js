@@ -10,8 +10,14 @@ import PausePresentation from '@material-ui/icons/PauseOutlined';
 import PlayCircleOutline from '@material-ui/icons/PlayArrowOutlined';
 import ApiContext from '../../ApiContext'
 
+import  myWorker  from '../../test.worker';
+
+ 
+
+
+
 class Clock extends React.Component {
-  
+
   render() {
     return (
       <>
@@ -19,6 +25,7 @@ class Clock extends React.Component {
           <div id="timer">
             <Countdown updateDB={this.props.updateDB} taskBarOpen={this.props.taskBarOpen} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle} taskBarCounter={this.props.taskBarCounter}>
             </Countdown>
+            <KeepAwake/>
           </div>
         </div>
       </>
@@ -27,8 +34,32 @@ class Clock extends React.Component {
 
 }
 
+class KeepAwake extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {counter: 0};
+  }
+
+  componentDidMount() {
+    
+    
+  }
+
+
+  render() {
+    return (
+      <></>
+    )
+  
+  }
+
+}
+
 
 function Countdown(props) {
+
+  const worker = new myWorker();
 
   const [timer, setTimer] = React.useState({
     name: 'timer',
@@ -53,6 +84,7 @@ function Countdown(props) {
   let allowCountdownRestart = (taskBarCounter.counter !== taskBarProps) ? true : false
   const context = React.useContext(ApiContext);
   let breakDurations = context.prefs
+
 
   React.useEffect(() => {
     if (allowCountdownRestart) {
@@ -156,6 +188,22 @@ function Countdown(props) {
   const handleStart = e => {
     if (timer.time !== 0) {
       clearInterval(timer.timerHandler)
+
+
+      const worker = new myWorker();
+      worker.postMessage(0);
+      // worker.addEventListener('message', event => setTimer({counter: event.data}));
+ 
+       
+
+
+
+
+
+
+
+
+
       const handle = setInterval(updateTimeRemaining, 1000);
       setTimer({ ...timer, isPaused: false, timerHandler: handle })
     }
