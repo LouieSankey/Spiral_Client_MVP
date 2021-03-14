@@ -78,6 +78,7 @@ function Countdown(props) {
     allowCountdownRestart = false
   }, [context.prefs]);
 
+
   
 
   React.useEffect(() => {
@@ -93,7 +94,9 @@ function Countdown(props) {
   }, [props.pauseForModal])
 
   React.useEffect(() => {
-    console.log(context.prefs)
+    console.log("context", context)
+
+
  
     if (allowCountdownRestart) {
       if (!timer.pauseForModal) {

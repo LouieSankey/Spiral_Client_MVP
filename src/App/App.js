@@ -22,7 +22,7 @@ class App extends Component {
     toggleMobileNav: false,
     account_id: null,
     tasks: [],
-    showHelp: false
+    // showHelp: false
   }
 
   componentDidMount = () => {
@@ -38,16 +38,16 @@ class App extends Component {
     }
   }
 
-  ShowHelpAtFirstLogin = () => {
-    if(!localStorage.getItem("workflowShown")){
-      localStorage.setItem("workflowShown", true)
-      this.setState({showHelp: true})
-    }
+  // ShowHelpAtFirstLogin = () => {
+  //   if(!localStorage.getItem("workflowShown")){
+  //     localStorage.setItem("workflowShown", true)
+  //     this.setState({showHelp: true})
+  //   }
 
-  }
+  // }
 
   handleAPIRequest = (account_id) => {
-    this.ShowHelpAtFirstLogin()
+    // this.ShowHelpAtFirstLogin()
     Promise.all([
       fetch(`${config.API_ENDPOINT}/account/${account_id}`),
       fetch(`${config.API_ENDPOINT}/project/account/${account_id}`),
@@ -120,29 +120,13 @@ class App extends Component {
         <Route
           exact
           path='/'
-          render={(props) => <Home {...props} hideHelp={this.hideHelp} showHelp={this.state.showHelp} />} />
+          render={(props) => <Home {...props}  />} />
       </>
 
     )
   }
 
-  showHelp = () => {
-    this.setState({
-      showHelp: true,
-      pauseForModal: true
-    });
-  };
-  hideHelp = () => {
-    this.setState({
-      showHelp: false,
-      pauseForModal: false
-    });
-  };
 
-    ToggleHelp = () => {
-    this.setState({showHelp: !this.state.showHelp})
- 
-  }
 
   Logout = () => {
 
@@ -205,7 +189,7 @@ class App extends Component {
 
     return (
       <ApiContext.Provider value={value}>
-        <Sidebar logout={this.Logout} toggleHelpModal={this.ToggleHelp}></Sidebar>
+        <Sidebar logout={this.Logout} ></Sidebar>
         {this.renderMainRoutes()}
       </ApiContext.Provider>
 

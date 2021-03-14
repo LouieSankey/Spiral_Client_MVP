@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import NavModal from '../Main/Modals/NavModal'
 
 import ApiContext from '../ApiContext'
+import HelpModal from '../Main/Modals/HelpModal'
+
 
 class Sidebar extends Component {
 
@@ -12,7 +14,8 @@ class Sidebar extends Component {
     showNav: false,
     showBreakPrefs: false,
     showPrefs: false,
-    showNavModal: false
+    showNavModal: false,
+    showHelp:false
   };
 
   constructor(props) {
@@ -101,6 +104,25 @@ class Sidebar extends Component {
 
   }
 
+    showHelp = () => {
+    this.setState({
+      showHelp: true,
+      pauseForModal: true
+    });
+  };
+
+  hideHelp = () => {
+    this.setState({
+      showHelp: false,
+      pauseForModal: false
+    });
+  };
+
+    ToggleHelp = () => {
+    this.setState({showHelp: !this.state.showHelp})
+
+  }
+
 
 
 
@@ -185,7 +207,7 @@ class Sidebar extends Component {
 
               </div>
 
-              <h2 className="white accordion" onClick={() => this.props.toggleHelpModal()}>Help</h2>
+              <h2 className="white accordion" onClick={() => this.ToggleHelp()}>Help</h2>
 
 
             </div>
@@ -200,6 +222,7 @@ class Sidebar extends Component {
         </>
 
         }
+        <HelpModal showHelp={this.state.showHelp} handleClose={this.hideHelp}></HelpModal>
 
 
       </>

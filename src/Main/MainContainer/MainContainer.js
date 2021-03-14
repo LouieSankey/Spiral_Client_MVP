@@ -6,7 +6,6 @@ import NewProjectModal from '../Modals/NewProjectModal'
 import BreakPrefsModal from '../Modals/BreakPrefsModal'
 import './MainContainer.css'
 import ApiContext from '../../ApiContext'
-import HelpModal from '../Modals/HelpModal'
 
 export default class Main extends Component {
 
@@ -83,7 +82,6 @@ export default class Main extends Component {
         <NewProjectModal show={this.state.showAddProject} handleClose={this.hideNewProjectModal}>
         </NewProjectModal>
         <br />
-        <HelpModal showHelp={this.props.showHelp} handleClose={this.props.hideHelp}></HelpModal>
       </>
     )
   }
