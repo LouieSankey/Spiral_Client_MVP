@@ -9,11 +9,7 @@ import Stop from '@material-ui/icons/StopOutlined';
 import PausePresentation from '@material-ui/icons/PauseOutlined';
 import PlayCircleOutline from '@material-ui/icons/PlayArrowOutlined';
 import ApiContext from '../../ApiContext'
-
 import  myWorker  from '../../test.worker';
-
- 
-
 
 
 class Clock extends React.Component {
@@ -25,7 +21,7 @@ class Clock extends React.Component {
           <div id="timer">
             <Countdown updateDB={this.props.updateDB} taskBarOpen={this.props.taskBarOpen} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle} taskBarCounter={this.props.taskBarCounter}>
             </Countdown>
-            <KeepAwake/>
+          
           </div>
         </div>
       </>
@@ -34,27 +30,7 @@ class Clock extends React.Component {
 
 }
 
-class KeepAwake extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {counter: 0};
-  }
-
-  componentDidMount() {
-    
-    
-  }
-
-
-  render() {
-    return (
-      <></>
-    )
-  
-  }
-
-}
 
 
 function Countdown(props) {
@@ -76,15 +52,17 @@ function Countdown(props) {
 
   })
 
+  const context = React.useContext(ApiContext);
+
   const [taskBarCounter] = React.useState({
     counter: 0
   })
 
+
   let taskBarProps = props.taskBarCounter
-  let allowCountdownRestart = (taskBarCounter.counter !== taskBarProps) ? true : false
-  const context = React.useContext(ApiContext);
   let breakDurations = context.prefs
 
+  let allowCountdownRestart = (taskBarCounter.counter !== taskBarProps) ? true : false
 
   React.useEffect(() => {
     if (allowCountdownRestart) {
@@ -94,6 +72,13 @@ function Countdown(props) {
       allowCountdownRestart = true
     }
   }, [props, allowCountdownRestart])
+
+  
+  React.useEffect(() => {
+    allowCountdownRestart = false
+  }, [context.prefs]);
+
+  
 
   React.useEffect(() => {
     if (props.pauseForModal) {
@@ -108,6 +93,8 @@ function Countdown(props) {
   }, [props.pauseForModal])
 
   React.useEffect(() => {
+    console.log(context.prefs)
+ 
     if (allowCountdownRestart) {
       if (!timer.pauseForModal) {
         setTimer((timer) => ({
@@ -123,7 +110,7 @@ function Countdown(props) {
       }
     }
 
-  }, [props])
+  }, [props, !context.prefs])
 
   React.useEffect(() => {
     if (timer.time === 0 && !timer.firstStart) {
