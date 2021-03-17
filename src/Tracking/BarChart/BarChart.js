@@ -13,14 +13,17 @@ class BarChart extends Component {
   constructor(props) {
     super(props);
 
-    let today = moment().format("ddd, MMM Do")
-    let todayLess1 = moment().subtract(1, 'days').format("ddd, MMM Do")
-    let todayLess2 = moment().subtract(2, 'days').format("ddd, MMM Do")
-    let todayLess3 = moment().subtract(3, 'days').format("ddd, MMM Do")
-    let todayLess4 = moment().subtract(4, 'days').format("ddd, MMM Do")
-    let todayLess5 = moment().subtract(5, 'days').format("ddd, MMM Do")
-    let todayLess6 = moment().subtract(6, 'days').format("ddd, MMM Do")
-    let days = [todayLess6, todayLess5, todayLess4, todayLess3, todayLess2, todayLess1, today]
+
+    let days = []
+
+    for(let i = 0; i < 7; i++) {
+      let date = moment().subtract(i, 'days').format("ddd, MMM Do")
+      days.push(date)
+
+    }
+
+    days.reverse()
+
 
 
     this.state = {

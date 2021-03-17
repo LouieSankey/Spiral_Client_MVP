@@ -12,25 +12,20 @@ export default class TaskEntryBar extends Component {
 
   state = {
     showTaskbar: false,
-    taskBarCounter: 0,
     tasks: []
 
   }
 
- 
 
   constructor(props) {
     super(props);
     this.taskName = "No Task";
     this.setTaskName = this.setTaskName.bind(this);
-    this.updateDB = this.updateDB.bind(this);
+    this.updateDBWithTask = this.updateDBWithTask.bind(this);
     this.taskInput = React.createRef();
     this.handleFocus = this.handleFocus.bind(this);
   }
  
- 
-  
-  
 
   handleFocus = event => {
     this.taskInput.current.focus();
@@ -40,7 +35,7 @@ export default class TaskEntryBar extends Component {
     this.taskName = event.target.value
   }
 
-  updateDB = (cycle) => {
+  updateDBWithTask = (cycle) => {
     let projectId;
     if (typeof this.context.currentProject === 'undefined') {
       projectId = "0000"
@@ -56,21 +51,7 @@ export default class TaskEntryBar extends Component {
     ApiServices.postTask(task)
   }
 
-  toggleTaskbar = () => {
-    this.setState({
-      taskBarCounter: this.state.taskBarCounter + 1
-    })
 
-    if (this.state.showTaskbar) {
-      this.setState({
-        showTaskbar: false
-      })
-    } else {
-      this.setState({
-        showTaskbar: true
-      })
-    }
-  }
 
  onlyUnique(value, index, self) { 
     return self.indexOf(value) === index;
@@ -89,7 +70,7 @@ export default class TaskEntryBar extends Component {
 
     return (
       <>
-        <Clock updateDB={this.updateDB} taskBarOpen={this.state.showTaskbar} cycle={this.props.cycle} pauseForModal={this.props.pauseForModal} taskBarCounter={this.state.taskBarCounter}></Clock>
+        <Clock updateDBWithTask={this.updateDBWithTask} cycle={this.props.cycle}  ></Clock>
         <div className="taskbar">
         {/* <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
           {this.state.showTaskbar &&

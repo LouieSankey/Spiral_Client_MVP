@@ -43,10 +43,8 @@ class Sidebar extends Component {
 
   static contextType = ApiContext;
 
-
   updateBreakPrefs = () => {
     this.context.changeBreakPrefs(this.newPrefs)
-
   }
 
   changePreferenceValue = event => {
@@ -71,17 +69,16 @@ class Sidebar extends Component {
 
 
   CloseSidebar = () => {
-
     document.body.classList.add('body-margin-left-none')
     document.body.classList.remove('body-margin-left')
 
   }
 
-  handleClose = () => {
+  navAccordianClose = () => {
     this.setState({showNavModal:false})
   }
 
-  navigateToInsights = () => {
+  allowNavigateToInsights = () => {
     if(this.context.timerRef.current?.innerText === "00:00"  || this.context.timerRef.current?.innerText === undefined){
       this.insightsLinkRef.current.click()
     }else{
@@ -89,7 +86,7 @@ class Sidebar extends Component {
     }
   }
 
-  navigateToLogout = () => {
+  allowNavigateToLogout = () => {
     if(this.context.timerRef.current?.innerText === "00:00" || this.context.timerRef.current?.innerText === undefined){
       this.logoutLinkRef.current.click()
     }else{
@@ -97,7 +94,7 @@ class Sidebar extends Component {
     }
   }
 
-  navigateToTimer = () => {
+  allowNavigateToTimer = () => {
     if(this.context.timerRef.current?.innerText === "00:00"  || this.context.timerRef.current?.innerText === undefined){
       this.homeLinkRef.current.click()
     }
@@ -107,14 +104,13 @@ class Sidebar extends Component {
     showHelp = () => {
     this.setState({
       showHelp: true,
-      pauseForModal: true
+      // pauseForModal: true
     });
   };
 
   hideHelp = () => {
     this.setState({
       showHelp: false,
-      pauseForModal: false
     });
   };
 
@@ -122,8 +118,6 @@ class Sidebar extends Component {
     this.setState({showHelp: !this.state.showHelp})
 
   }
-
-
 
 
   render() {
@@ -148,14 +142,14 @@ class Sidebar extends Component {
 
                 <ul className={this.state.showNav ? 'display-block' : 'display-none'}>
                  
-                  <li className="nav-link" onClick={() => this.navigateToTimer()}> <Link  ref={this.homeLinkRef} to="/"></Link>Timer</li>
-                  <li className="nav-link" onClick={() => this.navigateToInsights()}> <Link ref={this.insightsLinkRef} to="/tracking"></Link>Insights</li>
-                  <li className="nav-link" onClick={() => this.navigateToLogout()}> <Link ref={this.logoutLinkRef} onClick={() => { this.props.logout(); this.ToggleSidebar() }} to="/spiral" ></Link>Logout</li>
+                  <li className="nav-link" onClick={() => this.allowNavigateToTimer()}> <Link  ref={this.homeLinkRef} to="/"></Link>Timer</li>
+                  <li className="nav-link" onClick={() => this.allowNavigateToInsights()}> <Link ref={this.insightsLinkRef} to="/tracking"></Link>Insights</li>
+                  <li className="nav-link" onClick={() => this.allowNavigateToLogout()}> <Link ref={this.logoutLinkRef} onClick={() => { this.props.logout(); this.ToggleSidebar() }} to="/spiral" ></Link>Logout</li>
                
                 
                 </ul>
               </div>
-              <NavModal handleClose={this.handleClose} show={this.state.showNavModal}></NavModal>
+              <NavModal handleClose={this.navAccordianClose} show={this.state.showNavModal}></NavModal>
 
 
               <h2 onClick={() => this.setState({ showBreakPrefs: !this.state.showBreakPrefs })} className="white accordion">Breaks</h2>
@@ -175,13 +169,7 @@ class Sidebar extends Component {
                     <li className="pref-li"> 03 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['3']} name="3" className="edit-break" ></input></li>
                     <li className="pref-li"> 02 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['2']} name="2" className="edit-break" ></input></li>
                   </ul>
-
-
-
-
                   <button onClick={this.updateBreakPrefs} className="save-break-prefs-button" >SAVE</button>
-
-
                 </>
                 }
               </div>

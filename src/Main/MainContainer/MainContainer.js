@@ -39,14 +39,14 @@ export default class Main extends Component {
   hideBreakPrefsModal = () => {
     this.setState({
       showPrefs: false,
-      pauseForModal: false
+      // pauseForModal: false
     });
   };
 
   showAllProjectsModal = () => {
     this.setState(prevState => ({
       showProjects: !prevState.showProjects,
-      pauseForModal: !prevState.pauseForModal
+      // pauseForModal: !prevState.pauseForModal
     }));
 
   };
@@ -54,21 +54,21 @@ export default class Main extends Component {
   hideAllProjectsModal = () => {
     this.setState({
       showProjects: false,
-      pauseForModal: false
+      // pauseForModal: false
     });
   };
 
   showNewProjectModal = () => {
     this.setState({
       showAddProject: true,
-      pauseForModal: true
+      // pauseForModal: true
     });
   };
 
   hideNewProjectModal = () => {
     this.setState({
       showAddProject: false,
-      pauseForModal: false
+      // pauseForModal: false
     });
   };
 
@@ -81,7 +81,7 @@ export default class Main extends Component {
       <>
    
         <BreakPrefsModal showPrefs={this.state.showPrefs} handleClose={this.hideBreakPrefsModal}></BreakPrefsModal>
-        <TaskEntryBar setTaskName={this.setLocalTaskName} pauseForModal={this.state.pauseForModal} cycle={this.state.cycle} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
+        <TaskEntryBar setTaskName={this.setLocalTaskName}  cycle={this.state.cycle} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
         <GoldenRectangle updateCycle={this.updateCycle}></GoldenRectangle>
         <AllProjectsModal show={this.state.showProjects} handleClose={this.hideAllProjectsModal} showAdd={this.showNewProjectModal}>
         </AllProjectsModal>

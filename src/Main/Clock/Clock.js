@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './Clock.css'
 import useSound from 'use-sound';
 import bark from '../../Sounds/dog_bark.wav';
@@ -19,7 +19,7 @@ class Clock extends React.Component {
       <>
         <div className="floatLeft">
           <div id="timer">
-            <Countdown updateDB={this.props.updateDB} taskBarOpen={this.props.taskBarOpen} pauseForModal={this.props.pauseForModal} cycle={this.props.cycle} taskBarCounter={this.props.taskBarCounter}>
+            <Countdown updateDBWithTask={this.props.updateDBWithTask}  cycle={this.props.cycle}>
             </Countdown>
           
           </div>
@@ -32,41 +32,30 @@ class Clock extends React.Component {
 
 
 
-
 function Countdown(props) {
 
-  const worker = new myWorker();
-
-  const [timer, setTimer] = React.useState({
-    name: 'timer',
+  const [timer, setTimer] = useState({
     onBreak: false,
-    firstStart: true,
+    firstPageLoad: true,
     isPaused: true,
-    pauseForModal: false,
     time: 0,
     timeRemaining: 0,
     timerHandler: null,
     cycle: 0,
-    timeEqualsTimeRemaning: true,
-    showToolbar: false
-
   })
 
-  const context = React.useContext(ApiContext);
+  const worker = new myWorker()
+  const context = useContext(ApiContext)
+  let breakPrefs = context.prefs
 
-  const [taskBarCounter] = React.useState({
-    counter: 0
-  })
+  
+  //allowCountdownRestart manages state updates
+  //when 'break prefs' or 'project selection' change mid cycle
+  //it will only be true when a valid cycle is selected.
+  let allowCountdownRestart = false
 
-
-  let taskBarProps = props.taskBarCounter
-  let breakDurations = context.prefs
-
-  let allowCountdownRestart = (taskBarCounter.counter !== taskBarProps) ? true : false
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (allowCountdownRestart) {
-      taskBarCounter.counter = taskBarCounter.counter + 1
       allowCountdownRestart = false
     } else {
       allowCountdownRestart = true
@@ -74,28 +63,14 @@ function Countdown(props) {
   }, [props, allowCountdownRestart])
 
   
-  React.useEffect(() => {
+  useEffect(() => {
     allowCountdownRestart = false
-  }, [context.prefs]);
+  }, [breakPrefs]);
 
-
-  
-
-  React.useEffect(() => {
-    if (props.pauseForModal) {
-      timer.pauseForModal = true
-    } else {
-      setTimeout(() => {
-        timer.pauseForModal = false
-      }, 300);
-    }
-  }, [props.pauseForModal])
-
-  React.useEffect(() => {
+  useEffect(() => {
 
     if (allowCountdownRestart) {
-      if (!timer.pauseForModal) {
-        // playGong()
+
         setTimer((timer) => ({
           ...timer,
           time: props.cycle * 60,
@@ -103,56 +78,58 @@ function Countdown(props) {
           cycle: props.cycle,
           onBreak: false
         }));
-      }
-      if (timer.isPaused) {
-        // timer.isPaused = false;
-      }
+ 
     }
 
-  }, [props, !context.prefs])
+  }, [props])
 
-  React.useEffect(() => {
-    if (timer.time === 0 && !timer.firstStart) {
+
+
+  useEffect(() => {
+   
+    if (timer.time === 0 && !timer.firstPageLoad) {
+
       setTimeout(function () {
         if (timer.onBreak) {
           playBark()
-          timer.showToolbar = false
+
           timer.onBreak = false
+
+
         } else {
-          const breakDuration = breakDurations[timer.cycle] * 60
+          const breakDuration = breakPrefs[timer.cycle] * 60
 
           playTweet()
+
           if (breakDuration !== 0) {
 
-            // playTweet()
             setTimer((timer) => ({
               ...timer,
               onBreak: true,
               time: breakDuration,
               timeRemaining: breakDuration
             }));
-          } else {
-            // playBark()
-            timer.showToolbar = false
-          }
-          props.updateDB(timer.cycle)
+
+          } 
+
+          props.updateDBWithTask(timer.cycle)
         }
       }, 1000);
 
     } else {
 
       if (timer.time === timer.timeRemaining) {
-        timer.firstStart = false
-        timer.showToolbar = true
-        handleStart()
-      }
 
+        //first page load is true here, then immediatly set to false
+        timer.firstPageLoad = false
+        handleResume()
+      }
     }
 
   }, [timer.time, timer.time === timer.timeRemaining])
 
 
-  React.useEffect(() => {
+  useEffect(() => {
 
     if (timer.timeRemaining === 0) {
       clearInterval(timer.timerHandler)
@@ -166,38 +143,52 @@ function Countdown(props) {
 
   }, [timer.timeRemaining])
 
+
+
+  const handleResume = e => {
+    if (timer.time !== 0) {
+      clearInterval(timer.timerHandler)
+    
+      setTimer({ 
+        ...timer, 
+        isPaused: false, 
+        timerHandler: setInterval(updateTimeRemaining, 1000)})
+    }
+  }
+
   const updateTimeRemaining = e => {
     setTimer(prev => {
       return { ...prev, timeRemaining: prev.timeRemaining - 1 }
     })
   }
-  const handleStart = e => {
-    if (timer.time !== 0) {
-      clearInterval(timer.timerHandler)
 
-
-      const worker = new myWorker();
-      worker.postMessage(0);
-      // worker.addEventListener('message', event => setTimer({counter: event.data}));
- 
-       
-
-
-
-
-
-
-
-
-
-      const handle = setInterval(updateTimeRemaining, 1000);
-      setTimer({ ...timer, isPaused: false, timerHandler: handle })
-    }
+  const handleSkip = () => {
+    clearInterval(timer.timerHandler)
+    setTimer({ ...timer, timeRemaining: 0 })
   }
+
+  const handleStop = () => {
+    clearInterval(timer.timerHandler)
+    setTimer({ ...timer, onBreak: true, cycle: 0, timeRemaining: 0 })
+
+  }
+
   const handlePause = e => {
     clearInterval(timer.timerHandler)
     setTimer({ ...timer, isPaused: true })
   }
+
+  const [playBark] = useSound(bark,
+    { volume: 0.35 }
+  );
+
+  const [playTweet] = useSound(tweet,
+    { volume: 0.20 }
+  );
+
+  const [playGong] = useSound(gong,
+    { volume: 0.20 }
+  );
 
   const timeFormat = (duration) => {
 
@@ -217,29 +208,6 @@ function Countdown(props) {
     }
   }
 
-  const handleSkip = () => {
-    clearInterval(timer.timerHandler)
-    setTimer({ ...timer, timeRemaining: 0 })
-  }
-
-  const handleStop = () => {
-    clearInterval(timer.timerHandler)
-    setTimer({ ...timer, onBreak: true, cycle: 0, timeRemaining: 0 })
-
-  }
-
-  const [playBark] = useSound(bark,
-    { volume: 0.35 }
-  );
-
-  const [playTweet] = useSound(tweet,
-    { volume: 0.20 }
-  );
-
-  const [playGong] = useSound(gong,
-    { volume: 0.20 }
-  );
-
 
   return <React.Fragment>
 
@@ -256,7 +224,7 @@ function Countdown(props) {
             <i className="tooltip pause"><PausePresentation className="toolbar-icon" onClick={handlePause}></PausePresentation>
               <span className="tooltiptext pause-tooltip">Pause</span></i>
             :
-            <i className="tooltip pause"><PlayCircleOutline className="toolbar-icon" onClick={handleStart}></PlayCircleOutline>
+            <i className="tooltip pause"><PlayCircleOutline className="toolbar-icon" onClick={handleResume}></PlayCircleOutline>
               <span className="tooltiptext">Resume</span></i>
           }
           <i className="tooltip"><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext>
