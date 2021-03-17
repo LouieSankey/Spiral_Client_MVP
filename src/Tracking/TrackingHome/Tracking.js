@@ -43,11 +43,14 @@ export default class Tracking extends Component {
   componentDidMount() {
 
     const contextValue = this.context;
+    let currentProject = 
+    contextValue.currentProject ? contextValue.currentProject : JSON.parse(localStorage.getItem("recent_project"))
+
     this.setState({
-      currentProject: contextValue.currentProject,
+      currentProject: currentProject,
     })
 
-    this.getSelectedProjectTasksFromDB(this.state.timeRange, contextValue.currentProject.id)
+    this.getSelectedProjectTasksFromDB(this.state.timeRange, currentProject.id)
 
     setTimeout(() => {
       this.setState({
@@ -59,10 +62,13 @@ export default class Tracking extends Component {
 
   getSelectedProjectTasksFromDB = (timeRange, currentProjectId) => {
 
+    let account_id = this.context.account_id ? this.context.account_id : JSON.parse(localStorage.getItem("account_id"))
+    let project_id = currentProjectId ? currentProjectId : JSON.parse(localStorage.getItem("recent_project")).id
+
     let params = {
       timeRange: timeRange,
-      project: currentProjectId,
-      account: this.context.account_id
+      project: project_id,
+      account: account_id
     }
 
     APIService.getProjectTasksForRange(params)
@@ -84,8 +90,10 @@ export default class Tracking extends Component {
   }
 
   onProjectSelected = (event) => {
-    this.state.currentProject = {...this.state.currentProject, id: event.value, project: event.label}
+    let project = {...this.state.currentProject, id: event.value, project: event.label}
+    this.state.currentProject = project
     this.getSelectedProjectTasksFromDB(this.state.timeRange, event.value)
+    localStorage.setItem("recent_project", JSON.stringify(project))
   }
 
   onSliceSelected = (event) => {
@@ -157,6 +165,11 @@ export default class Tracking extends Component {
 
 
   mapProjectsForDropdown = (projects) => {
+
+    if(!projects){
+      projects = localStorage.getItem("recent_projects")
+    }
+
     return projects.map(project => {
       return { value: project.id, label: project.project }
     })
@@ -189,7 +202,7 @@ export default class Tracking extends Component {
         <div className="tracking-container">
           <div className="projects-dropdown">
 
-            <Dropdown className='dropdown' options={this.mapProjectsForDropdown(projects)} onChange={this.onProjectSelected} value={currentProject.project} placeholder="Select an option" />
+            <Dropdown className='dropdown' options={this.mapProjectsForDropdown(projects)} onChange={this.onProjectSelected} value={this.state.currentProject.project} placeholder="Select an option" />
 
             <h1 className="bar-chart-header">Selected Task: {this.state.currentTaskName} </h1>
             <select name="timeframe" className="timeframe" onChange={this.onTimeRangeSelected} value={this.state.timeRange}>

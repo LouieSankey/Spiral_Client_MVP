@@ -81,6 +81,8 @@ class App extends Component {
 
         const currentProject = projects[0]
         this.setState({ account, projects, prefsRes, account_id, currentProject, tasksRes })
+        localStorage.setItem("recent_projects", JSON.stringify(projects))
+
       })
       .catch(error => {
         console.error({ error })
@@ -101,6 +103,7 @@ class App extends Component {
     this.setState({
       currentProject: project
     })
+    localStorage.setItem("recent_project", JSON.stringify(project))
   }
 
   ToggleMobileNav = () => {
