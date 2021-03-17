@@ -15,19 +15,26 @@ export default class Tracking extends Component {
 
   state = {
     tasks: null,
-    sortedTasks: [],
-    projects: [],
     currentProject: {},
-    sortedProjectTasks: [],
-    tasksForBarChart: [],
+    currentTaskName: "All",
+    tasksForPie: [],
+    tasksForDailyView: [],
     displayLoader: true,
-    data: [
-      { label: "apple", y: 10 },
-      { label: "orange", y: 15 },
-      { label: "banana", y: 25 },
-      { label: "mango", y: 30 },
-      { label: "grape", y: 28 }
-    ]
+    timeRange: 1,
+    timeRangeOptions: [
+      {
+        name: 'This Week',
+        value: 1,
+      },
+      {
+        name: 'This Month',
+        value: 2,
+      },
+      {
+        name: 'This Year',
+        value: 3,
+      }
+    ],
 
   }
 
@@ -38,10 +45,9 @@ export default class Tracking extends Component {
     const contextValue = this.context;
     this.setState({
       currentProject: contextValue.currentProject,
-      currentTaskName: "All",
     })
 
-    this.getTasks()
+    this.getSelectedProjectTasksFromDB(this.state.timeRange, contextValue.currentProject.id)
 
     setTimeout(() => {
       this.setState({
@@ -51,54 +57,77 @@ export default class Tracking extends Component {
   }
 
 
+  getSelectedProjectTasksFromDB = (timeRange, currentProjectId) => {
 
-  getTasks() {
-    Promise.all([
-      fetch(`${config.API_ENDPOINT}/task/account/${this.context.account_id}`),
-    ])
-      .then(([taskRes]) => {
-        if (!taskRes.ok)
-          return taskRes.json().then(e => Promise.reject(e))
+    let params = {
+      timeRange: timeRange,
+      project: currentProjectId,
+      account: this.context.account_id
+    }
 
-        return Promise.all([
-          taskRes.json(),
-        ])
-      })
+    APIService.getProjectTasksForRange(params)
       .then(([tasks]) => {
         this.setState({ tasks })
-        this.getTasksForProject(this.state.currentProject, tasks)
+        this.getTimeForTasks(tasks)
+
       })
       .catch(error => {
         console.error({ error })
       })
+
   }
 
 
-  getTasksForProject = (currentProject) => {
-    let projectName = currentProject.value ? currentProject.value : currentProject.id
-    let sortedTasks = this.state.tasks.filter(task => task.project === projectName)
-    let allTasksTime = 0
-    sortedTasks.forEach(task => {
-      allTasksTime += task.cycle
-    })
+  onTimeRangeSelected = (event) => {
+    this.setState({ timeRange: event.target.value })
+    this.getSelectedProjectTasksFromDB(event.target.value, this.state.currentProject.id)
+  }
 
-    let sortedProjectTasks = this.filterArrayForPieChart(sortedTasks)
+  onProjectSelected = (event) => {
+    this.state.currentProject = {...this.state.currentProject, id: event.value, project: event.label}
+    this.getSelectedProjectTasksFromDB(this.state.timeRange, event.value)
+  }
+
+  onSliceSelected = (event) => {
 
     this.setState({
-      sortedTasks: this.formatTasks(sortedTasks),
-      tasksForBarChart: this.formatTasks(sortedTasks),
-      taskTimeHeader: FormatTrackingHeader(allTasksTime),
-      allTasksTime: allTasksTime,
-      selectedProjectName: projectName,
-      sortedProjectTasks: this.formatTasks(sortedProjectTasks)
+      tasksForDailyView: this.state.currentTaskName === event.dataPoint.label
+        ? this.state.tasks
+        : this.addTimeLabelFormatting(this.state.tasks.filter(task => task.task === event.dataPoint.label)),
+
+      currentTaskName: this.state.currentTaskName === event.dataPoint.label
+        ? "All"
+        : event.dataPoint.label,
+
+      taskTimeHeader: this.state.currentTaskName === event.dataPoint.label
+        ? FormatTrackingHeader(this.state.timeForAllTasks)
+        : FormatTrackingHeader(event.dataPoint.y),
 
     })
 
   }
 
 
+  getTimeForTasks = (tasks) => {
 
-  filterArrayForPieChart = (tasks) => {
+    let timeForAllTasks = 0
+    tasks.forEach(task => {
+      timeForAllTasks += task.cycle
+    })
+
+    let tasksForPie = this.getTimeTotalForEachTask(tasks)
+
+    this.setState({
+      tasksForDailyView: this.addTimeLabelFormatting(tasks),
+      taskTimeHeader: FormatTrackingHeader(timeForAllTasks),
+      tasksForPie: this.addTimeLabelFormatting(tasksForPie),
+      timeForAllTasks: timeForAllTasks,
+    })
+
+  }
+
+
+  getTimeTotalForEachTask = (tasks) => {
     let hash = {}
     tasks.forEach(task => {
       if (hash[task.task]) {
@@ -109,7 +138,6 @@ export default class Tracking extends Component {
     })
 
     let data = []
-
     Object.keys(hash).forEach(key => {
       data.push({ y: hash[key], label: key })
     })
@@ -117,7 +145,7 @@ export default class Tracking extends Component {
     return data
   }
 
-  formatTasks = (tasks) => {
+  addTimeLabelFormatting = (tasks) => {
     tasks.forEach(task => {
       task.time = moment(task.date_published).format("h:mm a")
       task.date = moment(task.date_published).format("dddd, MMMM Do YYYY")
@@ -127,44 +155,31 @@ export default class Tracking extends Component {
     return tasks
   }
 
-  
+
   mapProjectsForDropdown = (projects) => {
     return projects.map(project => {
       return { value: project.id, label: project.project }
     })
-
   }
 
 
-  // when a pie chart slice is selected
 
-  onSliceSelected = (event) => {
-    this.setState({
-      tasksForBarChart: this.state.currentTaskName === event.dataPoint.label
-        ? this.state.sortedTasks
-        : this.formatTasks(this.state.sortedTasks.filter(task => task.task === event.dataPoint.label)),
+  DeleteProject = (force = false) => {
 
-      currentTaskName: this.state.currentTaskName === event.dataPoint.label
-        ? "All"
-        : event.dataPoint.label,
-
-      taskTimeHeader: this.state.currentTaskName === event.dataPoint.label
-        ? FormatTrackingHeader(this.state.allTasksTime)
-        : FormatTrackingHeader(event.dataPoint.y),
-
-    })
-
-  }
-
-  DeleteProject = () => {
-    APIService.deleteProject(this.state.currentProject.id)
+    let confirm = true;
+    if (!force) {
+        confirm = window.confirm(`are you sure you want to delete "${this.state.currentProject.project}"?`)
+    }
+    if (confirm) {
+        APIService.deleteProject(this.state.currentProject.id)
+    }
   }
 
 
   render() {
     const { projects = [], currentProject = {} } = this.context
     const value = {
-      tasks: this.state.tasksForBarChart,
+      tasks: this.state.tasksForDailyView,
       currentProject: currentProject,
     }
 
@@ -174,25 +189,23 @@ export default class Tracking extends Component {
         <div className="tracking-container">
           <div className="projects-dropdown">
 
-            {/* select project dropdown */}
-            <Dropdown className='dropdown' options={this.mapProjectsForDropdown(projects)} onChange={this.getTasksForProject} value={currentProject.project} placeholder="Select an option" />
-           
-           
-            <h1 className="bar-chart-header">Selected Task: {this.state.currentTaskName} </h1>
+            <Dropdown className='dropdown' options={this.mapProjectsForDropdown(projects)} onChange={this.onProjectSelected} value={currentProject.project} placeholder="Select an option" />
 
-            {/* select time period dropdown */}
-            <select name="timeframe" className="timeframe">
-              <option value="today">This Week:</option>
+            <h1 className="bar-chart-header">Selected Task: {this.state.currentTaskName} </h1>
+            <select name="timeframe" className="timeframe" onChange={this.onTimeRangeSelected} value={this.state.timeRange}>
+              {this.state.timeRangeOptions.map(item => (
+                <option key={item.value} value={item.value}>
+                  {item.name}
+                </option>))}
             </select>
 
 
             <h2 className="bar-chart-sub-header">{this.state.taskTimeHeader}</h2>
           </div>
 
-          {/* sortedProjectTasks is passed in to the pie chart */}
-          {this.state.sortedProjectTasks.length > 0 ?
+          {this.state.tasksForPie.length > 0 ?
 
-            <PieChart data={this.state.sortedProjectTasks.sort()} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
+            <PieChart data={this.state.tasksForPie.sort()} onSliceSelected={this.onSliceSelected} taskName={this.state.currentTaskName}></PieChart>
             :
             <div className={"loaderContainer"}>
               {this.state.displayLoader ?
@@ -202,13 +215,11 @@ export default class Tracking extends Component {
           }
           <h2 className="tracking-header">{`Daily View (This Week - ${this.state.currentTaskName})`}</h2>
 
-          {/* tasksForPieChart chart is passed to bar chart */}
-          <BarChart tasks={this.state.tasksForPieChart} headline={this.state.projectName ? this.state.projectName : currentProject.project}>
+          <BarChart headline={this.state.projectName ? this.state.projectName : currentProject.project}>
           </BarChart>
           <h2 className="edit-label">Edit Task</h2>
 
 
-          {/* tasks are available to grid via context */}
           <Grid></Grid>
           <br></br>
           <p onClick={() => this.DeleteProject()} className="delete-project">DELETE PROJECT</p>

@@ -72,6 +72,14 @@
     width: 100%;
 }
 
+.Dropdown-option:hover {
+    background-color: rgb(71, 71, 71);
+}
+
+.Dropdown-option.is-selected {
+    background-color: black;
+}
+
 .bar-chart-sub-header {
     padding-bottom: 20px;
 }

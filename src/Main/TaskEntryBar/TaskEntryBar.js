@@ -73,7 +73,6 @@ export default class TaskEntryBar extends Component {
   }
 
  onlyUnique(value, index, self) { 
-   console.log(value)
     return self.indexOf(value) === index;
 }
 

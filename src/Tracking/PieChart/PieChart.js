@@ -59,7 +59,6 @@ class PieChart extends Component {
 
 
 	render() {
-		console.log("data " + JSON.stringify(this.props.data))
 
 		const onSelect = (event) => {
 			var dataSeries = event.dataSeries;

@@ -6,6 +6,10 @@ import NewProjectModal from '../Modals/NewProjectModal'
 import BreakPrefsModal from '../Modals/BreakPrefsModal'
 import './MainContainer.css'
 import ApiContext from '../../ApiContext'
+import  useSound from 'use-sound';
+
+
+
 
 export default class Main extends Component {
 
@@ -67,6 +71,8 @@ export default class Main extends Component {
       pauseForModal: false
     });
   };
+
+
 
 
 

@@ -84,22 +84,18 @@ function Countdown(props) {
   React.useEffect(() => {
     if (props.pauseForModal) {
       timer.pauseForModal = true
-      // handlePause()
     } else {
       setTimeout(() => {
         timer.pauseForModal = false
-        // handleStart()
       }, 300);
     }
   }, [props.pauseForModal])
 
   React.useEffect(() => {
-    console.log("context", context)
 
-
- 
     if (allowCountdownRestart) {
       if (!timer.pauseForModal) {
+        // playGong()
         setTimer((timer) => ({
           ...timer,
           time: props.cycle * 60,
@@ -261,7 +257,7 @@ function Countdown(props) {
               <span className="tooltiptext pause-tooltip">Pause</span></i>
             :
             <i className="tooltip pause"><PlayCircleOutline className="toolbar-icon" onClick={handleStart}></PlayCircleOutline>
-              <span className="tooltiptext">Start</span></i>
+              <span className="tooltiptext">Resume</span></i>
           }
           <i className="tooltip"><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext>
             <span className="tooltiptext">Skip to Break</span></i>
