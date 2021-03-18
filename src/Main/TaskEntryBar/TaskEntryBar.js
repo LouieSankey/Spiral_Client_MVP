@@ -70,7 +70,7 @@ export default class TaskEntryBar extends Component {
 
     return (
       <>
-        <Clock updateDBWithTask={this.updateDBWithTask} cycle={this.props.cycle}  ></Clock>
+        <Clock updateDBWithTask={this.updateDBWithTask} noClockStop={this.props.noClockStop} cycle={this.props.cycle}  ></Clock>
         <div className="taskbar">
         {/* <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
           {this.state.showTaskbar &&

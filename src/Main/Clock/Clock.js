@@ -19,7 +19,7 @@ class Clock extends React.Component {
       <>
         <div className="floatLeft">
           <div id="timer">
-            <Countdown updateDBWithTask={this.props.updateDBWithTask}  cycle={this.props.cycle}>
+            <Countdown updateDBWithTask={this.props.updateDBWithTask} noClockStop={this.props.noClockStop} cycle={this.props.cycle}>
             </Countdown>
           
           </div>
@@ -47,7 +47,6 @@ function Countdown(props) {
   const worker = new myWorker()
   const context = useContext(ApiContext)
   let breakPrefs = context.prefs
-
   
   //allowCountdownRestart manages state updates
   //when 'break prefs' or 'project selection' change mid cycle
@@ -65,9 +64,12 @@ function Countdown(props) {
   
   useEffect(() => {
     allowCountdownRestart = false
-  }, [breakPrefs]);
+  }, [breakPrefs, props.noClockStop, context.handleAddProject, context.currentProject]);
+
+
 
   useEffect(() => {
+    console.log(props)
 
     if (allowCountdownRestart) {
 

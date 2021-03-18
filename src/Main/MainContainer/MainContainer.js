@@ -22,6 +22,7 @@ export default class Main extends Component {
     showAddProject: false,
     pauseTimer: false,
     taskName: "",
+    noClockStop: 0
  
   };
 
@@ -33,44 +34,48 @@ export default class Main extends Component {
   showBreakPrefsModal = () => {
     this.setState({
       showPrefs: true,
-      pauseForModal: true
     });
   };
   hideBreakPrefsModal = () => {
     this.setState({
       showPrefs: false,
-      // pauseForModal: false
     });
   };
 
   showAllProjectsModal = () => {
     this.setState(prevState => ({
       showProjects: !prevState.showProjects,
-      // pauseForModal: !prevState.pauseForModal
+     noClockStop: prevState.noClockStop+1
     }));
 
   };
 
   hideAllProjectsModal = () => {
-    this.setState({
+    this.setState(prevState => ({
       showProjects: false,
-      // pauseForModal: false
-    });
+      noClockStop: prevState.noClockStop+1 
+      }));
   };
 
   showNewProjectModal = () => {
-    this.setState({
+    this.setState(prevState => ({
       showAddProject: true,
-      // pauseForModal: true
-    });
+      noClockStop: prevState.noClockStop+1  
+      }));
   };
 
   hideNewProjectModal = () => {
-    this.setState({
+    this.setState(prevState => ({
       showAddProject: false,
-      // pauseForModal: false
-    });
+      noClockStop: prevState.noClockStop+1
+        }));
   };
+
+  noClockStop = () => {
+    this.setState(prevState => ({
+      noClockStop: prevState.noClockStop+1
+        }));
+  }
 
 
 
@@ -81,11 +86,11 @@ export default class Main extends Component {
       <>
    
         <BreakPrefsModal showPrefs={this.state.showPrefs} handleClose={this.hideBreakPrefsModal}></BreakPrefsModal>
-        <TaskEntryBar setTaskName={this.setLocalTaskName}  cycle={this.state.cycle} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
+        <TaskEntryBar setTaskName={this.setLocalTaskName}  cycle={this.state.cycle} noClockStop={this.state.noClockStop} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
         <GoldenRectangle updateCycle={this.updateCycle}></GoldenRectangle>
         <AllProjectsModal show={this.state.showProjects} handleClose={this.hideAllProjectsModal} showAdd={this.showNewProjectModal}>
         </AllProjectsModal>
-        <NewProjectModal show={this.state.showAddProject} handleClose={this.hideNewProjectModal}>
+        <NewProjectModal show={this.state.showAddProject} noClockStop={this.noClockStop} handleClose={this.hideNewProjectModal}>
         </NewProjectModal>
         <br />
       </>

@@ -30,6 +30,7 @@ class NewProjectModal extends Component {
       .catch(error => {
         console.error({ error })
       })
+      
 
     this.props.handleClose()
   }
