@@ -43,7 +43,6 @@
 
 .break-modal {
     position: fixed;
-    background-color: rgb(0, 0, 0, 0.4);
     z-index: 9999;
     top: 0;
     left: 0;
@@ -66,12 +65,13 @@
 
 .nav-link-modal {
     position: fixed;
-    background-color: rgb(0, 0, 0, 0.4);
     z-index: 9999;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 250px);
+    margin-left: 250px;
     height: 100%;
+    background-color: rgb(0, 0, 0, 0.4);
 }
 
 .nav-link-list {
@@ -91,7 +91,7 @@
     background: rgb(253, 253, 253);
     border-style: solid;
     border-radius: 15px;
-    width: 40%;
+    width: 60%;
     height: 40%;
     overflow: auto;
     top: 50%;
@@ -101,12 +101,13 @@
 
 .help-modal {
     position: fixed;
-    background-color: rgb(0, 0, 0, 0.4);
     z-index: 9999;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 250px);
+    margin-left: 250px;
     height: 100%;
+    background-color: rgb(0, 0, 0, 0.4);
 }
 
 .help-list {
@@ -125,8 +126,8 @@
     background: rgb(253, 253, 253);
     border-style: solid;
     border-radius: 20px;
-    width: 60%;
-    height: 70%;
+    width: 80%;
+    height: 60%;
     overflow: auto;
     top: 50%;
     left: 50%;
@@ -214,6 +215,14 @@
 }
 
 @media screen and (max-width: 768px) {
+    .nav-link-modal {
+        margin-left: 0px;
+        width: 100%;
+    }
+    .help-modal {
+        margin-left: 0px;
+        width: 100%;
+    }
     .modal-nav-link-main {
         width: 70%;
         height: 40%;
