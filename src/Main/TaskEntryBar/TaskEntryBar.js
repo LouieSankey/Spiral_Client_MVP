@@ -3,8 +3,6 @@ import './TaskEntryBar.css'
 import ApiContext from '../../ApiContext'
 import Clock from '../Clock/Clock'
 import ApiServices from '../../api-services'
-import { isElementOfType } from 'react-dom/test-utils'
-import config from '../../config'
 
 export default class TaskEntryBar extends Component {
   static defaultProps = {}
@@ -71,21 +69,13 @@ export default class TaskEntryBar extends Component {
     return (
       <>
         <Clock updateDBWithTask={this.updateDBWithTask} noClockStop={this.props.noClockStop} cycle={this.props.cycle}  ></Clock>
-        <div className="taskbar">
-        {/* <button onClick={this.toggleTaskbar} className="plus-button" >{plusbutton}</button>
-          {this.state.showTaskbar &&
-          
-          } */}
 
+        <div className="taskbar">
             <div>
               <label htmlFor="taskInput" className="task-name"  alt="an input for tracking to provide a name for your current task"></label>
               <input list="tasks" autoComplete="off" className="taskInput" name="taskInput" id="taskInput" ref={this.taskInput} onKeyPress={event => (event.key === 'Enter') && this.handleFocus} onChange={this.setTaskName} type="text" placeholder="Task Name" onFocus={(event) => event.target.select()} ></input>
               <datalist id="tasks">
-                  {
-       
-                  
-                  
-                  tasks.filter(task => {return task.project === this.context.currentProject.id})
+                  {tasks.filter(task => {return task.project === this.context.currentProject.id})
                   .map(task => {return task.task})
                   .filter( this.onlyUnique )
                   .map((task, key) =>
