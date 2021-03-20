@@ -1,7 +1,6 @@
-/* eslint-disable-next-line no-restricted-globals */
 
 let mytimer;
-
+/* eslint-disable-next-line no-restricted-globals */
 self.onmessage = function(evt) {
     clearInterval(mytimer);
 
