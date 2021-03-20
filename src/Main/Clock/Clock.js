@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import './Clock.css'
 import useSound from 'use-sound';
 import bark from '../../Sounds/dog_bark.wav';
@@ -44,9 +44,42 @@ function Countdown(props) {
     cycle: 0,
   })
 
-  const worker = new myWorker()
   const context = useContext(ApiContext)
   let breakPrefs = context.prefs
+
+
+const worker = useRef()
+
+useEffect(() => {
+  worker.current = new myWorker()
+
+  return () => {
+    worker.current.terminate();
+  }
+}, [])
+
+
+
+useEffect(() => {
+  const eventHander = e => {
+    
+  setTimer(prev => {
+      return { ...prev, timeRemaining: e.data}
+    })
+    console.log('Countdown from worker ' + e.data);
+  }
+
+  worker.current.addEventListener('message', eventHander)
+  return () => {
+    worker.current.removeEventListener('message', eventHander)
+  }
+}, [])
+
+
+
+
+
+
   
   //allowCountdownRestart manages state updates
   //when 'break prefs' or 'project selection' change mid cycle
@@ -62,28 +95,46 @@ function Countdown(props) {
   }, [props, allowCountdownRestart])
 
   
+
+
   useEffect(() => {
     allowCountdownRestart = false
   }, [breakPrefs, props.noClockStop, context.handleAddProject, context.currentProject]);
 
 
 
-  useEffect(() => {
-    console.log(props)
+  // useEffect(() => {
 
-    if (allowCountdownRestart) {
+  //   if (allowCountdownRestart) {
 
-        setTimer((timer) => ({
-          ...timer,
-          time: props.cycle * 60,
-          timeRemaining: props.cycle * 60,
-          cycle: props.cycle,
-          onBreak: false
-        }));
+  //       setTimer((timer) => ({
+  //         ...timer,
+  //         time: props.cycle * 60,
+  //         // timeRemaining: props.cycle * 60,
+  //         cycle: props.cycle,
+  //         onBreak: false
+  //       }));
  
-    }
+  //   }
 
-  }, [props])
+  // }, [props])
+
+
+  useEffect(() => {
+    if (allowCountdownRestart) {
+  
+      worker.current.postMessage({message: "start", "time": props.cycle * 60 + 1})
+
+    setTimer((timer) => ({
+      ...timer,
+      time: props.cycle * 60,
+      timeRemaining: props.cycle * 60,
+      cycle: props.cycle,
+      onBreak: false
+    }));
+  }
+
+}, [props])
 
 
 
@@ -91,12 +142,10 @@ function Countdown(props) {
    
     if (timer.time === 0 && !timer.firstPageLoad) {
 
-      setTimeout(function () {
         if (timer.onBreak) {
           playBark()
 
           timer.onBreak = false
-
 
         } else {
           const breakDuration = breakPrefs[timer.cycle] * 60
@@ -105,18 +154,21 @@ function Countdown(props) {
 
           if (breakDuration !== 0) {
 
+
+            worker.current.postMessage({message: "break", "time": breakDuration})
+
             setTimer((timer) => ({
               ...timer,
               onBreak: true,
               time: breakDuration,
-              timeRemaining: breakDuration
+              // timeRemaining: breakDuration
             }));
 
           } 
 
           props.updateDBWithTask(timer.cycle)
         }
-      }, 1000);
+      // }, 0);
 
     } else {
 
@@ -131,10 +183,14 @@ function Countdown(props) {
   }, [timer.time, timer.time === timer.timeRemaining])
 
 
+  //resets timer to intial state
   useEffect(() => {
 
     if (timer.timeRemaining === 0) {
-      clearInterval(timer.timerHandler)
+      // clearInterval(timer.timerHandler)
+
+            worker.current.postMessage({message: "stop", "time": 0})
+
       setTimer((timer) => ({
         ...timer,
         time: 0,
@@ -147,14 +203,21 @@ function Countdown(props) {
 
 
 
+
   const handleResume = e => {
     if (timer.time !== 0) {
-      clearInterval(timer.timerHandler)
+      // clearInterval(timer.timerHandler)
+
+      // worker.postMessage(timer.timeRemaining)
     
       setTimer({ 
         ...timer, 
         isPaused: false, 
-        timerHandler: setInterval(updateTimeRemaining, 1000)})
+        timerHandler: setInterval(updateTimeRemaining, 1000)
+        //timerHandler: worker.postMessage(timer.timeRemaining)
+      
+      })
+
     }
   }
 
@@ -165,19 +228,37 @@ function Countdown(props) {
   }
 
   const handleSkip = () => {
-    clearInterval(timer.timerHandler)
-    setTimer({ ...timer, timeRemaining: 0 })
+
+    worker.current.postMessage({message: "skip", "time": 0})
+
+
+
+    // clearInterval(timer.timerHandler)
+    // setTimer({ ...timer, timeRemaining: 0 })
+
   }
 
   const handleStop = () => {
-    clearInterval(timer.timerHandler)
-    setTimer({ ...timer, onBreak: true, cycle: 0, timeRemaining: 0 })
 
+    worker.current.postMessage({message: "stop", "time": 0})
+
+    clearInterval(timer.timerHandler)
+    setTimer({ 
+      ...timer, 
+      onBreak: true, 
+      cycle: 0, 
+      // timeRemaining: 0 
+    })
   }
 
   const handlePause = e => {
-    clearInterval(timer.timerHandler)
-    setTimer({ ...timer, isPaused: true })
+
+    // clearInterval(timer.timerHandler)
+    setTimer({ 
+      ...timer, 
+      isPaused: true 
+    })
+
   }
 
   const [playBark] = useSound(bark,
