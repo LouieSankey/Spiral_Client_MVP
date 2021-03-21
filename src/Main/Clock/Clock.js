@@ -52,18 +52,6 @@ function Clock(props) {
   }, [])
 
 
-
-  //listens for pause/unpause and updates timer accordingly
-  useEffect(() => {
-    if (timer.isPaused) {
-      worker.current.postMessage({ message: "pause", "time": timer.timeRemaining })
-    } else {
-      worker.current.postMessage({ message: "start", "time": timer.timeRemaining })
-    }
-  }, [timer.isPaused])
-
-
-
   //stops the countdown from resetting during certain UI events 
   let allowCountdownRestart = false
   useEffect(() => {
@@ -84,6 +72,8 @@ function Clock(props) {
   //couldn't pass in [props.cycle] for this because of an issue when user selects the same cycle twice
   useEffect(() => {
     if (allowCountdownRestart) {
+      worker.current.postMessage({ message: "start", "time": props.cycle * 60 })
+
       setTimer((timer) => ({
         ...timer,
         time: props.cycle * 60,
@@ -156,6 +146,14 @@ function Clock(props) {
 
 
 
+  //listens for pause/unpause and updates timer accordingly
+  useEffect(() => {
+    if (timer.isPaused) {
+      worker.current.postMessage({ message: "pause", "time": timer.timeRemaining })
+    } else {
+      worker.current.postMessage({ message: "start", "time": timer.timeRemaining })
+    }
+  }, [timer.isPaused])
 
 
   const handlePause = e => {
