@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import './TaskEntryBar.css'
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import Clock from '../Clock/Clock'
 import ApiServices from '../../api-services'
 
 export default class TaskEntryBar extends Component {
   static defaultProps = {}
-  static contextType = ApiContext;
+  static contextType = MainContext;
 
   state = {
     showTaskbar: false,

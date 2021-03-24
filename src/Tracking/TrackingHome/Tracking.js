@@ -1,50 +1,50 @@
 import React, { Component } from 'react'
-import BarChart from '../BarChart/BarChart'
+import OneWeekTrailing from '../OneWeekTrailing/OneWeekTrailing'
 import Grid from '../AG_Grid/Grid'
 import './Tracking.css'
 import Dropdown from 'react-dropdown'
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import config from '../../config'
-import moment from 'moment'
 import PieChart from '../PieChart/PieChart'
-import { FormatTrackingHeader } from '../BarChart/helper'
+import { FormatTrackingHeader } from '../helper'
 import APIService from '../../api-services'
 import DotLoader from "react-spinners/ClipLoader"
+import OneMonthTrailing from "../OneMonthTrailing/OneMonthTrailing"
+import moment from 'moment'
 
 export default class Tracking extends Component {
 
   state = {
     tasks: null,
     currentProject: {},
-    currentTaskName: "All",
+    currentTaskName: "All Tasks",
     tasksForPie: [],
     tasksForDailyView: [],
     displayLoader: true,
-    timeRange: 1,
+    timeRange: "1",
+    timeRangeLabel: "Last 7 Days",
     timeRangeOptions: [
       {
-        name: 'This Week',
-        value: 1,
+        name: 'Last 7 Days',
+        value: "1"
+
       },
       {
-        name: 'This Month',
-        value: 2,
-      },
-      {
-        name: 'This Year',
-        value: 3,
+        name: 'Last 30 Days',
+        value: "2"
       }
+
     ],
 
   }
 
-  static contextType = ApiContext;
+  static contextType = MainContext;
 
   componentDidMount() {
 
     const contextValue = this.context;
-    let currentProject = 
-    contextValue.currentProject ? contextValue.currentProject : JSON.parse(localStorage.getItem("recent_project"))
+    let currentProject =
+      contextValue.currentProject ? contextValue.currentProject : JSON.parse(localStorage.getItem("recent_project"))
 
     this.setState({
       currentProject: currentProject,
@@ -65,7 +65,24 @@ export default class Tracking extends Component {
     let account_id = this.context.account_id ? this.context.account_id : JSON.parse(localStorage.getItem("account_id"))
     let project_id = currentProjectId ? currentProjectId : JSON.parse(localStorage.getItem("recent_project")).id
 
+    let dateFrom, dateTo
+
+    switch (timeRange) {
+      case "1":
+        dateFrom = moment().subtract(7, 'd').toDate().toISOString();
+        dateTo = moment().subtract(0, 'd').toDate().toISOString();
+        break;
+      case "2":
+        dateFrom = moment().subtract(30, 'd').toDate().toISOString();
+        dateTo = moment().subtract(0, 'd').toDate().toISOString();
+        break;
+      default:
+        break;
+    }
+
     let params = {
+      dateFrom: dateFrom,
+      dateTo: dateTo,
       timeRange: timeRange,
       project: project_id,
       account: account_id
@@ -85,12 +102,12 @@ export default class Tracking extends Component {
 
 
   onTimeRangeSelected = (event) => {
-    this.setState({ timeRange: event.target.value })
+    this.setState({ timeRange: event.target.value, timeRangeLabel: event.nativeEvent.target[event.nativeEvent.target.selectedIndex].label })
     this.getSelectedProjectTasksFromDB(event.target.value, this.state.currentProject.id)
   }
 
   onProjectSelected = (event) => {
-    let project = {...this.state.currentProject, id: event.value, project: event.label}
+    let project = { ...this.state.currentProject, id: event.value, project: event.label }
     this.state.currentProject = project
     this.getSelectedProjectTasksFromDB(this.state.timeRange, event.value)
     localStorage.setItem("recent_project", JSON.stringify(project))
@@ -104,7 +121,7 @@ export default class Tracking extends Component {
         : this.addTimeLabelFormatting(this.state.tasks.filter(task => task.task === event.dataPoint.label)),
 
       currentTaskName: this.state.currentTaskName === event.dataPoint.label
-        ? "All"
+        ? "All Tasks"
         : event.dataPoint.label,
 
       taskTimeHeader: this.state.currentTaskName === event.dataPoint.label
@@ -166,7 +183,7 @@ export default class Tracking extends Component {
 
   mapProjectsForDropdown = (projects) => {
 
-    if(!projects){
+    if (!projects) {
       projects = localStorage.getItem("recent_projects")
     }
 
@@ -181,12 +198,13 @@ export default class Tracking extends Component {
 
     let confirm = true;
     if (!force) {
-        confirm = window.confirm(`are you sure you want to delete "${this.state.currentProject.project}"?`)
+      confirm = window.confirm(`are you sure you want to delete "${this.state.currentProject.project}"?`)
     }
     if (confirm) {
-        APIService.deleteProject(this.state.currentProject.id)
+      APIService.deleteProject(this.state.currentProject.id)
     }
   }
+
 
 
   render() {
@@ -198,7 +216,7 @@ export default class Tracking extends Component {
 
 
     return (
-      <ApiContext.Provider value={value}>
+      <MainContext.Provider value={value}>
         <div className="tracking-container">
           <div className="projects-dropdown">
 
@@ -207,7 +225,7 @@ export default class Tracking extends Component {
             <h1 className="bar-chart-header">Selected Task: {this.state.currentTaskName} </h1>
             <select name="timeframe" className="timeframe" onChange={this.onTimeRangeSelected} value={this.state.timeRange}>
               {this.state.timeRangeOptions.map(item => (
-                <option key={item.value} value={item.value}>
+                <option key={item.value} value={item.value} label={item.name}>
                   {item.name}
                 </option>))}
             </select>
@@ -226,18 +244,25 @@ export default class Tracking extends Component {
                 : <p className={'loader-empty'}>No Tasks Found</p>}
             </div>
           }
-          <h2 className="tracking-header">{`Daily View (This Week - ${this.state.currentTaskName})`}</h2>
+          <h2 className="tracking-header">{`${this.state.timeRangeLabel} - ${this.state.currentTaskName}`}</h2>
 
-          <BarChart headline={this.state.projectName ? this.state.projectName : currentProject.project}>
-          </BarChart>
+          {(() => {
+            switch (this.state.timeRange) {
+              case "1":
+                return <OneWeekTrailing headline={this.state.projectName ? this.state.projectName : currentProject.project} />
+              case "2":
+                return <OneMonthTrailing headline={this.state.projectName ? this.state.projectName : currentProject.project} />
+              default:
+                return null;
+            }
+          })()}
+
           <h2 className="edit-label">Edit Task</h2>
-
-
           <Grid></Grid>
           <br></br>
           <p onClick={() => this.DeleteProject()} className="delete-project">DELETE PROJECT</p>
         </div>
-      </ApiContext.Provider>
+      </MainContext.Provider>
     )
   }
 }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import './GoldenRectangle.css'
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 const birdTweet = require('../../Img/birdtweet1.png')
 const dogBark = require('../../Img/dogbark1.png')
 
 
 export default class GoldenRectangle extends Component {
 
-  static contextType = ApiContext;
+  static contextType = MainContext;
 
     state = {
 

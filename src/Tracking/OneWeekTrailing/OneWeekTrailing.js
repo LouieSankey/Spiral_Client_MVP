@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import moment from 'moment'
-import './BarChart.css'
-import { FormatTrackingHeader } from './helper'
+import './OneWeekTrailing.css'
+import { FormatTrackingHeader } from '../helper'
 
 
-class BarChart extends Component {
+class OneWeekTrailing extends Component {
 
-  static contextType = ApiContext;
+  static contextType = MainContext;
 
   constructor(props) {
     super(props);
@@ -209,4 +209,4 @@ class BarChart extends Component {
   }
 }
 
-export default BarChart;
+export default OneWeekTrailing;

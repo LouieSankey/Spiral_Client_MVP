@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import { useContext } from 'react';
 
 
 const BreakPrefsModal = ({ handleClose, showPrefs, children }) => {
 
-  const context = useContext(ApiContext)
+  const context = useContext(MainContext)
 
   const newPrefs = {
     "89": null,

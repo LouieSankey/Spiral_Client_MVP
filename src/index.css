@@ -10,9 +10,7 @@ body {
     overflow: hidden;
     background-image: url('./Img/dusksky.jpeg');
     background-repeat: no-repeat;
-    /* background-size: contain; */
     background-size: 100% 850px;
-    /* background-color: black; */
 }
 
 html,

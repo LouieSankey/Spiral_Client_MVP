@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CanvasJSReact from "../../canvasjs.react";
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import { render } from "react-dom";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -51,7 +51,7 @@ class PieChart extends Component {
 		super(props);
 	}
 
-	static contextType = ApiContext;
+	static contextType = MainContext;
 
 	state = {
 		options: {}

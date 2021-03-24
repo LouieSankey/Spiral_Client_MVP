@@ -4,14 +4,14 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import React, { Component } from 'react';
 import './Grid.css'
 import 'react-dropdown/style.css';
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 // import DeleteIcon from '../../Img/delete'
 import SimpleEditor from './SimpleEditor'
 import ActionsRenderer from './ActionsRenderer'
 
 class Grid extends Component {
 
-    static contextType = ApiContext;
+    static contextType = MainContext;
 
 
  

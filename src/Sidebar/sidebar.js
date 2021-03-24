@@ -3,7 +3,7 @@ import './sidebar.css'
 import { Link } from "react-router-dom"
 import NavModal from '../Main/Modals/NavModal'
 
-import ApiContext from '../ApiContext'
+import MainContext from '../MainContext'
 import HelpModal from '../Main/Modals/HelpModal'
 
 
@@ -41,7 +41,7 @@ class Sidebar extends Component {
   }
 
 
-  static contextType = ApiContext;
+  static contextType = MainContext;
 
   updateBreakPrefs = () => {
     this.context.changeBreakPrefs(this.newPrefs)

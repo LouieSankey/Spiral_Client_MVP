@@ -4,7 +4,7 @@ import { FaAlignRight } from 'react-icons/fa';
 import Home from '../Main/MainContainer/MainContainer'
 import Tracking from '../Tracking/TrackingHome/Tracking'
 import Landing from '../Landing/Landing'
-import ApiContext from '../ApiContext'
+import MainContext from '../MainContext'
 import config from '../config'
 import './App.css'
 import APIService from '../api-services';
@@ -191,10 +191,10 @@ class App extends Component {
     }
 
     return (
-      <ApiContext.Provider value={value}>
+      <MainContext.Provider value={value}>
         <Sidebar logout={this.Logout} ></Sidebar>
         {this.renderMainRoutes()}
-      </ApiContext.Provider>
+      </MainContext.Provider>
 
     )
   }

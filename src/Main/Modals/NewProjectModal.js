@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import APIService from '../../api-services';
 
 class NewProjectModal extends Component {
 
-  static contextType = ApiContext;
+  static contextType = MainContext;
 
   setProjectNameLocally = event => {
     this.setState({

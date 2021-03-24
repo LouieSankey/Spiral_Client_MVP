@@ -8,14 +8,14 @@ import SkipNext from '@material-ui/icons/SkipNextOutlined';
 import Stop from '@material-ui/icons/StopOutlined';
 import PausePresentation from '@material-ui/icons/PauseOutlined';
 import PlayCircleOutline from '@material-ui/icons/PlayArrowOutlined';
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import myWorker from '../../test.worker';
 
 
 
 function Clock(props) {
 
-  const context = useContext(ApiContext)
+  const context = useContext(MainContext)
   let breakPrefs = context.prefs
 
   const [timer, setTimer] = useState({

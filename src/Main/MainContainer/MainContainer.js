@@ -5,7 +5,7 @@ import AllProjectsModal from '../Modals/ProjectsModal';
 import NewProjectModal from '../Modals/NewProjectModal'
 import BreakPrefsModal from '../Modals/BreakPrefsModal'
 import './MainContainer.css'
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import  useSound from 'use-sound';
 
 
@@ -13,7 +13,7 @@ import  useSound from 'use-sound';
 
 export default class Main extends Component {
 
-  static contextType = ApiContext;
+  static contextType = MainContext;
 
   state = {
     cycle: 0,

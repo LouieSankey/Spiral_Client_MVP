@@ -3,13 +3,13 @@ import './Landing.css'
 import fibSpiral from '../Img/55golden.png'
 import spiralIcon from '../Img/Spiral-rotated.png'
 import { Redirect, withRouter } from 'react-router-dom'
-import ApiContext from '../ApiContext';
+import MainContext from '../MainContext';
 import ApiServices from '../api-services'
 import LoginModal from '../Auth/Login.js'
 
 
 class Landing extends Component {
-  static contextType = ApiContext;
+  static contextType = MainContext;
 
   constructor(props) {
     super(props);

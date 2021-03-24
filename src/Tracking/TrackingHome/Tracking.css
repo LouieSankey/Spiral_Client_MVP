@@ -62,10 +62,11 @@
 
 .bar-chart-sub-header {
     margin-top: 0px;
-    padding-left: 10px;
+    padding-left: 20px;
     padding-top: 16px;
     float: left;
     color: rgb(177, 177, 177);
+    padding-bottom: 20px;
 }
 
 .dropdown {
@@ -78,10 +79,6 @@
 
 .Dropdown-option.is-selected {
     background-color: black;
-}
-
-.bar-chart-sub-header {
-    padding-bottom: 20px;
 }
 
 .timeframe {

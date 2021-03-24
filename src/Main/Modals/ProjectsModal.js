@@ -1,10 +1,10 @@
 import React from 'react'
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import '../GoldenRectangle/GoldenRectangle.css'
 
 class AllProjectsModal extends React.Component {
 
-  static contextType = ApiContext;
+  static contextType = MainContext;
   
   setCurrentProject(project) {
     this.context.setCurrentProject(project)

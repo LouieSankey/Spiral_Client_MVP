@@ -1,5 +1,5 @@
 import React from 'react';
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import { useContext } from 'react';
 import '../TaskEntryBar/TaskEntryBar.css'
 
@@ -7,7 +7,7 @@ import '../TaskEntryBar/TaskEntryBar.css'
 
 const HelpModal = ({ handleClose, showHelp, children }) => {
 
-  const context = useContext(ApiContext)
+  const context = useContext(MainContext)
   const showHideClassName = showHelp ? "help-modal display-block" : "help-modal display-none";
 
   return (

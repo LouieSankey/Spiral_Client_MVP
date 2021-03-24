@@ -1,0 +1,18 @@
+.apexcharts-toolbar {
+    display: none;
+}
+
+.tracking-header {
+    padding-left: 50px;
+    color: white;
+}
+
+.tracking-subheader {
+    padding-left: 50px;
+    color: white;
+    /* text-align: center; */
+}
+
+.mixed-chart {
+    padding-bottom: 40px;
+}

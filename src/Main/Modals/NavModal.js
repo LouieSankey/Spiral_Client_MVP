@@ -1,5 +1,5 @@
 import React from 'react';
-import ApiContext from '../../ApiContext'
+import MainContext from '../../MainContext'
 import { useContext } from 'react';
 import '../TaskEntryBar/TaskEntryBar.css'
 
@@ -7,7 +7,7 @@ import '../TaskEntryBar/TaskEntryBar.css'
 
 const NavModal = ({ handleClose, show, children }) => {
 
-  const context = useContext(ApiContext)
+  const context = useContext(MainContext)
   const showHideClassName = show ? "nav-link-modal display-block" : "nav-link-modal display-none";
 
   return (
