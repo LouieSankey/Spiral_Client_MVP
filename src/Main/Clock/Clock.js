@@ -25,6 +25,7 @@ function Clock(props) {
     time: 0,
     timeRemaining: 0,
     cycle: 0,
+    skipped: false
   })
 
 
@@ -112,7 +113,14 @@ function Clock(props) {
               timeRemaining: breakDuration
             }));
           }
-          props.updateDBWithTask(timer.cycle)
+
+          if (!timer.skipped) {
+            props.updateDBWithTask(timer.cycle)
+          }
+          setTimer((timer) => ({
+            ...timer,
+            skipped: false
+          }));
         }
       }, 1000);
 
@@ -170,7 +178,16 @@ function Clock(props) {
   }
 
   const handleSkip = () => {
-    setTimer({ ...timer, timeRemaining: 0 })
+
+    const elapsedMinutes = Math.floor((timer.time - timer.timeRemaining) / 60)
+    const remainingSeconds = (timer.time - timer.timeRemaining) - elapsedMinutes * 60;
+    const roundedMinutes = remainingSeconds > 30 ? elapsedMinutes + 1 : elapsedMinutes
+    
+    if(roundedMinutes > 0){
+      props.updateDBWithTask(roundedMinutes)
+    }
+
+    setTimer({ ...timer, skipped: true, timeRemaining: 0 })
     worker.current.postMessage({ message: "stop", "time": 0 })
   }
 
