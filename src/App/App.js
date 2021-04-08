@@ -11,8 +11,6 @@ import APIService from '../api-services';
 import Sidebar from '../Sidebar/sidebar'
 import '../Sidebar/sidebar.css'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../features/counter/counterSlice'
 
 
 
