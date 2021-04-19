@@ -1,0 +1,755 @@
+diff --git a/src/App/App.css b/src/App/App.css
+index ff8f87f..e2fa339 100644
+--- a/src/App/App.css
++++ b/src/App/App.css
+@@ -49,6 +49,10 @@ center {
+     font-size: 20px;
+ }
+ 
++.clip-loader {
++    z-index: 100000
++}
++
+ @media screen and (min-width: 768px) {
+     .nav-button {
+         display: none;
+diff --git a/src/App/App.js b/src/App/App.js
+index 00b70eb..db7ed44 100644
+--- a/src/App/App.js
++++ b/src/App/App.js
+@@ -11,6 +11,8 @@ import APIService from '../api-services';
+ import Sidebar from '../Sidebar/sidebar'
+ import '../Sidebar/sidebar.css'
+ 
++const token = localStorage.getItem("spiral_jwt_token")
++
+ class App extends Component {
+   constructor(props) {
+     super(props);
+@@ -18,6 +20,8 @@ class App extends Component {
+     this.timerRef = React.createRef();
+   }
+ 
++
++
+   state = {
+     toggleMobileNav: false,
+     account_id: null,
+@@ -29,10 +33,11 @@ class App extends Component {
+ 
+     document.title = "Spiral"
+     let account_id = localStorage.getItem('account_id')
++    let token = localStorage.getItem("spiral_jwt_token")
+     account_id = Number(account_id)
+     if (account_id) {
+-      this.handleAPIRequest(account_id)
+-    
++      this.handleAPIRequest(account_id, token)
++
+     } else {
+       this.props.history.push('/Spiral')
+     }
+@@ -46,14 +51,33 @@ class App extends Component {
+ 
+   // }
+ 
+-  handleAPIRequest = (account_id) => {
++  handleAPIRequest = (account_id, token) => {
++
++
+     // this.ShowHelpAtFirstLogin()
+     Promise.all([
+-      fetch(`${config.API_ENDPOINT}/account/${account_id}`),
+-      fetch(`${config.API_ENDPOINT}/project/account/${account_id}`),
+-      fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`),
+ 
+-      fetch(`${config.API_ENDPOINT}/task/account/${account_id}`),
++      fetch(`${config.API_ENDPOINT}/account/${account_id}`, {
++        headers: {
++          "Authorization": `Bearer ${token}`
++        }
++      }),
++      fetch(`${config.API_ENDPOINT}/project/account/${account_id}`, {
++        headers: {
++          "Authorization": `Bearer ${token}`
++        }
++      }),
++      fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`, {
++        headers: {
++          "Authorization": `Bearer ${token}`
++        }
++      }),
++
++      fetch(`${config.API_ENDPOINT}/task/account/${account_id}`, {
++        headers: {
++          "Authorization": `Bearer ${token}`
++        }
++      }),
+     ])
+       .then(([accountRes, projectRes, prefsRes, tasksRes]) => {
+         if (!accountRes.ok)
+@@ -62,7 +86,7 @@ class App extends Component {
+           return projectRes.json().then(e => Promise.reject(e))
+         if (!prefsRes.ok)
+           return prefsRes.json().then(e => Promise.reject(e))
+-          if (!tasksRes.ok)
++        if (!tasksRes.ok)
+           return tasksRes.json().then(e => Promise.reject(e))
+ 
+         return Promise.all([
+@@ -123,7 +147,7 @@ class App extends Component {
+         <Route
+           exact
+           path='/'
+-          render={(props) => <Home {...props}  />} />
++          render={(props) => <Home {...props} />} />
+       </>
+ 
+     )
+diff --git a/src/Auth/Login.css b/src/Auth/Login.css
+new file mode 100644
+index 0000000..9db3f91
+--- /dev/null
++++ b/src/Auth/Login.css
+@@ -0,0 +1,3 @@
++.clip-loader {
++    z-index: 100000
++}
+\ No newline at end of file
+diff --git a/src/Auth/Login.js b/src/Auth/Login.js
+index 52b4312..c4f27b5 100644
+--- a/src/Auth/Login.js
++++ b/src/Auth/Login.js
+@@ -1,5 +1,9 @@
+ import React, { Component } from 'react'
+ import PropTypes from 'prop-types'
++import ClipLoader from "react-spinners/ClipLoader"
++import './Login.css'
++
++
+ 
+ import LoginHome from './components/LoginHome';
+ 
+@@ -8,15 +12,18 @@ class LoginModal extends Component {
+   constructor(props) {
+     super(props)
+     this.state = {
+-      navigatePage: this.props.navigatePage
++      navigatePage: this.props.navigatePage,
++      displayLoader:true
+     }
+   }
+ 
+   render() {
+ 
+     return (
+-      // needs to pass the propes, currently use defalt props
+-      <div>
++
++<div>
++        <ClipLoader className="clip-loader" loading={true} color={'#6b8bba'} size={60}></ClipLoader>
++
+         <LoginHome 
+           handleSignup={this.props.handleSignup}
+           handleLogin={this.props.handleLogin}
+diff --git a/src/Auth/components/LoginHome.js b/src/Auth/components/LoginHome.js
+index 5a2f5b4..ef01ea3 100644
+--- a/src/Auth/components/LoginHome.js
++++ b/src/Auth/components/LoginHome.js
+@@ -135,7 +135,7 @@ class LoginHome extends Component {
+     const username = `${event.target.value}`;
+     let error = this.state.error;
+ 
+-    error.usernameMessage = loginEmailValidator(username);
++    // error.usernameMessage = loginEmailValidator(username);
+ 
+     this.setState({
+       error,
+@@ -151,7 +151,7 @@ class LoginHome extends Component {
+     const password = `${event.target.value}`;
+     let error = this.state.error;
+ 
+-    error.passwordMessage = loginPasswordValidator(password);
++    // error.passwordMessage = loginPasswordValidator(password);
+ 
+     this.setState({
+       error,
+@@ -398,10 +398,10 @@ class LoginHome extends Component {
+ 
+       <div className="loginContainer">
+         <img onClick={this.handleCloseModal} className="xclose" src={xclose} alt="close dialog" />
+-        Login - guest@spiral.com | password: 12345678
++        Login
+ 
+         {errorMessage}
+-        {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Incorrect password"}</div></div>}
++        {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Incorrect username or password"}</div></div>}
+         <div className="loginGroup">
+           <input
+             className="modal-input"
+diff --git a/src/Landing/Landing.js b/src/Landing/Landing.js
+index 2a6605f..5e62e82 100644
+--- a/src/Landing/Landing.js
++++ b/src/Landing/Landing.js
+@@ -6,6 +6,8 @@ import { Redirect, withRouter } from 'react-router-dom'
+ import MainContext from '../MainContext';
+ import ApiServices from '../api-services'
+ import LoginModal from '../Auth/Login.js'
++import ClipLoader from "react-spinners/ClipLoader"
++
+ 
+ 
+ class Landing extends Component {
+@@ -19,7 +21,8 @@ class Landing extends Component {
+     showModal: false,
+     redirect: false,
+     account_id: null,
+-    incorrect_password: false
++    incorrect_password: false,
++    displayLoader: true
+ 
+   };
+ 
+@@ -60,11 +63,13 @@ class Landing extends Component {
+     ApiServices.getAccountByEmail(credentials)
+       .then(account => {
+         localStorage.setItem("account_id", account.id)
+-        this.context.handleAPIRequest(account.id)
++        localStorage.setItem("spiral_jwt_token", account.token)
++
++        this.context.handleAPIRequest(account.id, account.token)
+         this.setRedirect()
+       })
+       .catch(error => {
+-        if (error.error.message === "Incorrect Password") {
++        if (error.error.message === "Invalid Credentials" || error.error.message === "account doesn't exist") {
+           this.setState({
+             incorrect_password: true
+           })
+@@ -91,7 +96,7 @@ class Landing extends Component {
+           "account": account.id
+         }
+ 
+-        ApiServices.createProject(project)
++        ApiServices.createProject(project, account.token)
+           .then(project => {
+             this.context.setCurrentProject(project)
+           }).then(() => {
+@@ -110,10 +115,13 @@ class Landing extends Component {
+               '_89': 13
+             }
+ 
+-            ApiServices.createUserPrefs(userPrefs)
++            ApiServices.createUserPrefs(userPrefs, account.token)
+               .then(userPrefs => {
++
+                 localStorage.setItem("account_id", account.id)
+-                this.context.handleAPIRequest(account.id)
++                localStorage.setItem("spiral_jwt_token", account.token)
++
++                this.context.handleAPIRequest(account.id, account.token)
+                 this.setRedirect()
+               }).catch(error => {
+                 console.error({ error })
+@@ -130,6 +138,7 @@ class Landing extends Component {
+     return (
+       <>
+         {this.renderRedirect()}
++
+         <div className="content">
+           <div className=" first-block">
+             <div className="first-block-content two-column-split">
+@@ -140,7 +149,13 @@ class Landing extends Component {
+                     handleSignup={this.handleSignupByEmail}
+                     handleLogin={this.handleLoginWithEmail}
+                     showPasswordError={this.state.incorrect_password}>
++        <ClipLoader loading={true} color={'#6b8bba'} size={60}></ClipLoader>
++
+                   </LoginModal>
++                 
++        
++                   
++                  
+                 }
+ 
+                 <img className="spiral-text-logo" src={require("../Img/spiral-text-logo.png")} alt=""/>
+diff --git a/src/Main/Clock/Clock.js b/src/Main/Clock/Clock.js
+index c6561c6..8daa7fe 100644
+--- a/src/Main/Clock/Clock.js
++++ b/src/Main/Clock/Clock.js
+@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from 'react'
+ import './Clock.css'
+ import useSound from 'use-sound';
+ import bark from '../../Sounds/dog_bark.wav';
++import crickets from '../../Sounds/crickets.wav';
+ import tweet from '../../Sounds/bird-tweet.mp3';
+ import gong from '../../Sounds/opening_gong.wav'
+ import SkipNext from '@material-ui/icons/SkipNextOutlined';
+@@ -28,6 +29,26 @@ function Clock(props) {
+     skipped: false
+   })
+ 
++  const [playBark] = useSound(bark,
++    { volume: 0.65 }
++  );
++
++  const [playTweet] = useSound(tweet,
++    { volume: 0.20 }
++  );
++
++  const [playGong] = useSound(gong,
++    { volume: 0.20 }
++  );
++
++  const [playCrickets] = useSound(crickets,
++    { volume: 0.10 }
++  );
++
++    const [playCricketsLoud] = useSound(crickets,
++    { volume: 0.20 }
++  );
++
+ 
+   //sets up a worker thread to keep the clock running accurately when browser is in background
+   const worker = useRef()
+@@ -41,11 +62,18 @@ function Clock(props) {
+   //updates time remaining in state from the worker thread every second
+   useEffect(() => {
+     const eventHander = e => {
+-      setTimer((timer) => ({
+-        ...timer,
+-        timeRemaining: e.data
+-      }))
++      if(e.data === true){
++        //here is where the sound should play
++       
++      }else{
++        setTimer((timer) => ({
++          ...timer,
++          timeRemaining: e.data
++        }))
++      }
++
+     }
++
+     worker.current.addEventListener('message', eventHander)
+     return () => {
+       worker.current.removeEventListener('message', eventHander)
+@@ -53,6 +81,7 @@ function Clock(props) {
+   }, [])
+ 
+ 
++
+   //stops the countdown from resetting during certain UI events 
+   let allowCountdownRestart = false
+   useEffect(() => {
+@@ -87,7 +116,7 @@ function Clock(props) {
+   }, [props])
+ 
+ 
+-  //starts the timer after its reset 
++  //starts the timer after it's reset 
+   useEffect(() => {
+     if (timer.time > 0) {
+       worker.current.postMessage({ message: "start", "time": timer.time })
+@@ -98,11 +127,15 @@ function Clock(props) {
+ 
+   //handles the automatic switch to a break after a regular cycle 
+   useEffect(() => {
++
++
+     if (timer.time === 0 && !timer.firstPageLoad) {
+       setTimeout(function () {
+         if (timer.onBreak) {
+           timer.onBreak = false
+         } else {
++
++          
+           const breakDuration = breakPrefs[timer.cycle] * 60
+           if (breakDuration !== 0) {
+             worker.current.postMessage({ message: "start", "time": breakDuration })
+@@ -158,12 +191,15 @@ function Clock(props) {
+   useEffect(() => {
+     if (timer.isPaused) {
+       worker.current.postMessage({ message: "pause", "time": timer.timeRemaining })
++
++
+     } else {
+       worker.current.postMessage({ message: "start", "time": timer.timeRemaining })
+     }
+   }, [timer.isPaused])
+ 
+ 
++
+   const handlePause = e => {
+     setTimer({ ...timer, isPaused: true })
+   }
+@@ -197,17 +233,7 @@ function Clock(props) {
+   }
+ 
+ 
+-  const [playBark] = useSound(bark,
+-    { volume: 0.35 }
+-  );
+ 
+-  const [playTweet] = useSound(tweet,
+-    { volume: 0.20 }
+-  );
+-
+-  const [playGong] = useSound(gong,
+-    { volume: 0.20 }
+-  );
+ 
+   const timeFormat = (duration) => {
+ 
+diff --git a/src/Main/GoldenRectangle/GoldenRectangle.css b/src/Main/GoldenRectangle/GoldenRectangle.css
+index caa59f0..334be44 100644
+--- a/src/Main/GoldenRectangle/GoldenRectangle.css
++++ b/src/Main/GoldenRectangle/GoldenRectangle.css
+@@ -19,6 +19,20 @@
+     background-repeat: no-repeat;
+ }
+ 
++.break-message {
++    cursor: pointer;
++    margin-top: -41px;
++    margin-bottom: 0px;
++    color: white;
++    border: solid 1px white;
++    padding: 10px;
++    margin-left: auto;
++    margin-right: auto;
++    text-align: center;
++    width: 150px;
++    border-radius: 15px;
++}
++
+ .alarm {
+     position: absolute;
+     z-index: 900;
+diff --git a/src/Main/GoldenRectangle/GoldenRectangle.js b/src/Main/GoldenRectangle/GoldenRectangle.js
+index 23a47cf..cb26136 100644
+--- a/src/Main/GoldenRectangle/GoldenRectangle.js
++++ b/src/Main/GoldenRectangle/GoldenRectangle.js
+@@ -1,6 +1,7 @@
+ import React, { Component } from 'react'
+ import './GoldenRectangle.css'
+ import MainContext from '../../MainContext'
++import { TramOutlined } from '@material-ui/icons'
+ const birdTweet = require('../../Img/birdtweet1.png')
+ const dogBark = require('../../Img/dogbark1.png')
+ 
+@@ -14,7 +15,8 @@ export default class GoldenRectangle extends Component {
+         sets: [[34, 21, 13, 8, 5, 3], [21, 13, 8, 5, 3, 2], [13, 8, 5, 3, 2, 1], [89, 55, 34, 21, 13, 8], [55, 34, 21, 13, 8, 5]],
+         setIndex: 4,
+         pauseForModal: false,
+-        alarmIcon: ""
++        alarmIcon: "",
++        hoverSelection: false
+     }
+ 
+     changeSpiralNumbers() {
+@@ -53,6 +55,9 @@ export default class GoldenRectangle extends Component {
+ 
+         return (
+             <>
++                      {/* {this.state.hoverSelection && 
++            <p className="break-message" >Need a Break First?</p>
++        } */}
+                 <div className="container">
+ 
+                     
+@@ -60,8 +65,8 @@ export default class GoldenRectangle extends Component {
+                     <img className="alarm-sound" src={this.state.alarmIcon} alt=""/> :
+                     <img className="alarm" src={require('../../Img/whitealarm2.png')} alt=""/>
+                     }
+-                    <div className="item box7"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[0]) ; this.SetAlarmIcon(currentIndex[0])}}>{currentIndex[0]}</button></div>
+-                    <div className="item box6"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[1]) ; this.SetAlarmIcon(currentIndex[1])}}>{currentIndex[1]}</button></div>
++                    <div className="item box7"><button className="clickable" onMouseEnter={() => this.setState(prevState => {return { hoverSelection: true }})}  onMouseLeave={() => this.setState(prevState => {return { hoverSelection: true }})} onClick={() => {this.props.updateCycle(currentIndex[0]) ; this.SetAlarmIcon(currentIndex[0])}}>{currentIndex[0]}</button></div>
++                    <div className="item box6"><button className="clickable" onMouseEnter={() => this.setState(prevState => {return { hoverSelection: false }})}  onMouseLeave={() => this.setState(prevState => {return { hoverSelection: false }})}  onClick={() => {this.props.updateCycle(currentIndex[1]) ; this.SetAlarmIcon(currentIndex[1])}}>{currentIndex[1]}</button></div>
+                     <div className="item box5"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[2]) ; this.SetAlarmIcon(currentIndex[2])}}>{currentIndex[2]}</button></div>
+                     <div className="item box3"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[3]) ; this.SetAlarmIcon(currentIndex[3])}}>{currentIndex[3]}</button></div>
+                     <div className="item box2"><button className="clickable" onClick={() => {this.props.updateCycle(currentIndex[4]) ; this.SetAlarmIcon(currentIndex[4])}}>{currentIndex[4]}</button></div>
+@@ -70,6 +75,7 @@ export default class GoldenRectangle extends Component {
+                         <span className="plus-minus">-</span></button>
+                     </div>
+                 </div>
++      
+             </>
+         )
+     }
+diff --git a/src/Main/Modals/NavModal.js b/src/Main/Modals/NavModal.js
+index 35233d6..4e7889e 100644
+--- a/src/Main/Modals/NavModal.js
++++ b/src/Main/Modals/NavModal.js
+@@ -20,8 +20,8 @@ const NavModal = ({ handleClose, show, children }) => {
+        
+ 
+             <p>It looks like you're in the middle of a cycle, and we don't want you to loose your progress.</p>
+-            <p>Before navigating, you can add your current cycle to tracking with 'Skip to Break'</p>
+-            <p>Or use 'Stop' to terminate it without recording.</p>
++            <p>Before navigating, you can add your current progress to tracking with 'Skip to Break'</p>
++            <p>Or use 'Stop' to terminate this cycle without recording.</p>
+        
+      
+         {/* </div> */}
+diff --git a/src/Sounds/crickets.wav b/src/Sounds/crickets.wav
+new file mode 100644
+index 0000000..e98f3f7
+Binary files /dev/null and b/src/Sounds/crickets.wav differ
+diff --git a/src/Tracking/AG_Grid/ActionsRenderer.jsx b/src/Tracking/AG_Grid/ActionsRenderer.jsx
+index 30081a0..99e78f0 100644
+--- a/src/Tracking/AG_Grid/ActionsRenderer.jsx
++++ b/src/Tracking/AG_Grid/ActionsRenderer.jsx
+@@ -57,7 +57,6 @@ export default (props) => {
+ 
+     function deleteRow(force = false) {
+         let data = props.data;
+-        console.log(data)
+       
+         let confirm = true;
+         if (!force) {
+@@ -67,6 +66,7 @@ export default (props) => {
+             props.api.updateRowData({ remove: [data] });
+             props.api.refreshCells({ force: true });
+ 
++
+         APIService.deleteTask(data.id)
+         //delete task also in parent 
+         
+diff --git a/src/api-services.js b/src/api-services.js
+index fc43663..6ce3543 100644
+--- a/src/api-services.js
++++ b/src/api-services.js
+@@ -1,4 +1,7 @@
+ import config from './config'
++const token = localStorage.getItem("spiral_jwt_token")
++const account = localStorage.getItem('account_id')
++
+ 
+ const APIService = {
+ 
+@@ -7,7 +10,8 @@ getAccountByEmail(credentials) {
+ return fetch(`${config.API_ENDPOINT}/account/email/${credentials.email}`, {
+     method: 'POST',
+     headers: {
+-      'content-type': 'application/json'
++      'content-type': 'application/json',
++      'Authorization': `Bearer ${token}`
+     },
+     body: JSON.stringify(credentials),
+   }).then(res => {
+@@ -17,12 +21,29 @@ return fetch(`${config.API_ENDPOINT}/account/email/${credentials.email}`, {
+     })
+ },
+ 
++// getAccountById(id) {
++
++//   return fetch(`${config.API_ENDPOINT}/account/${id}`, {
++//       method: 'GET',
++//       headers: {
++//         'content-type': 'application/json'
++//         `Authorization': 'Bearer ${token}`
++//       },
++//       body: JSON.stringify(credentials),
++//     }).then(res => {
++//         if (!res.ok)
++//           return res.json().then(e => Promise.reject(e))
++//         return res.json()
++//       })
++//   },
++
+ getProjectTasksForRange(params) {
+ 
+   return fetch(`${config.API_ENDPOINT}/task/account/${params.account}`, {
+       method: 'POST',
+       headers: {
+-        'content-type': 'application/json'
++        'content-type': 'application/json',
++        'Authorization': `Bearer ${token}`
+       },
+       body: JSON.stringify(params),
+     }).then(res => {
+@@ -36,7 +57,8 @@ createAccount(account) {
+     return fetch(`${config.API_ENDPOINT}/account`, {
+         method: 'POST',
+         headers: {
+-          'content-type': 'application/json'
++          'content-type': 'application/json',
++          'Authorization': `Bearer ${token}`
+         },
+         body: JSON.stringify(account),
+       })
+@@ -47,11 +69,12 @@ createAccount(account) {
+         })
+  },
+ 
+- createProject(project){
++ createProject(project, token = localStorage.getItem("spiral_jwt_token")){
+     return fetch(`${config.API_ENDPOINT}/project`, {
+         method: 'POST',
+         headers: {
+-          'content-type': 'application/json'
++          'content-type': 'application/json',
++          'Authorization': `Bearer ${token}`
+         },
+         body: JSON.stringify(project),
+       })
+@@ -63,29 +86,37 @@ createAccount(account) {
+  },
+ 
+  deleteProject(project_id){
+-  return fetch(`${config.API_ENDPOINT}/project/${project_id}`, {
++
++  return fetch(`${config.API_ENDPOINT}/project/${project_id}/${account}`, {
+       method: 'DELETE',
+-      // headers: {
+-      //   'content-type': 'application/json'
+-      // },
+-      // body: JSON.stringify(project),
++      headers: {
++        'content-type': 'application/json',
++        'Authorization': `Bearer ${token}`
++      },
+     })
+       .then(res => {
+         if (!res.ok)
+           return res.json().then(e => Promise.reject(e))
+-        return res.json()
++        return ""
+       })
+ },
+ 
+ deleteTask(task_id){
+-  return fetch(`${config.API_ENDPOINT}/task/${task_id}`, {
+-      method: 'DELETE'
++
++  return fetch(`${config.API_ENDPOINT}/task/${task_id}/${account}`, {
++      method: 'DELETE',
++      headers: {
++        'content-type': 'application/json',
++        'Authorization': `Bearer ${token}`,
++      }
+     })
+       .then(res => {
+         if (!res.ok)
+           return res.json().then(e => Promise.reject(e))
+-        return res.json()
+-      })
++        return ""
++      }).catch(error => {
++        console.error({ error })
++        })
+ },
+ 
+  postTask(task){
+@@ -93,7 +124,8 @@ deleteTask(task_id){
+     return fetch(`${config.API_ENDPOINT}/task`, {
+         method: 'POST',
+         headers: {
+-        'content-type': 'application/json'
++        'content-type': 'application/json',
++        'Authorization': `Bearer ${token}`
+         },
+         body: JSON.stringify(task),
+     })
+@@ -107,11 +139,12 @@ deleteTask(task_id){
+         })
+ },
+ 
+-createUserPrefs(pref){
++createUserPrefs(pref, token = localStorage.getItem("spiral_jwt_token")){
+   return fetch(`${config.API_ENDPOINT}/pref`, {
+       method: 'POST',
+       headers: {
+-      'content-type': 'application/json'
++      'content-type': 'application/json',
++      'Authorization': `Bearer ${token}`
+       },
+       body: JSON.stringify(pref),
+   })
+@@ -129,7 +162,8 @@ saveUserPrefs(prefs, account_id){
+   return fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`, {
+       method: 'PATCH',
+       headers: {
+-      'content-type': 'application/json'
++      'content-type': 'application/json',
++      'Authorization': `Bearer ${token}`
+       },
+       body: JSON.stringify(prefs),
+   })
+diff --git a/src/away.worker.js b/src/away.worker.js
+new file mode 100644
+index 0000000..19748a8
+--- /dev/null
++++ b/src/away.worker.js
+@@ -0,0 +1,16 @@
++
++// let awayTimer;
++/* eslint-disable-next-line no-restricted-globals */
++// self.onmessage = function(evt) {
++
++//     // let isAway = false
++//     console.log("worker responded")
++
++//     if (evt.data.message == "away") {
++//         setTimeout(() => {
++//             postMessage(true)
++//         }, 1000 * 15);
++        
++//     } 
++  
++// };
+\ No newline at end of file
+diff --git a/src/img/cricketchirp.png b/src/img/cricketchirp.png
+new file mode 100644
+index 0000000..0f24efe
+Binary files /dev/null and b/src/img/cricketchirp.png differ
+diff --git a/src/index.js b/src/index.js
+index 96f35a7..e77f62a 100644
+--- a/src/index.js
++++ b/src/index.js
+@@ -4,7 +4,9 @@ import App from './App/App'
+ import './index.css';
+ import { BrowserRouter } from 'react-router-dom'
+ 
++
+ ReactDOM.render(
++
+     <BrowserRouter>
+       <App />
+     </BrowserRouter>,
+diff --git a/src/test.worker.js b/src/test.worker.js
+index 50143aa..8f140e2 100644
+--- a/src/test.worker.js
++++ b/src/test.worker.js
+@@ -1,8 +1,19 @@
+ 
+ let mytimer;
++let myInterval;
+ /* eslint-disable-next-line no-restricted-globals */
+ self.onmessage = function(evt) {
+-    clearInterval(mytimer);
++    clearInterval(myInterval);
++    clearTimeout(mytimer)
++
++
++    if(evt.data.message === 'away'){
++
++      myTimer = setTimeout(() => {
++        postMessage(true)
++      }, 1000 * 10);
++     
++    }
+ 
+       if(evt.data.message === 'pause' || evt.data.message === 'stop' || evt.data.message === 'skip'){
+         postMessage(evt.data.time)
+@@ -10,7 +21,7 @@ self.onmessage = function(evt) {
+ 
+     if (evt.data.message == "start" || evt.data.message == "break") {
+         var i = evt.data.time;
+-        mytimer = setInterval(function() {
++        myInterval = setInterval(function() {
+             i--;
+             postMessage(i);
+         }, 1000);
