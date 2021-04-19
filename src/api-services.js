@@ -69,7 +69,7 @@ createAccount(account) {
         })
  },
 
- createProject(project){
+ createProject(project, token = localStorage.getItem("spiral_jwt_token")){
     return fetch(`${config.API_ENDPOINT}/project`, {
         method: 'POST',
         headers: {
@@ -139,7 +139,7 @@ deleteTask(task_id){
         })
 },
 
-createUserPrefs(pref){
+createUserPrefs(pref, token = localStorage.getItem("spiral_jwt_token")){
   return fetch(`${config.API_ENDPOINT}/pref`, {
       method: 'POST',
       headers: {

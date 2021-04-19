@@ -96,7 +96,7 @@ class Landing extends Component {
           "account": account.id
         }
 
-        ApiServices.createProject(project)
+        ApiServices.createProject(project, account.token)
           .then(project => {
             this.context.setCurrentProject(project)
           }).then(() => {
@@ -115,7 +115,7 @@ class Landing extends Component {
               '_89': 13
             }
 
-            ApiServices.createUserPrefs(userPrefs)
+            ApiServices.createUserPrefs(userPrefs, account.token)
               .then(userPrefs => {
 
                 localStorage.setItem("account_id", account.id)
