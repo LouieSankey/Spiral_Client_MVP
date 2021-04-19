@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ClipLoader from "react-spinners/ClipLoader"
+import './Login.css'
+
+
 
 import LoginHome from './components/LoginHome';
 
@@ -8,15 +12,18 @@ class LoginModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      navigatePage: this.props.navigatePage
+      navigatePage: this.props.navigatePage,
+      displayLoader:true
     }
   }
 
   render() {
 
     return (
-      // needs to pass the propes, currently use defalt props
-      <div>
+
+<div>
+        <ClipLoader className="clip-loader" loading={true} color={'#6b8bba'} size={60}></ClipLoader>
+
         <LoginHome 
           handleSignup={this.props.handleSignup}
           handleLogin={this.props.handleLogin}

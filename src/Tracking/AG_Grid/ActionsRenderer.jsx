@@ -57,7 +57,6 @@ export default (props) => {
 
     function deleteRow(force = false) {
         let data = props.data;
-        console.log(data)
       
         let confirm = true;
         if (!force) {
@@ -66,6 +65,7 @@ export default (props) => {
         if (confirm) {
             props.api.updateRowData({ remove: [data] });
             props.api.refreshCells({ force: true });
+
 
         APIService.deleteTask(data.id)
         //delete task also in parent 

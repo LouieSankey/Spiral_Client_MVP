@@ -6,6 +6,8 @@ import { Redirect, withRouter } from 'react-router-dom'
 import MainContext from '../MainContext';
 import ApiServices from '../api-services'
 import LoginModal from '../Auth/Login.js'
+import ClipLoader from "react-spinners/ClipLoader"
+
 
 
 class Landing extends Component {
@@ -19,7 +21,8 @@ class Landing extends Component {
     showModal: false,
     redirect: false,
     account_id: null,
-    incorrect_password: false
+    incorrect_password: false,
+    displayLoader: true
 
   };
 
@@ -60,11 +63,13 @@ class Landing extends Component {
     ApiServices.getAccountByEmail(credentials)
       .then(account => {
         localStorage.setItem("account_id", account.id)
-        this.context.handleAPIRequest(account.id)
+        localStorage.setItem("spiral_jwt_token", account.token)
+
+        this.context.handleAPIRequest(account.id, account.token)
         this.setRedirect()
       })
       .catch(error => {
-        if (error.error.message === "Incorrect Password") {
+        if (error.error.message === "Invalid Credentials" || error.error.message === "account doesn't exist") {
           this.setState({
             incorrect_password: true
           })
@@ -112,8 +117,11 @@ class Landing extends Component {
 
             ApiServices.createUserPrefs(userPrefs)
               .then(userPrefs => {
+
                 localStorage.setItem("account_id", account.id)
-                this.context.handleAPIRequest(account.id)
+                localStorage.setItem("spiral_jwt_token", account.token)
+
+                this.context.handleAPIRequest(account.id, account.token)
                 this.setRedirect()
               }).catch(error => {
                 console.error({ error })
@@ -130,6 +138,7 @@ class Landing extends Component {
     return (
       <>
         {this.renderRedirect()}
+
         <div className="content">
           <div className=" first-block">
             <div className="first-block-content two-column-split">
@@ -140,7 +149,13 @@ class Landing extends Component {
                     handleSignup={this.handleSignupByEmail}
                     handleLogin={this.handleLoginWithEmail}
                     showPasswordError={this.state.incorrect_password}>
+        <ClipLoader loading={true} color={'#6b8bba'} size={60}></ClipLoader>
+
                   </LoginModal>
+                 
+        
+                   
+                  
                 }
 
                 <img className="spiral-text-logo" src={require("../Img/spiral-text-logo.png")} alt=""/>

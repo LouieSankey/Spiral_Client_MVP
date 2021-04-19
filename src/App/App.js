@@ -11,6 +11,8 @@ import APIService from '../api-services';
 import Sidebar from '../Sidebar/sidebar'
 import '../Sidebar/sidebar.css'
 
+ const token = localStorage.getItem("spiral_jwt_token")
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,9 +31,10 @@ class App extends Component {
 
     document.title = "Spiral"
     let account_id = localStorage.getItem('account_id')
+    let token = localStorage.getItem("spiral_jwt_token")
     account_id = Number(account_id)
     if (account_id) {
-      this.handleAPIRequest(account_id)
+      this.handleAPIRequest(account_id, token)
     
     } else {
       this.props.history.push('/Spiral')
@@ -46,14 +49,33 @@ class App extends Component {
 
   // }
 
-  handleAPIRequest = (account_id) => {
+  handleAPIRequest = (account_id, token) => {
+
+  
     // this.ShowHelpAtFirstLogin()
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/account/${account_id}`),
-      fetch(`${config.API_ENDPOINT}/project/account/${account_id}`),
-      fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`),
+  
+      fetch(`${config.API_ENDPOINT}/account/${account_id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      }),
+      fetch(`${config.API_ENDPOINT}/project/account/${account_id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      }),
+      fetch(`${config.API_ENDPOINT}/pref/account/${account_id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      }),
 
-      fetch(`${config.API_ENDPOINT}/task/account/${account_id}`),
+      fetch(`${config.API_ENDPOINT}/task/account/${account_id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      }),
     ])
       .then(([accountRes, projectRes, prefsRes, tasksRes]) => {
         if (!accountRes.ok)

@@ -135,7 +135,7 @@ class LoginHome extends Component {
     const username = `${event.target.value}`;
     let error = this.state.error;
 
-    error.usernameMessage = loginEmailValidator(username);
+    // error.usernameMessage = loginEmailValidator(username);
 
     this.setState({
       error,
@@ -151,7 +151,7 @@ class LoginHome extends Component {
     const password = `${event.target.value}`;
     let error = this.state.error;
 
-    error.passwordMessage = loginPasswordValidator(password);
+    // error.passwordMessage = loginPasswordValidator(password);
 
     this.setState({
       error,
@@ -398,10 +398,10 @@ class LoginHome extends Component {
 
       <div className="loginContainer">
         <img onClick={this.handleCloseModal} className="xclose" src={xclose} alt="close dialog" />
-        Login - guest@spiral.com | password: 12345678
+        Login
 
         {errorMessage}
-        {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Incorrect password"}</div></div>}
+        {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Incorrect username or password"}</div></div>}
         <div className="loginGroup">
           <input
             className="modal-input"
