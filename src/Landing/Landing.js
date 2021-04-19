@@ -6,7 +6,6 @@ import { Redirect, withRouter } from 'react-router-dom'
 import MainContext from '../MainContext';
 import ApiServices from '../api-services'
 import LoginModal from '../Auth/Login.js'
-import ClipLoader from "react-spinners/ClipLoader"
 
 
 
@@ -149,7 +148,6 @@ class Landing extends Component {
                     handleSignup={this.handleSignupByEmail}
                     handleLogin={this.handleLoginWithEmail}
                     showPasswordError={this.state.incorrect_password}>
-        <ClipLoader loading={true} color={'#6b8bba'} size={60}></ClipLoader>
 
                   </LoginModal>
                  

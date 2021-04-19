@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useContext } from 'react'
 import './Clock.css'
 import useSound from 'use-sound';
 import bark from '../../Sounds/dog_bark.wav';
-import crickets from '../../Sounds/crickets.wav';
 import tweet from '../../Sounds/bird-tweet.mp3';
 import gong from '../../Sounds/opening_gong.wav'
 import SkipNext from '@material-ui/icons/SkipNextOutlined';
@@ -41,13 +40,8 @@ function Clock(props) {
     { volume: 0.20 }
   );
 
-  const [playCrickets] = useSound(crickets,
-    { volume: 0.10 }
-  );
 
-    const [playCricketsLoud] = useSound(crickets,
-    { volume: 0.20 }
-  );
+
 
 
   //sets up a worker thread to keep the clock running accurately when browser is in background
