@@ -11,7 +11,12 @@ import APIService from '../api-services';
 import Sidebar from '../Sidebar/sidebar'
 import '../Sidebar/sidebar.css'
 
+<<<<<<< HEAD
  const token = localStorage.getItem("spiral_jwt_token")
+=======
+
+
+>>>>>>> b4d3318b2e4ff5e5667349d1421c6b456ed21220
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +24,8 @@ class App extends Component {
     this.handleAPIRequest = this.handleAPIRequest.bind(this);
     this.timerRef = React.createRef();
   }
+
+ 
 
   state = {
     toggleMobileNav: false,

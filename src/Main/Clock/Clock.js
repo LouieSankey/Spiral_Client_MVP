@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from 'react'
 import './Clock.css'
 import useSound from 'use-sound';
 import bark from '../../Sounds/dog_bark.wav';
+import crickets from '../../Sounds/crickets.wav';
 import tweet from '../../Sounds/bird-tweet.mp3';
 import gong from '../../Sounds/opening_gong.wav'
 import SkipNext from '@material-ui/icons/SkipNextOutlined';
@@ -28,6 +29,26 @@ function Clock(props) {
     skipped: false
   })
 
+  const [playBark] = useSound(bark,
+    { volume: 0.65 }
+  );
+
+  const [playTweet] = useSound(tweet,
+    { volume: 0.20 }
+  );
+
+  const [playGong] = useSound(gong,
+    { volume: 0.20 }
+  );
+
+  const [playCrickets] = useSound(crickets,
+    { volume: 0.10 }
+  );
+
+    const [playCricketsLoud] = useSound(crickets,
+    { volume: 0.20 }
+  );
+
 
   //sets up a worker thread to keep the clock running accurately when browser is in background
   const worker = useRef()
@@ -41,16 +62,24 @@ function Clock(props) {
   //updates time remaining in state from the worker thread every second
   useEffect(() => {
     const eventHander = e => {
-      setTimer((timer) => ({
-        ...timer,
-        timeRemaining: e.data
-      }))
+      if(e.data === true){
+        //here is where the sound should play
+       
+      }else{
+        setTimer((timer) => ({
+          ...timer,
+          timeRemaining: e.data
+        }))
+      }
+
     }
+
     worker.current.addEventListener('message', eventHander)
     return () => {
       worker.current.removeEventListener('message', eventHander)
     }
   }, [])
+
 
 
   //stops the countdown from resetting during certain UI events 
@@ -87,7 +116,7 @@ function Clock(props) {
   }, [props])
 
 
-  //starts the timer after its reset 
+  //starts the timer after it's reset 
   useEffect(() => {
     if (timer.time > 0) {
       worker.current.postMessage({ message: "start", "time": timer.time })
@@ -98,11 +127,15 @@ function Clock(props) {
 
   //handles the automatic switch to a break after a regular cycle 
   useEffect(() => {
+
+
     if (timer.time === 0 && !timer.firstPageLoad) {
       setTimeout(function () {
         if (timer.onBreak) {
           timer.onBreak = false
         } else {
+
+          
           const breakDuration = breakPrefs[timer.cycle] * 60
           if (breakDuration !== 0) {
             worker.current.postMessage({ message: "start", "time": breakDuration })
@@ -158,10 +191,13 @@ function Clock(props) {
   useEffect(() => {
     if (timer.isPaused) {
       worker.current.postMessage({ message: "pause", "time": timer.timeRemaining })
+
+
     } else {
       worker.current.postMessage({ message: "start", "time": timer.timeRemaining })
     }
   }, [timer.isPaused])
+
 
 
   const handlePause = e => {
@@ -197,17 +233,7 @@ function Clock(props) {
   }
 
 
-  const [playBark] = useSound(bark,
-    { volume: 0.35 }
-  );
 
-  const [playTweet] = useSound(tweet,
-    { volume: 0.20 }
-  );
-
-  const [playGong] = useSound(gong,
-    { volume: 0.20 }
-  );
 
   const timeFormat = (duration) => {
 

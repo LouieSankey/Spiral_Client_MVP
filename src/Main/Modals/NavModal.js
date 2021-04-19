@@ -20,8 +20,8 @@ const NavModal = ({ handleClose, show, children }) => {
        
 
             <p>It looks like you're in the middle of a cycle, and we don't want you to loose your progress.</p>
-            <p>Before navigating, you can add your current cycle to tracking with 'Skip to Break'</p>
-            <p>Or use 'Stop' to terminate it without recording.</p>
+            <p>Before navigating, you can add your current progress to tracking with 'Skip to Break'</p>
+            <p>Or use 'Stop' to terminate this cycle without recording.</p>
        
      
         {/* </div> */}
