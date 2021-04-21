@@ -1,5 +1,5 @@
 import config from './config'
-const token = localStorage.getItem("spiral_jwt_token")
+
 const account = localStorage.getItem('account_id')
 
 
@@ -11,7 +11,7 @@ return fetch(`${config.API_ENDPOINT}/account/email/${credentials.email}`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${localStorage.getItem("spiral_jwt_token")}`
     },
     body: JSON.stringify(credentials),
   }).then(res => {
@@ -43,7 +43,7 @@ getProjectTasksForRange(params) {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${localStorage.getItem("spiral_jwt_token")}`
       },
       body: JSON.stringify(params),
     }).then(res => {
@@ -58,7 +58,7 @@ createAccount(account) {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${localStorage.getItem("spiral_jwt_token")}`
         },
         body: JSON.stringify(account),
       })
@@ -91,7 +91,7 @@ createAccount(account) {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${localStorage.getItem("spiral_jwt_token")}`
       },
     })
       .then(res => {
@@ -107,7 +107,7 @@ deleteTask(task_id){
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${localStorage.getItem("spiral_jwt_token")}`,
       }
     })
       .then(res => {
@@ -125,7 +125,7 @@ deleteTask(task_id){
         method: 'POST',
         headers: {
         'content-type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${localStorage.getItem("spiral_jwt_token")}`
         },
         body: JSON.stringify(task),
     })
@@ -163,7 +163,7 @@ saveUserPrefs(prefs, account_id){
       method: 'PATCH',
       headers: {
       'content-type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${localStorage.getItem("spiral_jwt_token")}`
       },
       body: JSON.stringify(prefs),
   })
