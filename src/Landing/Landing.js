@@ -240,7 +240,7 @@ class Landing extends Component {
                                         <img className="asset-light caution" src={require("./images/caution-image.png").default} alt="Feature 03"></img>
                                     </div>
                                     <div className="feature-content">
-                                        <h3 className="feature-title mt-0">Tedius to Use</h3>
+                                        <h3 className="feature-title mt-0">Tedious to Use</h3>
                                         <p className="text-sm mb-0">There's no positive rewards cycle or engaging user experience, so using it feels more like a chore than a productivity boost.</p>
                                     </div>
                                 </div>
@@ -298,7 +298,7 @@ class Landing extends Component {
                         <p>Spiral lets you keep all your tasks organized by project.</p>
                         <br/><br/><br/><br/>
                         <img className="clock-icon" src={require("./images/chart-icon.png").default} alt=""></img>
-                        <p>Spiral lets you view inghts into how you've been working to help you make performance improvments over time. </p>
+                        <p>Spiral lets you view insights into how you've been working to help you make performance improvements over time. </p>
                         <br/><br/><br/>
                         <a className="button button-primary" onClick={this.handleOpenModal} href="#">Try It!</a>
 
