@@ -256,7 +256,7 @@ class Landing extends Component {
                         <div className="features-header text-center">
                             <div className="container-sm">
                                 <h2 className="section-title mt-0">The Spiral Difference</h2>
-                                <p className="section-paragraph">Using The Golden Ratio, Spiral provides a framework for comparing potential time estimates, then starting a countdown timer for your task.  All it take's is a click!</p>
+                                <p className="section-paragraph">Using The Golden Ratio, Spiral provides a framework for comparing potential time estimates, then starting a countdown timer for your task.  All it takes is a click!</p>
                                 <p className="section-paragraph">(The numbers below are in minutes)</p>
 
                                 <div className="features-image">

@@ -1,3 +1,10 @@
-.clip-loader {
-    z-index: 100000
-}
+    .clip-loader {
+        z-index: 100000000
+    }
+    
+    .css-1ujetdd {
+        position: absolute !important;
+        top: 40% !important;
+        left: 50% !important;
+        z-index: 1000 !important;
+    }

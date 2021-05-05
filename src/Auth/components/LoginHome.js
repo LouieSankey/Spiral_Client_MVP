@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.css";
 import xclose from "../../Img/xclose.png"
+import FadeLoader from "react-spinners/FadeLoader"
+
 
 import {
   loginEmailValidator,
@@ -11,6 +13,7 @@ import {
   passwordValidator,
   confirmPasswordValidator
 } from "../utilities/validator";
+import { TrendingUpRounded } from "@material-ui/icons";
 
 
 class LoginHome extends Component {
@@ -68,13 +71,14 @@ class LoginHome extends Component {
         color: "#FF0000",
         font: this.props.fontFamily
       },
-
+      
       signUpPassword: "",
       signUpUsername: "",
       signUpConfirmPassword: "",
       signUpEmail: "",
       loginEmail: "",
-      loginPassword: ""
+      loginPassword: "",
+      showSpinner: false
     };
   }
 
@@ -87,6 +91,14 @@ class LoginHome extends Component {
    * Handle login page navigation using props
    */
   handleLogin = () => {
+    
+    this.setState({
+      showSpinner: true,
+      error: {
+        message: ""
+      }
+    })
+
     const { loginEmail, loginPassword } = this.state
     this.props.handleLogin(loginEmail, loginPassword);
 
@@ -96,6 +108,13 @@ class LoginHome extends Component {
    * Hanlde sign up page navigation using props
    */
   handleSignUp = () => {
+    this.setState({
+      showSpinner: true,
+      error: {
+        message: ""
+      }
+    })
+
     const { signUpEmail, signUpPassword } = this.state
     this.props.handleSignup(signUpEmail, signUpPassword);
 
@@ -106,9 +125,6 @@ class LoginHome extends Component {
    */
   navigateSignup = () => {
     let error = this.state.error;
-    error.usernameMessage = "";
-    error.passwordMessage = "";
-
     this.setState({
       navigatePage: true,
       error
@@ -118,9 +134,6 @@ class LoginHome extends Component {
 
   navigateLogin = () => {
     let error = this.state.error;
-    error.usernameMessage = "";
-    error.passwordMessage = "";
-
     this.setState({
       navigatePage: false,
       error
@@ -401,10 +414,14 @@ class LoginHome extends Component {
         {/* <img className="secure-login-badge" src={require('../../Img/security-icon.png').default} alt=""/> */}
 
         Login
+        {this.state.showSpinner && !this.props.showPasswordError &&
+          <FadeLoader className="Clip-loader" loading={true} color={'#6b8bba'} size={60}></FadeLoader>
 
+        }
         {errorMessage}
-        {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Incorrect username or password"}</div></div>}
+        {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{this.state.error.message}</div></div>}
         <div className="loginGroup">
+
           <input
             className="modal-input"
             type="text"
@@ -414,6 +431,7 @@ class LoginHome extends Component {
           ></input>
           <label style={font}>Email</label>
         </div>
+
 
         <div className="loginGroup">
           <input
@@ -449,6 +467,9 @@ class LoginHome extends Component {
           {/* <img className="secure-login-badge" src={require('../../Img/security-icon.png').default} alt=""/> */}
 
           Sign Up
+          {this.state.showSpinner && !this.props.showPasswordError &&
+          <FadeLoader className="Clip-loader" loading={true} color={'#6b8bba'} size={60}></FadeLoader>
+          }
           {errorList}
 
           <div className="loginGroup">
@@ -499,7 +520,9 @@ class LoginHome extends Component {
 
     navigatePage === false ? (mainContent = login) : (mainContent = signUp);
 
-    return <div>{mainContent}</div>;
+    return <div>
+
+      {mainContent}</div>;
   }
 }
 
