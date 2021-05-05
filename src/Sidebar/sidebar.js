@@ -133,7 +133,7 @@ class Sidebar extends Component {
             <a className="closebtn" onClick={this.ToggleSidebar}>&times;</a>
 
             <div className="sidebar-content">
-              <img className="spiral-text-logo-small" src={require("../Img/spiral-text-logo.png")} alt="" />
+              <img className="spiral-text-logo-small" src={require("../Img/spiral-text-logo.png").default} alt="" />
 
 
               <h2 onClick={() => this.setState({ showNav: !this.state.showNav })} className="white accordion">Menu</h2>

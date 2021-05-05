@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import './GoldenRectangle.css'
 import MainContext from '../../MainContext'
 import { TramOutlined } from '@material-ui/icons'
-const birdTweet = require('../../Img/birdtweet1.png')
-const dogBark = require('../../Img/dogbark1.png')
+const birdTweet = require('../../Img/birdtweet1.png').default
+const dogBark = require('../../Img/dogbark1.png').default
 
 
 export default class GoldenRectangle extends Component {
@@ -63,7 +63,7 @@ export default class GoldenRectangle extends Component {
                     
                     {this.state.alarmIcon !== "" ?
                     <img className="alarm-sound" src={this.state.alarmIcon} alt=""/> :
-                    <img className="alarm" src={require('../../Img/whitealarm2.png')} alt=""/>
+                    <img className="alarm" src={require('../../Img/whitealarm2.png').default} alt=""/>
                     }
                     <div className="item box7"><button className="clickable" onMouseEnter={() => this.setState(prevState => {return { hoverSelection: true }})}  onMouseLeave={() => this.setState(prevState => {return { hoverSelection: true }})} onClick={() => {this.props.updateCycle(currentIndex[0]) ; this.SetAlarmIcon(currentIndex[0])}}>{currentIndex[0]}</button></div>
                     <div className="item box6"><button className="clickable" onMouseEnter={() => this.setState(prevState => {return { hoverSelection: false }})}  onMouseLeave={() => this.setState(prevState => {return { hoverSelection: false }})}  onClick={() => {this.props.updateCycle(currentIndex[1]) ; this.SetAlarmIcon(currentIndex[1])}}>{currentIndex[1]}</button></div>

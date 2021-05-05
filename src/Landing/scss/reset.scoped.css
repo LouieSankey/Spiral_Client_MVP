@@ -1,0 +1,39 @@
+.container {
+    grid-gap: unset;
+    grid-template-rows: unset;
+    grid-template-columns: unset;
+    height: unset;
+    width: unset;
+    max-width: unset;
+    position: unset;
+    top: unset;
+    bottom: unset;
+    left: unset;
+    right: unset;
+    clear: unset;
+    margin: unset;
+    margin-bottom: unset;
+    background-color: unset;
+    background-size: unset;
+    background-repeat: unset;
+}
+
+.loginContainer {
+    width: 400px;
+}
+
+.site-header::before {
+    height: 0px;
+    content: '';
+    position: absolute;
+    top: -140px;
+    right: -100px;
+    width: 1440px;
+    height: 324px;
+    /* background-image: url(/static/media/header-illustration-light.77df613a.svg); */
+}
+
+.button {
+    padding-left: 32px !important;
+    height: unset !important;
+}

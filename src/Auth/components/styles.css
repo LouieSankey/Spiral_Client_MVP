@@ -8,7 +8,7 @@
     font-family: Nunito, Roboto, Arial, sans-serif;
     width: 300px;
     margin: 4em auto;
-    padding: 3em 2em 2em 2em;
+    padding: 30px;
     background: #fafafa;
     border: 1px solid #ebebeb;
     box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px;
@@ -17,6 +17,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-color: black;
+}
+
+.secure-login-badge {
+    display: block;
+    width: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .xclose {
@@ -70,4 +77,9 @@ input:valid~label {
     top: -20px;
     font-size: 14px;
     color: #5264AE;
+}
+
+p {
+    font-size: 20px;
+    color: black;
 }

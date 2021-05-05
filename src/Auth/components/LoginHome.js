@@ -398,6 +398,8 @@ class LoginHome extends Component {
 
       <div className="loginContainer">
         <img onClick={this.handleCloseModal} className="xclose" src={xclose} alt="close dialog" />
+        {/* <img className="secure-login-badge" src={require('../../Img/security-icon.png').default} alt=""/> */}
+
         Login
 
         {errorMessage}
@@ -444,6 +446,8 @@ class LoginHome extends Component {
       <div>
         <div className="loginContainer">
           <img onClick={this.handleCloseModal} className="xclose" src={xclose} alt="close dialog" />
+          {/* <img className="secure-login-badge" src={require('../../Img/security-icon.png').default} alt=""/> */}
+
           Sign Up
           {errorList}
 
