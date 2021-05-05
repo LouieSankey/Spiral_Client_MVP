@@ -94,9 +94,9 @@ class LoginHome extends Component {
     
     this.setState({
       showSpinner: true,
-      error: {
-        message: ""
-      }
+      // error: {
+      //   message: ""
+      // }
     })
 
     const { loginEmail, loginPassword } = this.state
@@ -110,9 +110,9 @@ class LoginHome extends Component {
   handleSignUp = () => {
     this.setState({
       showSpinner: true,
-      error: {
-        message: ""
-      }
+      // error: {
+      //   message: ""
+      // }
     })
 
     const { signUpEmail, signUpPassword } = this.state
@@ -419,7 +419,7 @@ class LoginHome extends Component {
 
         }
         {errorMessage}
-        {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{this.state.error.message}</div></div>}
+        {this.props.showPasswordError && <div style={errorMessageStyles} ><div style={font}>{"Invalid Credentials"}</div></div>}
         <div className="loginGroup">
 
           <input
