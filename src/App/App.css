@@ -2,6 +2,12 @@ center {
     text-align: center;
 }
 
+.help-modal-spiral-img {
+    height: 200px;
+    float: right;
+    overflow: hidden;
+}
+
 .nav-button {
     font-size: 30px;
     color: black;
