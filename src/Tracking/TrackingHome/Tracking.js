@@ -8,7 +8,7 @@ import config from '../../config'
 import PieChart from '../PieChart/PieChart'
 import { FormatTrackingHeader } from '../helper'
 import APIService from '../../api-services'
-import DotLoader from "react-spinners/ClipLoader"
+import DotLoader from "react-spinners/FadeLoader"
 import OneMonthTrailing from "../OneMonthTrailing/OneMonthTrailing"
 import moment from 'moment'
 
@@ -56,7 +56,7 @@ export default class Tracking extends Component {
       this.setState({
         displayLoader: false
       });
-    }, 3000)
+    }, 10000)
   }
 
 
@@ -240,7 +240,9 @@ export default class Tracking extends Component {
             :
             <div className={"loaderContainer"}>
               {this.state.displayLoader ?
-                <DotLoader className={this.state.displayLoader} color={'#6b8bba'} size={60}></DotLoader>
+              <div className={"tracking-loader"}>
+                <DotLoader  color={'#6b8bba'} size={60}></DotLoader>
+              </div>
                 : <p className={'loader-empty'}>No Tasks Found</p>}
             </div>
           }

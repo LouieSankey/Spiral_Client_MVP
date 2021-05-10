@@ -7,7 +7,8 @@ export default React.createContext({
   currentProject: {}, 
   chartData: [],
   prefs: {},
- 
+  
+  setBreakTimeElapsed: () => {},
   changeBreakPrefs: () => {},
   handleAPIRequest: () => {},
   setCurrentProject: () => {},

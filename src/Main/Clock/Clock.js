@@ -41,6 +41,7 @@ function Clock(props) {
   );
 
 
+  
 
 
 
@@ -95,6 +96,7 @@ function Clock(props) {
   //resets the timer when the user selects a new cycle
   //couldn't pass in [props.cycle] for this because of an issue when user selects the same cycle twice
   useEffect(() => {
+
     if (allowCountdownRestart) {
       worker.current.postMessage({ message: "start", "time": props.cycle * 60 })
 
@@ -109,6 +111,7 @@ function Clock(props) {
     }
   }, [props])
 
+ 
 
   //starts the timer after it's reset 
   useEffect(() => {
@@ -117,7 +120,17 @@ function Clock(props) {
     }
   }, [timer.time])
 
+  //listens for when take break is pressed
+  useEffect(() => {
+    if(props.takeBreak !== 0){
+      setTimer((timer) => ({
+        ...timer,
+        onBreak: true
+      }))
+    }
+  
 
+  }, [props.takeBreak])
 
   //handles the automatic switch to a break after a regular cycle 
   useEffect(() => {
@@ -130,19 +143,21 @@ function Clock(props) {
         } else {
 
           
-          const breakDuration = breakPrefs[timer.cycle] * 60
-          if (breakDuration !== 0) {
-            worker.current.postMessage({ message: "start", "time": breakDuration })
-            setTimer((timer) => ({
-              ...timer,
-              onBreak: true,
-              time: breakDuration,
-              timeRemaining: breakDuration
-            }));
-          }
+          // const breakDuration = breakPrefs[timer.cycle] * 60
+          // if (breakDuration !== 0) {
+          //   worker.current.postMessage({ message: "start", "time": breakDuration })
+          //   setTimer((timer) => ({
+          //     ...timer,
+          //     onBreak: true,
+          //     time: breakDuration,
+          //     timeRemaining: breakDuration
+          //   }));
+          // }
 
           if (!timer.skipped) {
             props.updateDBWithTask(timer.cycle)
+            props.subtractFromTimeUntilBreak(timer.cycle, false) 
+
           }
           setTimer((timer) => ({
             ...timer,
@@ -167,6 +182,7 @@ function Clock(props) {
       if (timer.onBreak) {
         playBark()
       } else {
+       
         playTweet()
       }
 
@@ -198,6 +214,8 @@ function Clock(props) {
     setTimer({ ...timer, isPaused: true })
   }
 
+ 
+
   const handleResume = e => {
     if (timer.time !== 0) {
       setTimer({
@@ -213,8 +231,9 @@ function Clock(props) {
     const remainingSeconds = (timer.time - timer.timeRemaining) - elapsedMinutes * 60;
     const roundedMinutes = remainingSeconds > 30 ? elapsedMinutes + 1 : elapsedMinutes
     
-    if(roundedMinutes > 0){
+    if(roundedMinutes > 0 && !timer.onBreak){
       props.updateDBWithTask(roundedMinutes)
+      props.subtractFromTimeUntilBreak(roundedMinutes, true)
     }
 
     setTimer({ ...timer, skipped: true, timeRemaining: 0 })
@@ -261,7 +280,7 @@ function Clock(props) {
         <div className="toolbar-container">
           <div className={`toolbar-icons ${props.taskBarOpen ? "taskbar-open" : ""}`}>
             <i className="tooltip"><Stop className="toolbar-icon" onClick={handleStop}></Stop>
-              <span className="tooltiptext">Stop</span></i>
+              <span className="tooltiptext">Stop/Cancel</span></i>
             {!timer.isPaused ?
               <i className="tooltip pause"><PausePresentation className="toolbar-icon" onClick={handlePause}></PausePresentation>
                 <span className="tooltiptext pause-tooltip">Pause</span></i>
@@ -270,7 +289,7 @@ function Clock(props) {
                 <span className="tooltiptext">Resume</span></i>
             }
             <i className="tooltip"><SkipNext className="toolbar-icon" onClick={handleSkip} ></SkipNext>
-              <span className="tooltiptext">Skip to Break</span></i>
+              <span className="tooltiptext">Finish Early</span></i>
 
           </div>
         </div>

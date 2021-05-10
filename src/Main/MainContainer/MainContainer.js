@@ -9,12 +9,9 @@ import MainContext from '../../MainContext'
 import  useSound from 'use-sound';
 
 
-
-
 export default class Main extends Component {
 
   static contextType = MainContext;
-
   state = {
     cycle: 0,
     showPrefs: false,
@@ -22,10 +19,37 @@ export default class Main extends Component {
     showAddProject: false,
     pauseTimer: false,
     taskName: "",
-    noClockStop: 0
- 
+    noClockStop: 0,
+    takeBreak: 0,
+    timeRemainingUntilBreak: 9
   };
 
+  componentWillReceiveProps = (nextProps) => {
+  
+    const timeUntilBreakFromDB = nextProps.timeUntilBreakFromDB
+    this.setState(prevState => ({
+      noClockStop: prevState.noClockStop + 1,
+      timeRemainingUntilBreak: Number(timeUntilBreakFromDB),
+    }))
+  
+  }
+
+
+  subtractFromTimeUntilBreak = (elapsedTime, bool) => {
+    this.setState(prevState => ({ 
+      noClockStop: prevState.noClockStop + 1,
+      cycle: 0,
+      timeRemainingUntilBreak: prevState.timeRemainingUntilBreak - elapsedTime
+    }))
+  }
+
+
+  takeBreak = () => {
+    this.setState(prevState => ({ 
+      timeRemainingUntilBreak: 9,
+      takeBreak: prevState.takeBreak + 1
+    }))
+  }
 
   updateCycle = (cycleTime) => {
     this.setState({ cycle: cycleTime })
@@ -77,17 +101,15 @@ export default class Main extends Component {
         }));
   }
 
-
-
-
-
   render() {
     return (
       <>
+
+      {/* {this.context.prefs &&  console.log(this.context.prefs['55'])} */}
    
         <BreakPrefsModal showPrefs={this.state.showPrefs} handleClose={this.hideBreakPrefsModal}></BreakPrefsModal>
-        <TaskEntryBar setTaskName={this.setLocalTaskName}  cycle={this.state.cycle} noClockStop={this.state.noClockStop} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
-        <GoldenRectangle updateCycle={this.updateCycle}></GoldenRectangle>
+        <TaskEntryBar subtractFromTimeUntilBreak={this.subtractFromTimeUntilBreak} setTaskName={this.setLocalTaskName}  cycle={this.state.cycle} takeBreak={this.state.takeBreak}  noClockStop={this.state.noClockStop} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
+        <GoldenRectangle timeRemainingUntilBreak={this.state.timeRemainingUntilBreak} takeBreak={this.takeBreak} updateCycle={this.updateCycle}></GoldenRectangle>
         <AllProjectsModal show={this.state.showProjects} handleClose={this.hideAllProjectsModal} showAdd={this.showNewProjectModal}>
         </AllProjectsModal>
         <NewProjectModal show={this.state.showAddProject} noClockStop={this.noClockStop} handleClose={this.hideNewProjectModal}>

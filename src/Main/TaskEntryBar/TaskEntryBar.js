@@ -68,7 +68,7 @@ export default class TaskEntryBar extends Component {
 
     return (
       <>
-        <Clock updateDBWithTask={this.updateDBWithTask} noClockStop={this.props.noClockStop} cycle={this.props.cycle}  ></Clock>
+        <Clock subtractFromTimeUntilBreak={this.props.subtractFromTimeUntilBreak} setTimeElapsed={this.props.setTimeElapsedForBreak} updateDBWithTask={this.updateDBWithTask} noClockStop={this.props.noClockStop} cycle={this.props.cycle} takeBreak={this.props.takeBreak}></Clock>
 
         <div className="taskbar">
             <div>

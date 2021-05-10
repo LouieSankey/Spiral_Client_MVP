@@ -27,6 +27,7 @@ class App extends Component {
     account_id: null,
     tasks: [],
     // showHelp: false
+    timeUntilBreakFromDB: 0
   }
 
   componentDidMount = () => {
@@ -103,8 +104,11 @@ class App extends Component {
           }
         }
 
+        console.log(prefsRes)
         const currentProject = projects[0]
-        this.setState({ account, projects, prefsRes, account_id, currentProject, tasksRes })
+        this.setState({ account, projects, prefsRes, account_id, currentProject, tasksRes, 
+        timeUntilBreakFromDB: prefsRes['89']
+        })
         localStorage.setItem("recent_projects", JSON.stringify(projects))
 
       })
@@ -112,6 +116,14 @@ class App extends Component {
         console.error({ error })
       })
   }
+
+  
+  setTimeUntilBreakFromDB = (newTime) => {
+    this.setState(prevState => ({
+      timeUntilBreakFromDB: newTime
+  }))
+  }
+
 
   handleAddProject = newProject => {
     this.setState({
@@ -147,7 +159,7 @@ class App extends Component {
         <Route
           exact
           path='/'
-          render={(props) => <Home {...props} />} />
+          render={(props) => <Home {...props} timeUntilBreakFromDB={this.state.timeUntilBreakFromDB}/>} />
       </>
 
     )
@@ -205,6 +217,12 @@ class App extends Component {
       projects: this.state.projects,
       currentProject: this.state.currentProject,
       prefs: this.state.prefsRes,
+
+      //this is called from sidebar and nowhere else
+      setTimeUntilBreakFromDB: this.setTimeUntilBreakFromDB,
+      //this is passed to main container
+      // timeUntilBreakFromDB: this.timeUntilBreakFromDB,
+
       changeBreakPrefs: this.changeBreakPrefs,
       setCurrentProject: this.setCurrentProject,
       handleAddProject: this.handleAddProject,

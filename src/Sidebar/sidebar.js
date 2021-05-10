@@ -15,13 +15,18 @@ class Sidebar extends Component {
     showBreakPrefs: false,
     showPrefs: false,
     showNavModal: false,
-    showHelp:false
+    showHelp: false,
+    breakInterval: 90
   };
 
   constructor(props) {
     super(props)
-
+//refacotred how the breaks work. Temporarily using
+//89 for break interval
+//55 for break duration
+//34 for idle reset
     this.newPrefs = {
+     
       "89": null,
       "55": null,
       "34": null,
@@ -44,11 +49,16 @@ class Sidebar extends Component {
   static contextType = MainContext;
 
   updateBreakPrefs = () => {
+    console.log(this.newPrefs)
     this.context.changeBreakPrefs(this.newPrefs)
   }
 
   changePreferenceValue = event => {
     this.newPrefs[event.target.getAttribute('name')] = event.target.value
+    this.context.setTimeUntilBreakFromDB(event.target.value)
+    this.setState({
+      breakInterval: event.target.value
+    })
   };
 
   updateGongValue = event => {
@@ -75,33 +85,33 @@ class Sidebar extends Component {
   }
 
   navAccordianClose = () => {
-    this.setState({showNavModal:false})
+    this.setState({ showNavModal: false })
   }
 
   allowNavigateToInsights = () => {
-    if(this.context.timerRef.current?.innerText === "00:00"  || this.context.timerRef.current?.innerText === undefined){
+    if (this.context.timerRef.current?.innerText === "00:00" || this.context.timerRef.current?.innerText === undefined) {
       this.insightsLinkRef.current.click()
-    }else{
-     this.setState({showNavModal:true})
+    } else {
+      this.setState({ showNavModal: true })
     }
   }
 
   allowNavigateToLogout = () => {
-    if(this.context.timerRef.current?.innerText === "00:00" || this.context.timerRef.current?.innerText === undefined){
+    if (this.context.timerRef.current?.innerText === "00:00" || this.context.timerRef.current?.innerText === undefined) {
       this.logoutLinkRef.current.click()
-    }else{
-      this.setState({showNavModal:true})
+    } else {
+      this.setState({ showNavModal: true })
     }
   }
 
   allowNavigateToTimer = () => {
-    if(this.context.timerRef.current?.innerText === "00:00"  || this.context.timerRef.current?.innerText === undefined){
+    if (this.context.timerRef.current?.innerText === "00:00" || this.context.timerRef.current?.innerText === undefined) {
       this.homeLinkRef.current.click()
     }
 
   }
 
-    showHelp = () => {
+  showHelp = () => {
     this.setState({
       showHelp: true,
       // pauseForModal: true
@@ -114,10 +124,16 @@ class Sidebar extends Component {
     });
   };
 
-    ToggleHelp = () => {
-    this.setState({showHelp: !this.state.showHelp})
+  ToggleHelp = () => {
+    this.setState({ showHelp: !this.state.showHelp })
 
   }
+
+  changeBreakInterval = (event) =>{
+ 
+    this.setState({breakInterval: event.target.value});
+  }
+   
 
 
   render() {
@@ -135,63 +151,77 @@ class Sidebar extends Component {
             <div className="sidebar-content">
               <img className="spiral-text-logo-small" src={require("../Img/spiral-text-logo.png").default} alt="" />
 
-
               <h2 onClick={() => this.setState({ showNav: !this.state.showNav })} className="white accordion">Menu</h2>
-              <div className="panel" className={this.state.showNav ? 'display-block' : 'display-none'}>
-              
+              <div className="panel " className={this.state.showNav ? 'display-block' : 'display-none'}>
 
                 <ul className={this.state.showNav ? 'display-block' : 'display-none'}>
-                 
-                  <li className="nav-link" onClick={() => this.allowNavigateToTimer()}> <Link  ref={this.homeLinkRef} to="/"></Link>Timer</li>
+
+                  <li className="nav-link" onClick={() => this.allowNavigateToTimer()}> <Link ref={this.homeLinkRef} to="/"></Link>Timer</li>
                   <li className="nav-link" onClick={() => this.allowNavigateToInsights()}> <Link ref={this.insightsLinkRef} to="/tracking"></Link>Insights</li>
                   <li className="nav-link" onClick={() => this.allowNavigateToLogout()}> <Link ref={this.logoutLinkRef} onClick={() => { this.props.logout(); this.ToggleSidebar() }} to="/spiral" ></Link>Logout</li>
-               
-                
+
                 </ul>
               </div>
               <NavModal handleClose={this.navAccordianClose} show={this.state.showNavModal}></NavModal>
 
 
               <h2 onClick={() => this.setState({ showBreakPrefs: !this.state.showBreakPrefs })} className="white accordion">Breaks</h2>
-              <div className="panel" className={this.state.showBreakPrefs ? 'display-block' : 'display-none'}>
-            <h3 className="white">Cycle : Break Duration</h3>
+              <div className="panel " className={this.state.showBreakPrefs ? 'display-block' : 'display-none'}>
+                
+                <h4 className="grey">Suggest Break After Spiraling for:</h4>
+
+{/* break interval needs to be called from here to persist local change */}
+                <select onChange={this.changePreferenceValue} value={this.state.breakInterval} name="89" id="break-durations">
+                <option value={15}>0:15m</option>
+                  <option value={30}>0:30m</option>
+                  <option value={45}>0:45m</option>
+                  <option value={60}>1h</option>
+                  <option value={90}>1:30m</option>
+                  <option value={120}>2h</option>
+                  <option value={150}>2:30m</option>
+                  <option value={180}>3h</option>
+                  <option value={210}>3:30m</option>
+                  <option value={240}>4h</option>
+                </select>
+
+                <h4 className="grey">Break Duration In Minutes:</h4>
 
                 {this.context.prefs && <>
-                  <ul className="breakprefs-list">
+                {/* this corresponds to break interval for now */}
+                  <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['55']} name="55" className="edit-break" ></input>
 
-                    <li className="pref-li">89 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['89']} name="89" className="edit-break"></input></li>
-                    <li className="pref-li">55 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['55']} name="55" className="edit-break" ></input></li>
-                    <li className="pref-li">34 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['34']} name="34" className="edit-break" ></input></li>
-                    <li className="pref-li">21 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['21']} name="21" className="edit-break" ></input></li>
-                    <li className="pref-li">13 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['13']} name="13" className="edit-break" ></input></li>
-                    <li className="pref-li"> 08 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['8']} name="8" className="edit-break" ></input></li>
-                    <li className="pref-li"> 05 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['5']} name="5" className="edit-break" ></input></li>
-                    <li className="pref-li"> 03 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['3']} name="3" className="edit-break" ></input></li>
-                    <li className="pref-li"> 02 : <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['2']} name="2" className="edit-break" ></input></li>
-                  </ul>
+                  <h4 className="grey">Idle Time Allowance Between Cycles:</h4>
+
+                  {/* this corresponds to idle reset */}
+                  <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['34']} name="34" className="edit-break" ></input>
+                <br/><br/>
+
                   <button onClick={this.updateBreakPrefs} className="save-break-prefs-button" >SAVE</button>
+               
                 </>
                 }
+
+
               </div>
 
 
               <h2 onClick={() => this.setState({ showPrefs: !this.state.showPrefs })} className="white accordion">Theme</h2>
-              <div className="panel" className={this.state.showPrefs ? 'display-block' : 'display-none'}>
+              <div className="panel " className={this.state.showPrefs ? 'display-block' : 'display-none'}>
 
-              <h3 className="prefs-label">Break Sound</h3>
-              <select>
-                <option>Bird Tweet</option>
+                <h3 className="grey">Break Sound</h3>
+                <select>
+                  <option>Bird Tweet</option>
 
-              </select>
-              <h3 className="prefs-label">Resume Sound</h3>
-              <select>
-                <option>Dog Bark</option>
-              </select>
+                </select>
+                <h3 className="grey">Resume Sound</h3>
+                <select>
+                  <option>Dog Bark</option>
+                </select>
 
-              <h3 className="prefs-label">Away Sound</h3>
-              <select>
-                <option>Crickets</option>
-              </select>
+                <h3 className="grey">Idle Sound</h3>
+                <select>
+                  <option>Crickets</option>
+                </select>
 
               </div>
 
