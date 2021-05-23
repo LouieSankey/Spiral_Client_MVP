@@ -104,8 +104,6 @@ export default class Main extends Component {
   render() {
     return (
       <>
-
-      {/* {this.context.prefs &&  console.log(this.context.prefs['55'])} */}
    
         <BreakPrefsModal showPrefs={this.state.showPrefs} handleClose={this.hideBreakPrefsModal}></BreakPrefsModal>
         <TaskEntryBar subtractFromTimeUntilBreak={this.subtractFromTimeUntilBreak} setTaskName={this.setLocalTaskName}  cycle={this.state.cycle} takeBreak={this.state.takeBreak}  noClockStop={this.state.noClockStop} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>

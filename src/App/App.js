@@ -103,8 +103,6 @@ class App extends Component {
             delete Object.assign(prefsRes, { [key.substring(1)]: prefsRes[key] })[key];
           }
         }
-
-        console.log(prefsRes)
         const currentProject = projects[0]
         this.setState({ account, projects, prefsRes, account_id, currentProject, tasksRes, 
         timeUntilBreakFromDB: prefsRes['89']

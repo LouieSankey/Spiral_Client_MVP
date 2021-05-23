@@ -18,7 +18,7 @@ const HelpModal = ({ handleClose, showHelp, children }) => {
       <section className="modal-help-main">
         <button className="modal-close-button" onClick={handleClose}>x</button>
         <div className="modal-content">
-        <img class="help-modal-spiral-img" src={splashImage} alt=""/>
+        <img className="help-modal-spiral-img" src={splashImage} alt=""/>
 
           <h2 className="break-modal-header">Welcome!</h2>
           <ol className="help-list">

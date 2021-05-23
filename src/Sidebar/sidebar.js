@@ -49,7 +49,6 @@ class Sidebar extends Component {
   static contextType = MainContext;
 
   updateBreakPrefs = () => {
-    console.log(this.newPrefs)
     this.context.changeBreakPrefs(this.newPrefs)
   }
 

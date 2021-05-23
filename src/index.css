@@ -27,3 +27,11 @@ h2 {
     margin-top: 0px;
     margin-bottom: 8px;
 }
+
+@media (min-height: 850px) {
+    body {
+        background-image: url('./Img/duskskylg.jpeg') !important;
+        background-repeat: no-repeat;
+        background-size: 100% 1010px;
+    }
+}

@@ -13,6 +13,7 @@
 .project-list-name {
     display: inline;
     cursor: pointer;
+    color: white;
 }
 
 .current-project-selected-name {
