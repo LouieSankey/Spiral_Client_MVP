@@ -439,6 +439,14 @@ h6,
 }
 
 @media (max-width: 640px) {
+    .hero-paragraph{
+        text-align: left;
+    }
+
+    main[data-v-ba9fe1bc]{
+        margin-right: 30px !important;
+    }
+
     .h1-mobile {
         font-size: 38px;
         line-height: 48px;
@@ -1629,6 +1637,7 @@ label {
 .feature-icon img,
 .feature-icon svg {
     width: 70px;
+    height: 70px;
     max-width: none
 }
 

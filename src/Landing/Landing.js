@@ -6,12 +6,7 @@ import MainContext from '../MainContext';
 import ApiServices from '../api-services'
 import LoginModal from '../Auth/Login.js'
 import ScriptTag from 'react-script-tag';
-
-// import './Landing.css'
-
 import './scss/reset.scoped.css'
-
-
 import './scss/style.scoped.css'
 import './scss/style.scoped.scss';
 
@@ -19,9 +14,6 @@ import './scss/style.scoped.scss';
 class Landing extends Component {
   static contextType = MainContext;
 
-  constructor(props) {
-    super(props);
-  }
 
   state = {
     showModal: false,
@@ -82,8 +74,6 @@ class Landing extends Component {
         } else {
           console.error({ error })
         }
-
-
       })
   }
 
@@ -96,7 +86,6 @@ class Landing extends Component {
 
     ApiServices.createAccount(account)
       .then((account) => {
-
         const project = {
           "project": "My First Project",
           "account": account.id
@@ -118,7 +107,7 @@ class Landing extends Component {
               '_21': 3,
               '_34': 5,
               '_55': 8,
-              '_89': 13
+              '_89': 90
             }
 
             ApiServices.createUserPrefs(userPrefs, account.token)
@@ -140,7 +129,6 @@ class Landing extends Component {
   };
 
   render() {
-    // document.body.classList.remove('body-margin-left')
     return (
       <>
         {this.renderRedirect()}
