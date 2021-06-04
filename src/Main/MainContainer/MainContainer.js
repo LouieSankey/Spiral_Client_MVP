@@ -28,7 +28,9 @@ export default class Main extends Component {
   super(props);
   this.state = {
     timeRemainingUntilBreak: Number(props.timeUntilBreakFromDB),
+    noClockStop: 0
   };
+
 }
 
   componentWillReceiveProps = (nextProps) => {
@@ -38,11 +40,10 @@ export default class Main extends Component {
       noClockStop: prevState.noClockStop + 1,
       timeRemainingUntilBreak: Number(timeUntilBreakFromDB),
     }))
+
+    console.log("1", nextProps.noClockStop)
   
   }
-
-
- 
 
 
   subtractFromTimeUntilBreak = (elapsedTime, bool) => {
@@ -56,7 +57,7 @@ export default class Main extends Component {
 
   takeBreak = () => {
     this.setState(prevState => ({ 
-      timeRemainingUntilBreak: 9,
+      timeRemainingUntilBreak: 0,
       takeBreak: prevState.takeBreak + 1
     }))
   }
@@ -105,11 +106,12 @@ export default class Main extends Component {
         }));
   };
 
-  noClockStop = () => {
-    this.setState(prevState => ({
-      noClockStop: prevState.noClockStop+1
-        }));
-  }
+  // noClockStop = () => {
+ 
+  //   this.setState(prevState => ({
+  //     noClockStop: prevState.noClockStop+1
+  //       }));
+  // }
 
   render() {
     return (
