@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useContext } from 'react'
 import './Clock.css'
 import useSound from 'use-sound';
-import bark from '../../Sounds/dog_bark.wav';
-import tweet from '../../Sounds/bird-tweet.mp3';
+import bark from '../../Sounds/bong.wav';
+import tweet from '../../Sounds/bong.wav';
 import gong from '../../Sounds/opening_gong.wav'
 import SkipNext from '@material-ui/icons/SkipNextOutlined';
 import Stop from '@material-ui/icons/StopOutlined';

@@ -280,9 +280,9 @@ index c6561c6..8daa7fe 100644
 @@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from 'react'
  import './Clock.css'
  import useSound from 'use-sound';
- import bark from '../../Sounds/dog_bark.wav';
+ import bark from '../../Sounds/bong.wav';
 +import crickets from '../../Sounds/crickets.wav';
- import tweet from '../../Sounds/bird-tweet.mp3';
+ import tweet from '../../Sounds/bong.wav';
  import gong from '../../Sounds/opening_gong.wav'
  import SkipNext from '@material-ui/icons/SkipNextOutlined';
 @@ -28,6 +29,26 @@ function Clock(props) {
