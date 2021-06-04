@@ -32,8 +32,6 @@ export default class Main extends Component {
 }
 
   componentWillReceiveProps = (nextProps) => {
-
-    console.log("next", nextProps.timeUntilBreakFromDB)
   
     const timeUntilBreakFromDB = nextProps.timeUntilBreakFromDB
     this.setState(prevState => ({
@@ -43,10 +41,6 @@ export default class Main extends Component {
   
   }
 
-  componentDidMount = () => {
-    console.log("fucked")
-
-  }
 
  
 
