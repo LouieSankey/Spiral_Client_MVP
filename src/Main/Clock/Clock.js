@@ -179,10 +179,8 @@ function Clock(props) {
   useEffect(() => {
 
     if (timer.timeRemaining === 0) {
-      if (timer.onBreak) {
-        playBark()
-      } else {
-       
+
+      if(!timer.onBreak){
         playTweet()
       }
 

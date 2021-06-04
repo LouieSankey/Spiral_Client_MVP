@@ -17,7 +17,7 @@ export default class TaskEntryBar extends Component {
 
   constructor(props) {
     super(props);
-    this.taskName = "No Task";
+    this.taskName = "Uncategorized";
     this.setTaskName = this.setTaskName.bind(this);
     this.updateDBWithTask = this.updateDBWithTask.bind(this);
     this.taskInput = React.createRef();
@@ -62,7 +62,7 @@ export default class TaskEntryBar extends Component {
     const tasks = (typeof this.context.tasksRes === 'undefined') ? [] : this.context.tasksRes
 
     { this.taskInput.current 
-      && this.taskName !== "No Task"
+      && this.taskName !== "Uncategorized"
       && this.taskName.length > 0
       && this.handleFocus() }
 

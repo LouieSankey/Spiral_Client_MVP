@@ -95,6 +95,9 @@ class Landing extends Component {
           .then(project => {
             this.context.setCurrentProject(project)
           }).then(() => {
+
+            //this user prefs object will get factored out now that break taking options have changed
+            //right now the values _89 and _55 are used as the values for break interval and break duration.
             const userPrefs = {
               'account': account.id,
               'gong': true,

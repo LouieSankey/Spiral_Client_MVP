@@ -41,7 +41,6 @@ export default class Main extends Component {
       timeRemainingUntilBreak: Number(timeUntilBreakFromDB),
     }))
 
-    console.log("1", nextProps.noClockStop)
   
   }
 

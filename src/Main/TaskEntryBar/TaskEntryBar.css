@@ -85,7 +85,7 @@
     } */
     
     #taskInput::-webkit-calendar-picker-indicator {
-        display: none;
+        display: none !important;
     }
     
     #taskInput:-webkit-autofill::first-line {
@@ -111,6 +111,8 @@
         color: transparent;
     }
     /* oldIE ;) */
+
+  
     
     .task-name {
         float: left;
