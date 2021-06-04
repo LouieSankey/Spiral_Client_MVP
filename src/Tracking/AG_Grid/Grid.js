@@ -19,17 +19,17 @@ class Grid extends Component {
     state = {
 
         columnDefs: [
-            { headerName: "Task", field: "task",  cellEditor: "simpleEditor" },
+            { headerName: "Task", field: "task",  cellEditor: "simpleEditor",  },
             { headerName: "Cycle", field: "cycle",  cellEditor: "simpleEditor" },
             { headerName: "Date", field: "date",  cellEditor: "simpleEditor" },
             { headerName: "Start", field: "time",  cellEditor: "simpleEditor" },
             {
-                headerName: "",
+                headerName: "Edit",
                 colId: "actions",
                 cellRenderer: "actionsRenderer",
                 editable: false,
                 filter: false,
-                minWidth: 220
+             
               }
         ],
         rowData: [
@@ -47,6 +47,8 @@ class Grid extends Component {
         resizable: true,
         filter: true,
         floatingFilter: false,
+        minWidth: 200,
+        flex: 1,
         suppressKeyboardEvent: params => params.editing
       };
 
