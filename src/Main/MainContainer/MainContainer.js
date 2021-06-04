@@ -21,10 +21,19 @@ export default class Main extends Component {
     taskName: "",
     noClockStop: 0,
     takeBreak: 0,
-    timeRemainingUntilBreak: 9
+    timeRemainingUntilBreak: 0
   };
 
+  constructor(props){
+  super(props);
+  this.state = {
+    timeRemainingUntilBreak: Number(props.timeUntilBreakFromDB),
+  };
+}
+
   componentWillReceiveProps = (nextProps) => {
+
+    console.log("next", nextProps.timeUntilBreakFromDB)
   
     const timeUntilBreakFromDB = nextProps.timeUntilBreakFromDB
     this.setState(prevState => ({
@@ -33,6 +42,13 @@ export default class Main extends Component {
     }))
   
   }
+
+  componentDidMount = () => {
+    console.log("fucked")
+
+  }
+
+ 
 
 
   subtractFromTimeUntilBreak = (elapsedTime, bool) => {

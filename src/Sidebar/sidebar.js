@@ -16,7 +16,7 @@ class Sidebar extends Component {
     showPrefs: false,
     showNavModal: false,
     showHelp: false,
-    breakInterval: 90
+    breakDuration: 90
   };
 
   constructor(props) {
@@ -56,7 +56,7 @@ class Sidebar extends Component {
     this.newPrefs[event.target.getAttribute('name')] = event.target.value
     this.context.setTimeUntilBreakFromDB(event.target.value)
     this.setState({
-      breakInterval: event.target.value
+      breakDuration: event.target.value
     })
   };
 
@@ -130,7 +130,7 @@ class Sidebar extends Component {
 
   changeBreakInterval = (event) =>{
  
-    this.setState({breakInterval: event.target.value});
+    // this.setState({breakInterval: event.target.value});
   }
    
 
@@ -170,7 +170,7 @@ class Sidebar extends Component {
                 <h4 className="grey">Suggest Break After Spiraling for:</h4>
 
 {/* break interval needs to be called from here to persist local change */}
-                <select onChange={this.changePreferenceValue} value={this.state.breakInterval} name="89" id="break-durations">
+                <select onChange={this.changePreferenceValue} value={this.state.breakDuration} name="89" id="break-durations">
                 <option value={15}>0:15m</option>
                   <option value={30}>0:30m</option>
                   <option value={45}>0:45m</option>
@@ -187,12 +187,12 @@ class Sidebar extends Component {
 
                 {this.context.prefs && <>
                 {/* this corresponds to break interval for now */}
-                  <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['55']} name="55" className="edit-break" ></input>
+                  <input type="integer"  defaultValue={this.context.prefs['55']} name="55" className="edit-break" ></input>
 
                   <h4 className="grey">Idle Time Allowance Between Cycles:</h4>
 
                   {/* this corresponds to idle reset */}
-                  <input type="integer" onChange={this.changePreferenceValue} defaultValue={this.context.prefs['34']} name="34" className="edit-break" ></input>
+                  <input type="integer" onChange={this.changeBreakInterval} defaultValue={this.context.prefs['34']} name="34" className="edit-break" ></input>
                 <br/><br/>
 
                   <button onClick={this.updateBreakPrefs} className="save-break-prefs-button" >SAVE</button>
