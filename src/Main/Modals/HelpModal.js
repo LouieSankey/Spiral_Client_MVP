@@ -26,9 +26,9 @@ const HelpModal = ({ handleClose, showHelp, children }) => {
 
             <li className="help-item">Keep Spiral open in a browser tab while you work.</li>
             <li className="help-item">To start tracking, select a time frame for a task (or subtask) you're working on.</li>
-            <li className="help-item">When your time is up you'll hear a bird chip, which means return to Spiral and select again.</li>
+            <li className="help-item">When your time is up you'll hear a gong sound, which means return to Spiral and select again.</li>
             <li className="help-item">Keep Spiraling until you reach your break period (which you can customize in the sidebar).</li>
-            <li className="help-item">After your break period you'll hear a dog bark, which means it's time to start again.</li>
+            <li className="help-item">After your break period you'll also hear the gong, which means get back to work.</li>
             <li className="help-item">Enjoy!</li>
           </ol>
         </div>

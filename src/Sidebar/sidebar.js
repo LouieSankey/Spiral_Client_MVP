@@ -210,12 +210,12 @@ class Sidebar extends Component {
 
                 <h3 className="grey">Break Sound</h3>
                 <select>
-                  <option>Bird Tweet</option>
+                  <option>Gong</option>
 
                 </select>
                 <h3 className="grey">Resume Sound</h3>
                 <select>
-                  <option>Dog Bark</option>
+                  <option>Gong</option>
                 </select>
 
                 <h3 className="grey">Idle Sound</h3>
