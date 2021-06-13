@@ -54,7 +54,6 @@ class OneWeekTrailing extends Component {
           position: 'top', // top, center, bottom
           
           formatter: (value) => {
-              //  return value + "m"
             const minutes = (value % 60 === 0) ? "" : value % 60 + "m"
             return (Math.floor(value / 60) > 0) ? Math.floor(value / 60) + "h " + minutes : minutes
           },
@@ -110,8 +109,7 @@ class OneWeekTrailing extends Component {
         yaxis: {
           tickAmount: 5,
           max: 60 * 5,
-          // max: (max) => { return (Math.floor(max / 60) * 60) + 30},
-          // forceNiceScale: true,
+     
           labels: {
             tickAmount: 4,
             style: {

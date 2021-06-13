@@ -98,18 +98,7 @@ class PieChart extends Component {
 				fontColor: 'white'
 
 			},
-			// noData: {
-			// 	text: "you haven't logged any data",
-			// 	align: 'center',
-			// 	verticalAlign: 'middle',
-			// 	offsetX: 0,
-			// 	offsetY: 0,
-			// 	style: {
-			// 		color: 'white',
-			// 		fontSize: '14px',
-			// 		fontFamily: undefined
-			// 	}
-			// },
+	
 			data: [{
 				type: "pie",
 				click: onSelect,

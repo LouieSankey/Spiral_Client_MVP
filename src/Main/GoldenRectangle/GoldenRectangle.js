@@ -17,6 +17,7 @@ export default class GoldenRectangle extends Component {
         pauseForModal: false,
         alarmIcon: "",
         hoverSelection: false,
+        firstStart: true
      
     }
 
@@ -34,7 +35,7 @@ export default class GoldenRectangle extends Component {
     }
 
     SetAlarmIcon = (selectedValue) => {
-        //this needs to check if its currenctly on a brek period, you could check the dom text
+        //this needs to check if its currenctly on a break period, you could check the dom text
         // const breakValue = this.context.prefs[selectedValue]
         this.setState(prevState => {
             return { alarmIcon: birdTweet}
@@ -63,8 +64,7 @@ export default class GoldenRectangle extends Component {
         handleBreakSelected = () => {
             this.setState(prevState => {return { hoverSelection: false }})
             this.props.takeBreak()
-            this.props.updateCycle(this.context.prefs['55'])
-            // this.setState(prevState => { return { breakAfter: 100}})
+            this.props.updateCycle(this.context.prefs['break_duration'])
 
               this.setState(prevState => {
             return { alarmIcon: birdTweet}

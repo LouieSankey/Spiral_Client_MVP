@@ -20,13 +20,10 @@ class App extends Component {
     this.timerRef = React.createRef();
   }
 
-
-
   state = {
     toggleMobileNav: false,
     account_id: null,
     tasks: [],
-    // showHelp: false
     timeUntilBreakFromDB: 0
   }
 
@@ -44,18 +41,9 @@ class App extends Component {
     }
   }
 
-  // ShowHelpAtFirstLogin = () => {
-  //   if(!localStorage.getItem("workflowShown")){
-  //     localStorage.setItem("workflowShown", true)
-  //     this.setState({showHelp: true})
-  //   }
-
-  // }
-
   handleAPIRequest = (account_id, token) => {
 
 
-    // this.ShowHelpAtFirstLogin()
     Promise.all([
 
       fetch(`${config.API_ENDPOINT}/account/${account_id}`, {
@@ -105,7 +93,8 @@ class App extends Component {
         }
         const currentProject = projects[0]
         this.setState({ account, projects, prefsRes, account_id, currentProject, tasksRes, 
-        timeUntilBreakFromDB: prefsRes['89']
+        
+        timeUntilBreakFromDB: Number(prefsRes['elapsed_time_until_break'])
         })
         localStorage.setItem("recent_projects", JSON.stringify(projects))
 
@@ -115,7 +104,8 @@ class App extends Component {
       })
   }
 
-  
+  //timeUntilBreak... gets set intially from DB then gets reset when value is changed in sidebar.
+  //that's what this function is for
   setTimeUntilBreakFromDB = (newTime) => {
     this.setState(prevState => ({
       timeUntilBreakFromDB: newTime
@@ -185,7 +175,7 @@ class App extends Component {
     for (const key in newPrefs) {
       if (newPrefs[key] !== null) {
         prefs[key] = newPrefs[key]
-        dbPrefs["_" + key] = newPrefs[key]
+        dbPrefs[key] = newPrefs[key]
       }
     }
 
@@ -201,6 +191,8 @@ class App extends Component {
         }))))
     }
 
+    
+
     Promise.all(promises).then(() => {
       APIService.saveUserPrefs(dbPrefs, this.state.account_id)
     })
@@ -215,12 +207,7 @@ class App extends Component {
       projects: this.state.projects,
       currentProject: this.state.currentProject,
       prefs: this.state.prefsRes,
-
-      //this is called from sidebar and nowhere else
       setTimeUntilBreakFromDB: this.setTimeUntilBreakFromDB,
-      //this is passed to main container
-      // timeUntilBreakFromDB: this.timeUntilBreakFromDB,
-
       changeBreakPrefs: this.changeBreakPrefs,
       setCurrentProject: this.setCurrentProject,
       handleAddProject: this.handleAddProject,

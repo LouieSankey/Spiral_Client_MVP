@@ -3,7 +3,6 @@ import TaskEntryBar from '../TaskEntryBar/TaskEntryBar'
 import GoldenRectangle from '../GoldenRectangle/GoldenRectangle'
 import AllProjectsModal from '../Modals/ProjectsModal';
 import NewProjectModal from '../Modals/NewProjectModal'
-import BreakPrefsModal from '../Modals/BreakPrefsModal'
 import './MainContainer.css'
 import MainContext from '../../MainContext'
 import  useSound from 'use-sound';
@@ -14,7 +13,6 @@ export default class Main extends Component {
   static contextType = MainContext;
   state = {
     cycle: 0,
-    showPrefs: false,
     showProjects: false,
     showAddProject: false,
     pauseTimer: false,
@@ -38,10 +36,8 @@ export default class Main extends Component {
     const timeUntilBreakFromDB = nextProps.timeUntilBreakFromDB
     this.setState(prevState => ({
       noClockStop: prevState.noClockStop + 1,
-      timeRemainingUntilBreak: Number(timeUntilBreakFromDB),
+      timeRemainingUntilBreak: Number(timeUntilBreakFromDB), 
     }))
-
-  
   }
 
 
@@ -65,16 +61,6 @@ export default class Main extends Component {
     this.setState({ cycle: cycleTime })
   }
 
-  showBreakPrefsModal = () => {
-    this.setState({
-      showPrefs: true,
-    });
-  };
-  hideBreakPrefsModal = () => {
-    this.setState({
-      showPrefs: false,
-    });
-  };
 
   showAllProjectsModal = () => {
     this.setState(prevState => ({
@@ -105,18 +91,11 @@ export default class Main extends Component {
         }));
   };
 
-  // noClockStop = () => {
- 
-  //   this.setState(prevState => ({
-  //     noClockStop: prevState.noClockStop+1
-  //       }));
-  // }
 
   render() {
     return (
       <>
    
-        <BreakPrefsModal showPrefs={this.state.showPrefs} handleClose={this.hideBreakPrefsModal}></BreakPrefsModal>
         <TaskEntryBar subtractFromTimeUntilBreak={this.subtractFromTimeUntilBreak} setTaskName={this.setLocalTaskName}  cycle={this.state.cycle} takeBreak={this.state.takeBreak}  noClockStop={this.state.noClockStop} showProjectsModal={this.showAllProjectsModal}></TaskEntryBar>
         <GoldenRectangle timeRemainingUntilBreak={this.state.timeRemainingUntilBreak} takeBreak={this.takeBreak} updateCycle={this.updateCycle}></GoldenRectangle>
         <AllProjectsModal show={this.state.showProjects} handleClose={this.hideAllProjectsModal} showAdd={this.showNewProjectModal}>

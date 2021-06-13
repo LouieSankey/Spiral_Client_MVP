@@ -1,8 +1,6 @@
 import config from './config'
 
 const account = localStorage.getItem('account_id')
-
-
 const APIService = {
 
 getAccountByEmail(credentials) {
@@ -20,22 +18,6 @@ return fetch(`${config.API_ENDPOINT}/account/email/${credentials.email}`, {
       return res.json()
     })
 },
-
-// getAccountById(id) {
-
-//   return fetch(`${config.API_ENDPOINT}/account/${id}`, {
-//       method: 'GET',
-//       headers: {
-//         'content-type': 'application/json'
-//         `Authorization': 'Bearer ${token}`
-//       },
-//       body: JSON.stringify(credentials),
-//     }).then(res => {
-//         if (!res.ok)
-//           return res.json().then(e => Promise.reject(e))
-//         return res.json()
-//       })
-//   },
 
 getProjectTasksForRange(params) {
 
@@ -176,10 +158,6 @@ saveUserPrefs(prefs, account_id){
       })
       
 }
-
-
-
-
 
 }
 

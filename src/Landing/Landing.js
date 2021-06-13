@@ -101,16 +101,9 @@ class Landing extends Component {
             const userPrefs = {
               'account': account.id,
               'gong': true,
-              '_1': 0,
-              '_2': 0,
-              '_3': 0,
-              '_5': 0,
-              '_8': 0,
-              '_13': 2,
-              '_21': 3,
-              '_34': 5,
-              '_55': 8,
-              '_89': 90
+              'elapsed_time_until_break':  120,
+              'break_duration': 20,
+              'idle_reset': 5,
             }
 
             ApiServices.createUserPrefs(userPrefs, account.token)

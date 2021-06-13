@@ -37,9 +37,6 @@ class Grid extends Component {
         ],
     }
 
-    // frameworkComponents = () => {
-    //     simpleEditor: SimpleEditor
-    //   }
 
  
     defaultColDef = {

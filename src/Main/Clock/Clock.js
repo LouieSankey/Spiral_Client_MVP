@@ -143,7 +143,7 @@ function Clock(props) {
         } else {
 
           
-          // const breakDuration = breakPrefs[timer.cycle] * 60
+          // const breakDuration = breakPrefs["break_duration"] * 60
           // if (breakDuration !== 0) {
           //   worker.current.postMessage({ message: "start", "time": breakDuration })
           //   setTimer((timer) => ({
