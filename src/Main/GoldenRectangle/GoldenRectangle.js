@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './GoldenRectangle.css'
 import MainContext from '../../MainContext'
 import { TramOutlined } from '@material-ui/icons'
-const birdTweet = require('../../Img/birdtweet1.png').default
+const birdTweet = require('../../Img/white-gong.png').default
 const dogBark = require('../../Img/dogbark1.png').default
 
 

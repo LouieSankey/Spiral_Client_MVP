@@ -14,14 +14,12 @@ import './scss/style.scoped.scss';
 class Landing extends Component {
   static contextType = MainContext;
 
-
   state = {
     showModal: false,
     redirect: false,
     account_id: null,
     incorrect_password: false,
     displayLoader: true
-
   };
 
 
