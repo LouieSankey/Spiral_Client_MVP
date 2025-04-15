@@ -4,9 +4,14 @@ Spiral - Mindfulness, Productivity.
 
 Client MVP built with React, Javascript, JSX, and Apex Charts
 
-Live App: https://spiral-ebon.vercel.app/
+Client MVP: https://spiral-ebon.vercel.app/
 
 Server Repo: https://github.com/LouieSankey/Spiral_Server
+
+## Update
+
+I've rebuilt this app entirely using a more modern tech stack (Next.js, Typescript, React, Redux, Tailwind). I've also built a mobile app with React Native and released it on the app stores. https://spiralproductivity.com
+
 
 ## Spiral
 
