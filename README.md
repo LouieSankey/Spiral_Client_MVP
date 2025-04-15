@@ -12,7 +12,7 @@ Server Repo: https://github.com/LouieSankey/Spiral_Server
 
 I've rebuilt this app entirely using a modern tech stack (Next.js, Typescript, React, Redux, Tailwind). 
 
-I also built a React Native mobile app and released on both app stores (repos not available for those).
+I also released on both app stores using React Native (repos not available for those).
 
 https://spiralproductivity.com
 
